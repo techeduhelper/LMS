@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
-import keys from '../config/key.js';
+import secretOrKey from '../config/key.js';
 import sendEmail from '../utils/nodemailer.js';
 import Student from '../models/student.js';
 import Subject from '../models/subject.js';
@@ -16,6 +16,7 @@ import validateStudentLoginInput from '../validation/studentLogin.js';
 import validateStudentUpdatePassword from '../validation/studentUpdatePassword.js';
 import validateForgotPassword from '../validation/forgotPassword.js';
 import validateOTP from '../validation/otpValidation.js';
+import Notice from "../models/Notice.js";
 
 
 export const studentLogin = async (req, res, next) => {
@@ -40,18 +41,20 @@ export const studentLogin = async (req, res, next) => {
     const payload = { id: student.id, student };
     jwt.sign(
         payload,
-        keys.secretOrKey,
+        secretOrKey,
         { expiresIn: 3600 },
         (err, token) => {
             res.json({
                 success: true,
-                token: 'Bearer ' + token
+                message: "Login Successfully",
+                token: token,
+                student
             });
         }
     );
 };
 
-export const checkAttendence = async (req, res, next) => {
+export const checkAttendance = async (req, res, next) => {
     try {
         const studentId = req.user._id
         const attendence = await Attendence.find({ student: studentId }).populate('subject')
@@ -403,5 +406,20 @@ export const getMarks = async (req, res, next) => {
     }
     catch (err) {
         return res.status(400).json({ "Error in getting marks": err.message })
+    }
+};
+
+
+export const getUnreadNotices = async (req, res, next) => {
+    try {
+        const studentId = req.user._id;
+
+        // Find unread notices for the student
+        const unreadNotices = await Notice.find({ isRead: false, recipients: studentId });
+
+        res.status(200).json({ unreadNotices });
+    } catch (err) {
+        console.error('Error getting unread notices:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };

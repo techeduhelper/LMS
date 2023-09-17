@@ -6,6 +6,7 @@ import Subject from '../models/subject.js';
 import Faculty from '../models/faculty.js';
 import Attendence from '../models/attendence.js';
 import Mark from '../models/marks.js';
+import Notice from '../models/Notice.js';
 import keys from '../config/key.js';
 
 // File Handler
@@ -336,5 +337,20 @@ export const updateProfile = async (req, res, next) => {
         res.status(200).json(faculty);
     } catch (err) {
         console.log("Error in updating Profile", err.message);
+    }
+};
+
+
+export const addNotice = async (req, res, next) => {
+    try {
+        const { title, content } = req.body;
+        const file = req.file ? req.file.filename : null;
+
+        const newNotice = new Notice({ title, content, file });
+        await newNotice.save();
+        res.status(201).json({ message: 'Notice added successfully' });
+    } catch (err) {
+        console.error('Error adding notice:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };

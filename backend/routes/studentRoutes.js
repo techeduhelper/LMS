@@ -2,7 +2,6 @@ import express from 'express';
 import passport from 'passport';
 import upload from '../utils/multer.js';
 import {
-    // checkAttendance,
     getAllStudents,
     getStudentByName,
     studentLogin,
@@ -16,7 +15,9 @@ import {
     previousChats,
     updateProfile,
     getAllSubjects,
-    getMarks
+    getMarks,
+    checkAttendance,
+    getUnreadNotices
 } from '../controller/studentController.js';
 
 const router = express.Router();
@@ -48,7 +49,7 @@ router.get('/getMarks', passport.authenticate('jwt', { session: false }), getMar
 
 router.get('/getAllSubjects', passport.authenticate('jwt', { session: false }), getAllSubjects);
 
-// router.get('/checkAttendance', passport.authenticate('jwt', { session: false }), checkAttendance);
+router.get('/checkAttendance', passport.authenticate('jwt', { session: false }), checkAttendance);
 
 // HELPER ROUTES
 router.post('/getAllStudents', passport.authenticate('jwt', { session: false }), getAllStudents);
@@ -56,5 +57,7 @@ router.post('/getAllStudents', passport.authenticate('jwt', { session: false }),
 router.post('/getStudentByRegName', passport.authenticate('jwt', { session: false }), getStudentByRegName);
 
 router.post('/getStudentByName', passport.authenticate('jwt', { session: false }), getStudentByName);
+
+router.get('/unread', passport.authenticate('jwt', { session: false }), getUnreadNotices);
 
 export default router;

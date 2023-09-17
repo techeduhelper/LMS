@@ -12,22 +12,29 @@ import {
     forgotPassword,
     postOTP,
     uploadMarks,
-    updateProfile
+    updateProfile,
+    markAttendence,
+    addNotice
 } from '../controller/facultyController.js';
 
+
+// LOGIN || POST METHOD
 router.post('/login', facultyLogin);
 
+// FORGOTPASSWORD || POST METHOD
 router.post('/forgotPassword', forgotPassword);
 
 router.post('/postOTP', postOTP);
 
 router.post('/updateProfile', passport.authenticate('jwt', { session: false }), upload.single('avatar'), updateProfile);
 
+router.post('/addNotice', passport.authenticate('jwt', { session: false }), upload.array('files', 5), addNotice);
+
 router.post('/fetchStudents', passport.authenticate('jwt', { session: false }), fetchStudents);
 
 router.post('/fetchAllSubjects', passport.authenticate('jwt', { session: false }), getAllSubjects);
 
-// router.post('/markAttendance', passport.authenticate('jwt', { session: false }), markAttendance);
+router.post('/markAttendance', passport.authenticate('jwt', { session: false }), markAttendence);
 
 router.post('/uploadMarks', passport.authenticate('jwt', { session: false }), uploadMarks);
 

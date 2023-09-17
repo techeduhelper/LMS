@@ -6,7 +6,7 @@ const validateStudentLoginInput = (data) => {
     data.registrationNumber = !isEmpty(data.registrationNumber) ? data.registrationNumber : '';
     data.password = !isEmpty(data.password) ? data.password : '';
 
-    if (!Validator.isLength(data.registrationNumber, { min: 12, max: 12 })) {
+    if (!Validator.isLength(data.registrationNumber, { min: 15, max: 15 })) {
         errors.registrationNumber = 'Registration Number must be 12 characters long';
     }
 

@@ -17,7 +17,8 @@ import Faculty from '../models/faculty.js';
 import Admin from '../models/admin.js';
 
 // Config
-import keys from '../config/key.js';
+import secretOrKey from '../config/key.js';
+
 
 export const addAdmin = async (req, res, next) => {
     try {
@@ -146,17 +147,18 @@ export const adminLogin = async (req, res, next) => {
             department: admin.department
         };
 
-        jwt.sign(
-            payload,
-            keys.secretOrKey,
-            { expiresIn: 7200 },
-            (err, token) => {
-                res.json({
-                    success: true,
-                    token: 'Bearer ' + token
-                });
-            }
-        );
+        try {
+            const token = jwt.sign(payload, secretOrKey, { expiresIn: 7200 });
+            res.json({
+                success: true,
+                message: "Login Successfully",
+                token: 'Bearer ' + token,
+                admin
+            });
+        } catch (err) {
+            console.error('Error signing JWT:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
     } catch (err) {
         console.log("Error in admin login", err.message);
     }
@@ -212,7 +214,7 @@ export const addStudent = async (req, res, next) => {
         const date = new Date();
         const batch = date.getFullYear();
         const components = [
-            "STU",
+            "STUSEC",
             date.getFullYear(),
             departmentHelper,
             helper

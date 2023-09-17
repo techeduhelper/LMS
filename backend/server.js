@@ -50,12 +50,17 @@ io.on('connection', (socket) => {
     });
 });
 
-let _response = {};
+let response = {};
 
 // ROUTES
 app.use('/api/admin', adminRoutes);
 app.use('/api/faculty', facultyRoutes);
 app.use('/api/student', studentRoutes);
+
+
+app.use('/', (req, res) => {
+    res.status(200).json(`Hello from LMS`);
+});
 
 // Catching 404 Error
 app.use((req, res, next) => {
@@ -81,19 +86,15 @@ try {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
-    _response.database = "Healthy";
+    response.database = "Healthy";
     console.log(`Server Started on PORT ${PORT}`.bgMagenta.bold);
     console.log("Database Connected successfully".bgGreen.yellow);
 
 } catch (err) {
-    _response.database = "Unhealthy";
+    response.database = "Unhealthy";
     console.error("Error in connecting to DataBase:", err.message);
 }
 
-app.use('/', (req, res) => {
-    res.status(200).json(`Hello from LMS`);
-});
-
 server.listen(PORT, () => {
-    _response.server = "Healthy";
+    response.server = "Healthy";
 });

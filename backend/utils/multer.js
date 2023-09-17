@@ -1,13 +1,14 @@
 import multer from 'multer';
 
-// Specify the storage engine
 const upload = multer({
     storage: multer.memoryStorage(),
     limits: {
         fileSize: 1024 * 1024 * 5
     },
     fileFilter: function (req, file, done) {
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+        const allowedFileTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+
+        if (allowedFileTypes.includes(file.mimetype)) {
             done(null, true);
         } else {
             // Prevent the upload
