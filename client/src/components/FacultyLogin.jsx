@@ -36,7 +36,7 @@ const FacultyLogin = () => {
                 <input
                   className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                   id="username"
-                  type="text"
+                  type="password"
                   placeholder="Password"
                 />
                 <div className="absolute left-0 inset-y-0 flex items-center">

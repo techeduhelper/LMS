@@ -3,7 +3,7 @@ import setAuthToken from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode';
 import { SET_STUDENT, SET_ERRORS_HELPER, SET_ERRORS, STUDENT_UPDATE_PASSWORD, SET_OTP, SET_FLAG } from '../actionTypes'
 
-const url = "http://localhost:5000"
+const url = "http://localhost:8080"
 
 export const setChatHistory = (data) => {
     return {
@@ -81,7 +81,7 @@ const getMarksHelper = (data) => {
         type: "GET_MARKS",
         payload: data
     }
-    
+
 }
 
 export const studentLogin = (studentCredential) => {
@@ -101,7 +101,7 @@ export const studentLogin = (studentCredential) => {
             const decoded = jwt_decode(token);
             // Set current user
             dispatch(setStudent(decoded))
-           
+
         }
         catch (err) {
             dispatch({
@@ -143,7 +143,7 @@ export const chatHelper = (name) => {
             dispatch(chatHelp(data.result))
         }
         catch (err) {
-            console.log('error in recent',err.message)
+            console.log('error in recent', err.message)
         }
     }
 }
@@ -162,7 +162,7 @@ export const getStudentByRegName = (registrationNumber) => {
             console.log('Error in getting student by registration number', err.message)
         }
     }
-    
+
 }
 
 
@@ -175,7 +175,7 @@ export const getOTPStudent = (studentEmail) => {
                 data: studentEmail
             })
             alert("Otp has been sent to your email")
-            dispatch({type:SET_FLAG})
+            dispatch({ type: SET_FLAG })
         }
         catch (err) {
             dispatch({
@@ -192,13 +192,13 @@ export const submitOTPStudent = (newPasswordWithOtp, history) => {
         try {
             const { data } = await axios({
                 method: 'Post',
-                url: url + "/api/student/postOTP" ,
-                data:newPasswordWithOtp
+                url: url + "/api/student/postOTP",
+                data: newPasswordWithOtp
             })
             alert("Password Update, kindly login with updated password")
             history.push('/')
         }
-        catch (err){
+        catch (err) {
             dispatch({
                 type: SET_ERRORS,
                 payload: err.response.data
@@ -207,7 +207,7 @@ export const submitOTPStudent = (newPasswordWithOtp, history) => {
     }
 }
 
-export const sendMessage = (room,messageobj) => {
+export const sendMessage = (room, messageobj) => {
     return async () => {
         try {
             const { data } = await axios({
@@ -217,7 +217,7 @@ export const sendMessage = (room,messageobj) => {
             })
         }
         catch (err) {
-            console.log("Error in sending message",err.message)
+            console.log("Error in sending message", err.message)
         }
     }
 }
@@ -326,7 +326,7 @@ export const fetchAttendence = () => {
         catch (err) {
             console.log("Error in sending message", err.message)
         }
-    
+
     }
 }
 
@@ -337,7 +337,7 @@ export const getMarks = () => {
                 method: 'Get',
                 url: url + "/api/student/getMarks"
             })
-           dispatch(getMarksHelper(data.result))
+            dispatch(getMarksHelper(data.result))
         }
         catch (err) {
             console.log("Error in getting marks", err.message)

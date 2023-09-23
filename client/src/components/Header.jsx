@@ -37,7 +37,7 @@ const Header = () => {
               Faculty
             </Link>
             <Link
-              to={"/admin-login"}
+              to={"/"}
               className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-green-600 text-md border-yellow-400"
             >
               Admin

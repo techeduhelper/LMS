@@ -2,7 +2,7 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode';
 import {
-    SET_ADMIN, SET_ERRORS, 
+    SET_ADMIN, SET_ERRORS,
     GET_SUBJECTS
 } from '../actionTypes'
 
@@ -54,7 +54,7 @@ const adminGetAllFacultyHelper = (data) => {
     return {
         type: "GET_ALL_FACULTY",
         payload: data
-    }   
+    }
 }
 
 const adminGetAllStudentHelper = (data) => {
@@ -75,7 +75,6 @@ const adminGetAllSubjectHelper = (data) => {
 export const adminLogin = (adminCredential) => {
     return async (dispatch) => {
         try {
-            console.log("Admin Login Credentials", adminCredential)
             const { data } = await axios({
                 method: 'Post',
                 url: url + "/api/admin/login",

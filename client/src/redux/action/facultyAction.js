@@ -10,7 +10,7 @@ const setFaculty = (data) => {
     }
 }
 
-const url = "http://localhost:5000"
+const url = "http://localhost:8080"
 
 const fetchStudentsHelper = (data) => {
     return {
