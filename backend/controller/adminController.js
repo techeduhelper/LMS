@@ -420,6 +420,10 @@ export const getAllFaculty = async (req, res, next) => {
         const { department } = req.body;
         const allFaculties = await Faculty.find({ department });
 
+        if (allFaculties.length === 0) {
+            return res.status(404).json({ message: "No Record Found" });
+        }
+
         res.status(200).json({ result: allFaculties });
     } catch (err) {
         console.log("Error in getting all faculties", err.message);

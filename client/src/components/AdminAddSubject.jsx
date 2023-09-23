@@ -20,30 +20,29 @@ const AdminAddSubject = () => {
       setError(store.error);
     }
   }, [store.error]);
-  const formHandler = async (e) => {
+  const formHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      await dispatch(
-        adminAddSubject({
-          subjectCode,
-          subjectName,
-          totalLectures,
-          department,
-          year,
-        })
-      );
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-      setIsLoading(false);
-    }
+    dispatch(
+      adminAddSubject({
+        subjectCode,
+        subjectName,
+        totalLectures,
+        department,
+        year,
+      })
+    );
   };
 
   useEffect(() => {
     if (store.admin.adminAddSubjectFlag) {
       setError({});
       setIsLoading(false);
+      setDepartment("");
+      setSubjectCode("");
+      setSubjectName("");
+      setTotalLectures("");
+      setYear("");
     }
   }, [store.admin.adminAddSubjectFlag]);
 

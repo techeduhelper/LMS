@@ -15,6 +15,12 @@ import AdminProfile from "./components/AdminProfile";
 import AdminGetAllStudent from "./components/AdminGetAllStudent";
 import AdminGetAllSubject from "./components/AdminGetAllSubject";
 import { Toaster } from "react-hot-toast";
+import FacultyHome from "./components/FacultyHome";
+import FacultyProfile from "./components/FacultyProfile";
+import FacultyUpdateProfile from "./components/FacultyUpdateProfile";
+import FacultyMarkAttendence from "./components/FacultyMarkAttendence";
+import FacultyMarksUpload from "./components/FacultyMarksUpload";
+import FacultyUpdatePassword from "./components/FacultyUpdatePassword";
 
 function App() {
   return (
@@ -25,7 +31,6 @@ function App() {
           <Route exact path="/" element={<Home />}>
             <Route path="/" element={<AdminLogin />} />
             <Route path="student-login" element={<StudentLogin />} />
-
             <Route path="faculty-login" element={<FacultyLogin />} />
           </Route>
           <Route path="/admin" element={<AdminHome />}>
@@ -38,7 +43,14 @@ function App() {
             <Route path="allStudents" element={<AdminGetAllStudent />} />
             <Route path="allSubject" element={<AdminGetAllSubject />} />
           </Route>
-          <Route path="/student" element={<StudentHome />} />
+          <Route path="/faculty" element={<FacultyHome />}>
+            <Route index element={<FacultyProfile />} />
+            <Route path="updateProfile" element={<FacultyUpdateProfile />} />
+            <Route path="markAttendence" element={<FacultyMarkAttendence />} />
+            <Route path="uploadMarks" element={<FacultyMarksUpload />} />
+            <Route path="updatePassword" element={<FacultyUpdatePassword />} />
+          </Route>
+          <Route path="/student" element={<StudentHome />}></Route>
         </Routes>
       </Router>
     </>

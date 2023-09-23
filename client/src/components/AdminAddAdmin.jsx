@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { adminAddAdmin } from "../redux/action/adminAction";
+import Message from "./../../../backend/models/message";
 
 const AdminAddAdmin = () => {
   const store = useSelector((state) => state);
@@ -25,31 +26,26 @@ const AdminAddAdmin = () => {
   const formHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      dispatch(
-        adminAddAdmin({
-          name,
-          email,
-          department,
-          contactNumber,
-          dob: dob.split("-").reverse().join("-"),
-        })
-      );
-      setName("");
-      setEmail("");
-      setDepartment("");
-      setContactNumber("");
-      setDob("");
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-      setIsLoading(false);
-    }
+    dispatch(
+      adminAddAdmin({
+        name,
+        email,
+        department,
+        contactNumber,
+        dob: dob.split("-").reverse().join("-"),
+      })
+    );
   };
 
   useEffect(() => {
     if (store.admin.adminAddAdminFlag) {
       setError({});
+      setIsLoading(false);
+      setName("");
+      setEmail("");
+      setDepartment("");
+      setContactNumber("");
+      setDob("");
     }
   }, [store.admin.adminAddAdminFlag]);
 
@@ -68,7 +64,7 @@ const AdminAddAdmin = () => {
           <>
             <div className="lg:container mx-auto mt-5">
               <div className="md:flex md:justify-center">
-                <div className="w-full px-4">
+                <div className="w-full lg:px-40 sm:px-4 ">
                   <form
                     noValidate
                     onSubmit={formHandler}
@@ -106,12 +102,12 @@ const AdminAddAdmin = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             type="email"
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
-                              error.email ? "border-red-500" : ""
+                              error.message ? "border-red-500" : ""
                             }`}
                             id="emailId"
                           />
-                          {error.email && (
-                            <p className="text-red-500 mt-2">{error.email}</p>
+                          {error.message && (
+                            <p className="text-red-500 mt-2">{error.message}</p>
                           )}
                         </div>
                         <div className="mb-4">
@@ -147,9 +143,9 @@ const AdminAddAdmin = () => {
                         <div className="mb-4">
                           <label
                             htmlFor="dobId"
-                            className="block text-gray-700"
+                            className="block text-gray-700 pl-1"
                           >
-                            DOB
+                            D.O.B
                           </label>
                           <input
                             onChange={(e) => setDob(e.target.value)}

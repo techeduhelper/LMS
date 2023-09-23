@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { adminGetAllFaculty } from "../redux/action/adminAction";
+import { AiFillPrinter } from "react-icons/ai";
 
 const AdminGetAllFaculties = () => {
   const store = useSelector((store) => store);
@@ -11,16 +12,10 @@ const AdminGetAllFaculties = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const formHandler = async (e) => {
+  const formHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      dispatch(adminGetAllFaculty({ department }));
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-      setIsLoading(false);
-    }
+    dispatch(adminGetAllFaculty({ department }));
   };
 
   useEffect(() => {
@@ -28,6 +23,38 @@ const AdminGetAllFaculties = () => {
       setIsLoading(false);
     }
   }, [store.admin.allFaculty.length]);
+
+  useEffect(() => {
+    if (store.error || store.admin.allFaculty) {
+      setError({});
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  }, [store.error, store.admin.allFaculty]);
+
+  // for Printing Purpose
+  const handlePrintClick = () => {
+    const printWindow = window.open("", "_blank");
+    const contentToPrint = document.getElementById("contentToPrint");
+    if (contentToPrint) {
+      printWindow.document.write(`
+      <html>
+        <head>
+          <title>All Faculties</title>
+        </head>
+        <body>
+        <h1 class="fcal">Faculties</h1>
+          ${contentToPrint.innerHTML}
+        </body>
+      </html>
+    `);
+      printWindow.print();
+      printWindow.close();
+    } else {
+      console.error("Element with ID 'contentToPrint' not found.");
+    }
+  };
 
   return (
     <>
@@ -77,49 +104,64 @@ const AdminGetAllFaculties = () => {
                     </button>
                   </form>
                 </div>
-                <div className="w-full md:w-2/3 px-4">
+                <div className="w-full md:w-2/3 px-4 ">
                   {store.admin.allFaculty.length !== 0 && (
-                    <table className="table-auto w-full border bg-slate-300 ">
-                      <thead>
-                        <tr>
-                          <th className="border px-4 py-2">S.No</th>
-                          <th className="border px-4 py-2">
-                            Registration Number
-                          </th>
-                          <th className="border px-4 py-2">Name</th>
-                          <th className="border px-4 py-2">Email</th>
-                          <th className="border px-4 py-2">Joining Year</th>
-                          <th className="border px-4 py-2"></th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white font-medium text-gray-600">
-                        {store.admin.allFaculty.map((res, index) => (
-                          <tr
-                            key={index}
-                            className={`${
-                              index % 2 === 0
-                                ? "bg-white hover:bg-gray-100"
-                                : "bg-gray-50 hover:bg-slate-200"
-                            }`}
-                          >
-                            <td className="border px-4 py-2">{index + 1}</td>
-                            <td className="border px-4 py-2">
-                              {res.registrationNumber}
-                            </td>
-                            <td className="border px-4 py-2">{res.name}</td>
-                            <td className="border px-4 py-2">{res.email}</td>
-                            <td className="border px-4 py-2">
-                              {res.joiningYear}
-                            </td>
-                            <td className="border px-4 py-2">
-                              <Link className="text-blue-600 hover:text-blue-800">
-                                View
-                              </Link>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                    <>
+                      <div className="w-full flex justify-end px-3 mb-2 text-gray-600 ">
+                        <AiFillPrinter
+                          size={40}
+                          className="hover:bg-slate-200 hover:rounded-full p-1 active:bg-slate-100"
+                          onClick={handlePrintClick}
+                        />
+                      </div>
+                      <div id="contentToPrint">
+                        <table className="printfacultie table-auto w-full border bg-slate-300 ">
+                          <thead>
+                            <tr>
+                              <th className="border px-4 py-2">S.No</th>
+                              <th className="border px-4 py-2">
+                                Registration Number
+                              </th>
+                              <th className="border px-4 py-2">Name</th>
+                              <th className="border px-4 py-2">Email</th>
+                              <th className="border px-4 py-2">Joining Year</th>
+                              <th className="border px-4 py-2"></th>
+                            </tr>
+                          </thead>
+                          <tbody className="bg-white font-medium text-gray-600">
+                            {store.admin.allFaculty.map((res, index) => (
+                              <tr
+                                key={index}
+                                className={`${
+                                  index % 2 === 0
+                                    ? "bg-white hover:bg-gray-100"
+                                    : "bg-gray-50 hover:bg-slate-200"
+                                }`}
+                              >
+                                <td className="border px-4 py-2">
+                                  {index + 1}
+                                </td>
+                                <td className="border px-4 py-2">
+                                  {res.registrationNumber}
+                                </td>
+                                <td className="border px-4 py-2">{res.name}</td>
+                                <td className="border px-4 py-2">
+                                  {res.email}
+                                </td>
+                                <td className="border px-4 py-2">
+                                  {res.joiningYear}
+                                </td>
+                                <td className="border px-4 py-2">
+                                  <Link className="text-blue-600 hover:text-blue-800">
+                                    View
+                                  </Link>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </>
                   )}
                 </div>
               </div>

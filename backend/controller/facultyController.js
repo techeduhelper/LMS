@@ -46,8 +46,8 @@ export const facultyLogin = async (req, res, next) => {
         };
         jwt.sign(
             payload,
-            keys.secretOrKey,
-            { expiresIn: 3600 },
+            keys,
+            { expiresIn: '3d' },
             (err, token) => {
                 res.json({
                     success: true,

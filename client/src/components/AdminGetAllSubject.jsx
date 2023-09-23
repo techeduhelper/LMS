@@ -12,21 +12,26 @@ const AdminGetAllSubject = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const formHandler = async (e) => {
+  const formHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      await dispatch(adminGetAllSubject({ department, year }));
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-    }
+    dispatch(adminGetAllSubject({ department, year }));
   };
+
   useEffect(() => {
     if (store.admin.allSubject.length !== 0) {
       setIsLoading(false);
     }
   }, [store.admin.allSubject.length]);
+
+  useEffect(() => {
+    if (store.error || store.admin.allSubject) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [store.error, store.admin.allSubject]);
+
   return (
     <>
       <div>

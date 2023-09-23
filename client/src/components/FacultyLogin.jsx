@@ -1,6 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { facultyLogin } from "../redux/action/facultyAction";
 
 const FacultyLogin = () => {
+  const store = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const [facultyRegNum, setFacultyRegNum] = useState("");
+  const [facultyPassword, setFacultyPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [isFacultyLoading, setIsFacultyLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (store.faculty.isAuthenticated) {
+      navigate("/faculty");
+    }
+  }, [store.faculty.isAuthenticated]);
+
+  useEffect(() => {
+    if (store.error) {
+      setErrors(store.error);
+    }
+  }, [store.error]);
+
+  const facultyFormHandler = (e) => {
+    e.preventDefault();
+    setIsFacultyLoading(true);
+    dispatch(
+      facultyLogin({
+        registrationNumber: facultyRegNum,
+        password: facultyPassword,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (store.error || store.faculty.isAuthenticated) {
+      setIsFacultyLoading(false);
+    } else {
+      setIsFacultyLoading(true);
+    }
+  }, [store.error, store.faculty.isAuthenticated]);
+
   return (
     <>
       <div className="lg:w-full sm:w-screen lg:h-[85vh]">
@@ -10,12 +53,14 @@ const FacultyLogin = () => {
               Faculty Login
             </p>
 
-            <form className="mt-6">
+            <form className="mt-6" onSubmit={facultyFormHandler}>
               <div className="relative">
                 <input
                   className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                   id="username"
                   type="text"
+                  value={facultyRegNum}
+                  onChange={(e) => setFacultyRegNum(e.target.value)}
                   placeholder="Employee Id"
                 />
 
@@ -32,11 +77,18 @@ const FacultyLogin = () => {
                   </svg>
                 </div>
               </div>
-              <div className="relative mt-3">
+              {errors.registrationNumber && (
+                <div className="invalid-feedback text-white px-1 text-sm absolute">
+                  {errors.registrationNumber}
+                </div>
+              )}
+              <div className="relative mt-7">
                 <input
                   className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                   id="username"
                   type="password"
+                  value={facultyPassword}
+                  onChange={(e) => setFacultyPassword(e.target.value)}
                   placeholder="Password"
                 />
                 <div className="absolute left-0 inset-y-0 flex items-center">
@@ -50,7 +102,12 @@ const FacultyLogin = () => {
                   </svg>
                 </div>
               </div>
-              <div className="mt-4 flex items-center text-white">
+              {errors.password && (
+                <div className="invalid-feedback text-white px-1 text-sm absolute">
+                  {errors.password}
+                </div>
+              )}
+              <div className="mt-7 flex items-center text-white">
                 <input
                   type="checkbox"
                   id="remember"

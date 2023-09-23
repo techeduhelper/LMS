@@ -24,27 +24,35 @@ const AdminAddStudent = () => {
   useEffect(() => {
     if (store.error) {
       setError(store.error);
+      setIsLoading(false);
     }
   }, [store.error]);
-  const formHandler = async (e) => {
+
+  
+  const formHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      await dispatch(
-        adminAddStudent({
-          name,
-          email,
-          year,
-          department,
-          fatherName,
-          aadharCard,
-          gender,
-          section: section.toUpperCase(),
-          dob: dob.split("-").reverse().join("-"),
-          studentMobileNumber,
-          fatherMobileNumber,
-        })
-      );
+    dispatch(
+      adminAddStudent({
+        name,
+        email,
+        year,
+        department,
+        fatherName,
+        aadharCard,
+        gender,
+        section: section.toUpperCase(),
+        dob: dob.split("-").reverse().join("-"),
+        studentMobileNumber,
+        fatherMobileNumber,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (store.admin.adminAddStudentFlag) {
+      setError({});
+      setIsLoading(false);
       setName("");
       setEmail("");
       setYear("");
@@ -54,17 +62,6 @@ const AdminAddStudent = () => {
       setGender("");
       setContactNumber("");
       setFatherName("");
-    } catch (error) {
-      console.log(
-        "Error",
-        error?.response?.data?.message[0]?.msg || "Something went wrong"
-      );
-    }
-  };
-
-  useEffect(() => {
-    if (store.admin.adminAddStudentFlag) {
-      setError({});
     }
   }, [store.admin.adminAddStudentFlag]);
 

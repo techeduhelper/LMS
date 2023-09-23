@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { adminGetAllStudent } from "../redux/action/adminAction";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { AiFillPrinter } from "react-icons/ai";
 
 const AdminGetAllStudent = () => {
   const store = useSelector((store) => store);
@@ -10,21 +10,13 @@ const AdminGetAllStudent = () => {
   const [department, setDepartment] = useState("");
   const [year, setYear] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   const [error, setError] = useState({});
   const navigate = useNavigate();
 
-  const formHandler = async (e) => {
+  const formHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      await dispatch(adminGetAllStudent({ department, year }));
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err.response.data.message);
-      setError(err);
-      setIsLoading(false);
-    }
+    dispatch(adminGetAllStudent({ department, year }));
   };
 
   useEffect(() => {
@@ -33,6 +25,37 @@ const AdminGetAllStudent = () => {
     }
     setIsLoading(false);
   }, [store.admin.allStudent.length]);
+
+  useEffect(() => {
+    if (store.error || store.admin.allStudent) {
+      setError({});
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [store.error, store.admin.allStudent]);
+
+  const handlePrintClick = () => {
+    const printWindow = window.open("", "_blank");
+    const contentToPrint = document.getElementById("student-details");
+    if (contentToPrint) {
+      printWindow.document.write(`
+      <html>
+        <head>
+          <title>All Faculties</title>
+        </head>
+        <body>
+        <h1 class="fcal">Faculties</h1>
+          ${contentToPrint.innerHTML}
+        </body>
+      </html>
+    `);
+      printWindow.print();
+      printWindow.close();
+    } else {
+      console.error("Element with ID 'contentToPrint' not found.");
+    }
+  };
 
   return (
     <>
@@ -104,51 +127,68 @@ const AdminGetAllStudent = () => {
                 </div>
                 <div className="lg:w-2/3 mt-4 lg:mt-0">
                   {store.admin.allStudent.length !== 0 && (
-                    <table className="table-auto bg-white p-4 shadow-md rounded-lg w-full">
-                      <thead className="bg-blue-500 text-white">
-                        <tr>
-                          <th scope="col" className="px-4 py-2">
-                            S.No
-                          </th>
-                          <th scope="col" className="px-4 py-2">
-                            Registration Number
-                          </th>
-                          <th scope="col" className="px-4 py-2">
-                            Name
-                          </th>
-                          <th scope="col" className="px-4 py-2">
-                            Email
-                          </th>
-                          <th scope="col" className="px-4 py-2">
-                            Section
-                          </th>
-                          <th scope="col" className="px-4 py-2">
-                            Department
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-gray-100 font-medium text-gray-600">
-                        {store.admin.allStudent.map((res, index) => (
-                          <tr
-                            key={index}
-                            className={`${
-                              index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                            }`}
-                          >
-                            <td className="border px-4 py-2">{index + 1}</td>
-                            <td className="border px-4 py-2">
-                              {res.registrationNumber}
-                            </td>
-                            <td className="border px-4 py-2">{res.name}</td>
-                            <td className="border px-4 py-2">{res.email}</td>
-                            <td className="border px-4 py-2">{res.section}</td>
-                            <td className="border px-4 py-2">
-                              {res.department}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                    <>
+                      <div className="w-full flex justify-end px-3 mb-2 text-gray-600 ">
+                        <AiFillPrinter
+                          size={40}
+                          className="hover:bg-slate-200 hover:rounded-full p-1 active:bg-slate-100"
+                          onClick={handlePrintClick}
+                        />
+                      </div>
+                      <div id="student-details">
+                        <table className="table-auto bg-white p-4 shadow-md rounded-lg w-full ">
+                          <thead className="bg-blue-500 text-white">
+                            <tr>
+                              <th scope="col" className="px-4 py-2">
+                                S.No
+                              </th>
+                              <th scope="col" className="px-4 py-2">
+                                Registration Number
+                              </th>
+                              <th scope="col" className="px-4 py-2">
+                                Name
+                              </th>
+                              <th scope="col" className="px-4 py-2">
+                                Email
+                              </th>
+                              <th scope="col" className="px-4 py-2">
+                                Section
+                              </th>
+                              <th scope="col" className="px-4 py-2">
+                                Department
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="bg-gray-100 font-medium text-gray-600">
+                            {store.admin.allStudent.map((res, index) => (
+                              <tr
+                                key={index}
+                                className={`${
+                                  index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                                }`}
+                              >
+                                <td className="border px-4 py-2">
+                                  {index + 1}
+                                </td>
+                                <td className="border px-4 py-2">
+                                  {res.registrationNumber}
+                                </td>
+                                <td className="border px-4 py-2">{res.name}</td>
+                                <td className="border px-4 py-2">
+                                  {res.email}
+                                </td>
+                                <td className="border px-4 py-2">
+                                  {res.section}
+                                </td>
+                                <td className="border px-4 py-2">
+                                  {res.department}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </>
                   )}
                 </div>
               </div>

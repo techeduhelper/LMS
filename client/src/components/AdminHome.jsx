@@ -50,7 +50,7 @@ const AdminHome = () => {
                   </Link>
                   <div className="w-[0.2rem] bg-white h-full mx-4"></div>
                   <div
-                    className={`lg:flex sm:absolute lg:static sm:top-0 sm:left-0 lg:left-auto lg:top-auto sm:h-[100vh] lg:h-auto sm:bg-slate-200 lg:bg-inherit sm:w-2/3 lg:w-auto sm:text-black lg:text-white ${
+                    className={`lg:flex sm:absolute lg:static sm:top-0 sm:left-0 lg:left-auto lg:top-auto sm:h-[100vh] lg:h-auto sm:bg-slate-200 lg:bg-inherit sm:w-2/3 lg:w-auto sm:text-black lg:text-white sm:px-2 lg:px-0 ${
                       togglenav ? "hidden space-x-2" : "flex flex-col"
                     }`}
                   >

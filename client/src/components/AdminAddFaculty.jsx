@@ -22,6 +22,7 @@ const AdminAddFaculty = () => {
   useEffect(() => {
     if (store.error) {
       setError(store.error);
+      setIsLoading(false);
     }
   }, [store.error]);
 
@@ -45,20 +46,21 @@ const AdminAddFaculty = () => {
   useEffect(() => {
     if (store.admin.adminAddFacultyFlag) {
       setError({});
+      setIsLoading(false);
+      setName("");
+      setEmail("");
+      setDesignation("");
+      setFacultyMobileNumber("");
+      setDepartment("");
+      setAadharCard("");
+      setGender("");
+      setDob("");
     }
   }, [store.admin.adminAddFacultyFlag]);
 
   useEffect(() => {
     if (store.error || store.admin.adminAddFacultyFlag) {
       setIsLoading(false);
-      setName("");
-      setAadharCard("");
-      setDepartment("");
-      setEmail("");
-      setDesignation("");
-      setFacultyMobileNumber("");
-      setDob("");
-      setGender("");
     } else {
       setIsLoading(true);
     }
