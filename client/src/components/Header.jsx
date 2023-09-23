@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <nav className="text-gray-600 body-font sticky top-0 z-50 bg-white shadow-md">
+      <nav className="navbar-bg text-gray-600 body-font sticky top-0 z-50 bg-white shadow-md">
         <div className="relative container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
           <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <svg
@@ -23,26 +23,26 @@ const Header = () => {
               Seacom LMS
             </span>
           </a>
-          <nav className="flex items-center text-base justify-end right-4 font-semibold absolute w-full h-full sm:mt-2 lg:mt-0 no-underline ">
+          <nav className="flex items-center text-lg justify-end right-4 font-semibold absolute w-full h-full sm:mt-2 lg:mt-0 no-underline">
             <Link
               to={"/student-login"}
-              className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 border-yellow-400 text-green-600 text-md "
+              className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 border-yellow-400 text-black text-md "
             >
               Student
             </Link>
             <Link
               to={"/faculty-login"}
-              className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-green-600 text-md border-yellow-400"
+              className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400"
             >
               Faculty
             </Link>
             <Link
               to={"/"}
-              className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-green-600 text-md border-yellow-400"
+              className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400"
             >
               Admin
             </Link>
-            <Link className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-green-600 text-md border-yellow-400">
+            <Link className="mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400">
               Lectures
             </Link>
           </nav>

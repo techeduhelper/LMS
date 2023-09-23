@@ -14,10 +14,12 @@ import AdminGetAllFaculties from "./components/AdminGetAllFaculties";
 import AdminProfile from "./components/AdminProfile";
 import AdminGetAllStudent from "./components/AdminGetAllStudent";
 import AdminGetAllSubject from "./components/AdminGetAllSubject";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
+      <Toaster />
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />}>
@@ -35,7 +37,6 @@ function App() {
             <Route path="allFaculties" element={<AdminGetAllFaculties />} />
             <Route path="allStudents" element={<AdminGetAllStudent />} />
             <Route path="allSubject" element={<AdminGetAllSubject />} />
-            
           </Route>
           <Route path="/student" element={<StudentHome />} />
         </Routes>

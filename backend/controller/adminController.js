@@ -99,8 +99,8 @@ export const addAdmin = async (req, res, next) => {
 
 export const getAllStudents = async (req, res, next) => {
     try {
-        const { branch, name } = req.body;
-        const students = await Student.find({});
+        const { department, year } = req.body;
+        const students = await Student.find({ department, year });
 
         if (students.length === 0) {
             return res.status(404).json({ message: "No students found" });
@@ -360,46 +360,46 @@ export const getAllFaculties = async (req, res, next) => {
 export const addSubject = async (req, res, next) => {
     try {
         const { errors, isValid } = validateSubjectRegisterInput(req.body);
-
-        // Validation
         if (!isValid) {
             return res.status(400).json(errors);
         }
-
         const { totalLectures, department, subjectCode, subjectName, year } = req.body;
-        const subject = await Subject.findOne({ subjectCode });
+        const existingSubject = await Subject.findOne({ subjectCode });
 
-        if (subject) {
-            errors.subjectCode = "Given Subject is already added";
+        if (existingSubject) {
+            errors.subjectCode = "Subject with this code already exists";
             return res.status(400).json(errors);
         }
-
-        const newSubject = await new Subject({
+        const newSubject = new Subject({
             totalLectures,
             department,
             subjectCode,
             subjectName,
             year
         });
-
-        await newSubject.save();
         const students = await Student.find({ department, year });
 
         if (students.length === 0) {
-            errors.department = "No branch found for the given subject";
+            errors.department = "No students found in the given department and year";
             return res.status(400).json(errors);
-        } else {
-            for (var i = 0; i < students.length; i++) {
-                students[i].subjects.push(newSubject._id);
-                await students[i].save();
-            }
-
-            res.status(200).json({ newSubject });
         }
+
+        // Allocate the new subject to each student
+        for (let i = 0; i < students.length; i++) {
+            students[i].subjects.push(newSubject._id);
+            await students[i].save();
+        }
+
+        // Save the new subject after allocating it to students
+        await newSubject.save();
+
+        res.status(200).json({ newSubject });
     } catch (err) {
-        console.log(`error in adding new subject", ${err.message}`);
+        console.error(`Error in adding new subject: ${err.message}`);
+        return res.status(500).json({ error: `Error in adding new subject: ${err.message}` });
     }
 };
+
 
 export const getAllSubjects = async (req, res, next) => {
     try {

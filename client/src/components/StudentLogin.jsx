@@ -5,8 +5,8 @@ const StudentLogin = () => {
     <>
       <div className="lg:w-full sm:w-screen lg:h-[85vh]">
         <div className="p-8 w-full  h-full flex justify-center items-center ">
-          <div className="bg-gray-100 rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center w-full ">
-            <p className="text-center text-2xl text-gray-800 font-semibold">
+          <div className="student-login rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center w-full ">
+            <p className="text-center text-2xl text-white font-semibold">
               Student Login
             </p>
 
@@ -50,7 +50,7 @@ const StudentLogin = () => {
                   </svg>
                 </div>
               </div>
-              <div className="mt-4 flex items-center text-gray-500">
+              <div className="mt-4 flex items-center text-white">
                 <input
                   type="checkbox"
                   id="remember"

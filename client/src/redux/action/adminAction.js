@@ -5,6 +5,7 @@ import {
     SET_ADMIN, SET_ERRORS,
     GET_SUBJECTS
 } from '../actionTypes'
+import toast from 'react-hot-toast';
 
 const url = "http://localhost:8080"
 
@@ -90,6 +91,7 @@ export const adminLogin = (adminCredential) => {
             const decoded = jwt_decode(token);
             // Set current user
             dispatch(setAdmin(decoded))
+            toast.success("Login Successfully")
         }
         catch (err) {
             dispatch({
@@ -124,7 +126,7 @@ export const adminAddFaculty = (facultyCredential) => {
                 data: facultyCredential
             })
             dispatch(adminAddFacultyFlag(true))
-            alert("Faculty Added Successfully")
+            toast.success("Faculty Added Successfully")
         }
         catch (err) {
             dispatch({
@@ -144,7 +146,7 @@ export const adminAddStudent = (studentCredential) => {
                 data: studentCredential
             })
             dispatch(adminAddStudentFlag(true))
-            alert("Student Added Successfully")
+            toast.success("Student Added Successfully")
         }
         catch (err) {
             dispatch({
@@ -164,7 +166,7 @@ export const adminAddSubject = (subjectCredential) => {
                 data: subjectCredential
             })
             dispatch(adminAddSubjectFlag(true))
-            alert("Subject Added Successfully")
+            toast.success("Subject Added Successfully")
         }
         catch (err) {
             dispatch({
@@ -185,7 +187,7 @@ export const adminAddAdmin = (adminCredentails) => {
                 data: adminCredentails
             })
             dispatch(adminAddAdminFlag(true))
-            alert("Admin Added Successfully")
+            toast.success("Admin Added Successfully")
         }
         catch (err) {
             dispatch({
@@ -254,19 +256,24 @@ export const adminGetAllSubject = (department) => {
     }
 }
 
-export const setAdminUser = data => {
+export const setAdminUser = () => {
+    const token = localStorage.getItem('adminJwtToken');
+    if (token) {
+        const decoded = jwt_decode(token);
+        return {
+            type: SET_ADMIN,
+            payload: decoded
+        };
+    }
     return {
         type: SET_ADMIN,
-        payload: data
+        payload: {}
     };
-}
-
+};
 export const adminLogout = () =>
     (dispatch) => {
-        // Remove token from localStorage
         localStorage.removeItem('adminJwtToken');
-        // Remove auth header for future requests
         setAuthToken(false);
-        // Set current user to {} which will set isAuthenticated to false
         dispatch(setAdmin({}));
+        toast.success("Logout Successfully")
     };

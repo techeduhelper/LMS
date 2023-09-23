@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { adminGetAllStudent } from "../redux/action/adminAction";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AdminGetAllStudent = () => {
   const store = useSelector((store) => store);
@@ -13,16 +14,24 @@ const AdminGetAllStudent = () => {
   const [error, setError] = useState({});
   const navigate = useNavigate();
 
-  const formHandler = (e) => {
+  const formHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    dispatch(adminGetAllStudent({ department, year }));
+    try {
+      await dispatch(adminGetAllStudent({ department, year }));
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err.response.data.message);
+      setError(err);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     if (store.admin.allStudent.length !== 0) {
       setIsLoading(false);
     }
+    setIsLoading(false);
   }, [store.admin.allStudent.length]);
 
   return (
@@ -47,7 +56,7 @@ const AdminGetAllStudent = () => {
                       </label>
                       <select
                         onChange={(e) => setDepartment(e.target.value)}
-                        className="form-select w-full"
+                        className="form-select w-full py-2 px-2"
                         id="departmentId"
                       >
                         <option>Select</option>
@@ -71,7 +80,7 @@ const AdminGetAllStudent = () => {
                       </label>
                       <select
                         onChange={(e) => setYear(e.target.value)}
-                        className="form-select w-full"
+                        className="form-select w-full py-2 px-2"
                         id="yearId"
                       >
                         <option>Select</option>

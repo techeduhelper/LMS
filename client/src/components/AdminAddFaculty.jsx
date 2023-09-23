@@ -51,6 +51,14 @@ const AdminAddFaculty = () => {
   useEffect(() => {
     if (store.error || store.admin.adminAddFacultyFlag) {
       setIsLoading(false);
+      setName("");
+      setAadharCard("");
+      setDepartment("");
+      setEmail("");
+      setDesignation("");
+      setFacultyMobileNumber("");
+      setDob("");
+      setGender("");
     } else {
       setIsLoading(true);
     }
@@ -262,9 +270,9 @@ const AdminAddFaculty = () => {
                   <div className="w-full flex justify-center items-center mt-5">
                     <button
                       type="submit"
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-2/5 "
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline w-2/5"
                     >
-                      {isLoading ? "Please Wait" : "Add Faculty"}
+                      {isLoading ? "Please Wait.." : "Add Faculty"}
                     </button>
                   </div>
                 </form>

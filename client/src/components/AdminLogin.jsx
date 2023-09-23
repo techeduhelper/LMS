@@ -42,8 +42,8 @@ const AdminLogin = () => {
       {!store.admin.isAuthenticated ? (
         <div className="lg:w-full sm:w-screen lg:h-[85vh]">
           <div className="p-8 w-full  h-full flex justify-center items-center ">
-            <div className="bg-gray-100 rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center w-full">
-              <p className="text-center text-2xl text-gray-800 font-semibold">
+            <div className="login-palet rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center w-full">
+              <p className="text-center text-2xl text-white font-semibold">
                 Admin Login
               </p>
 
@@ -72,7 +72,7 @@ const AdminLogin = () => {
                   </div>
                 </div>
                 {error.registrationNumber && (
-                  <div className="invalid-feedback text-red-500 px-1 text-sm absolute">
+                  <div className="invalid-feedback text-white px-1 text-sm absolute">
                     {error.registrationNumber}
                   </div>
                 )}
@@ -97,11 +97,11 @@ const AdminLogin = () => {
                   </div>
                 </div>
                 {error.password && (
-                  <div className="invalid-feedback text-red-500 absolute px-1">
+                  <div className="invalid-feedback text-white absolute px-1">
                     {error.password}
                   </div>
                 )}
-                <div className="mt-8 flex items-center text-gray-500">
+                <div className="mt-8 flex items-center text-white">
                   <input
                     type="checkbox"
                     id="remember"

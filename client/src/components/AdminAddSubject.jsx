@@ -20,23 +20,30 @@ const AdminAddSubject = () => {
       setError(store.error);
     }
   }, [store.error]);
-  const formHandler = (e) => {
+  const formHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    dispatch(
-      adminAddSubject({
-        subjectCode,
-        subjectName,
-        totalLectures,
-        department,
-        year,
-      })
-    );
+    try {
+      await dispatch(
+        adminAddSubject({
+          subjectCode,
+          subjectName,
+          totalLectures,
+          department,
+          year,
+        })
+      );
+      setIsLoading(false);
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     if (store.admin.adminAddSubjectFlag) {
       setError({});
+      setIsLoading(false);
     }
   }, [store.admin.adminAddSubjectFlag]);
 
@@ -157,24 +164,13 @@ const AdminAddSubject = () => {
                         <div className="text-red-500">{error.year}</div>
                       )}
                     </div>
-                    <div className="flex justify-center mb-4">
-                      {isLoading && (
-                        <div
-                          className="spinner-border text-primary"
-                          role="status"
-                        >
-                          <span className="sr-only">Loading...</span>
-                        </div>
-                      )}
-                    </div>
-                    {!isLoading && (
-                      <button
-                        type="submit"
-                        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full w-full"
-                      >
-                        Add Subject
-                      </button>
-                    )}
+
+                    <button
+                      type="submit"
+                      className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full w-full"
+                    >
+                      {isLoading ? "Please wait" : " Add Subject"}
+                    </button>
                   </form>
                 </div>
               </div>

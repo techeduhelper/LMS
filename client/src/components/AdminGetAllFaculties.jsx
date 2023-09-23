@@ -11,10 +11,16 @@ const AdminGetAllFaculties = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const formHandler = (e) => {
+  const formHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    dispatch(adminGetAllFaculty({ department }));
+    try {
+      dispatch(adminGetAllFaculty({ department }));
+      setIsLoading(false);
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
