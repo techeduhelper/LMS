@@ -53,7 +53,7 @@ const StudentHome = () => {
                     ☰
                   </button>
                   <Link
-                    to="/faculty"
+                    to="/student"
                     className="text-2xl font-extrabold sm:text-center text-white"
                   >
                     SEACOM LMS{" "}
@@ -101,12 +101,12 @@ const StudentHome = () => {
                       <li className="nav-item dropdown relative group">
                         <button
                           onClick={handledropd}
-                          className="text-white hover:underline group-hover:text-blue-300"
+                          className="text-white group-hover:text-blue-300"
                         >
                           ACADEMIC
                         </button>
                         {dropd && (
-                          <div className="absolute  mt-2 space-y-2 bg-white border border-gray-200 w-48 left-0 block">
+                          <div className="absolute  mt-2 space-y-2 bg-slate-300 border border-gray-200 w-48 left-0 block">
                             <Link
                               to="/student/testPerformance"
                               className="block px-4 py-2 hover:bg-gray-100"

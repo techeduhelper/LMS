@@ -387,19 +387,27 @@ export const getMarks = async (req, res, next) => {
         const getMarks = await Mark.find({ department, student: id }).populate('subject')
         console.log("getMarks", getMarks)
 
-        const CycleTest1 = getMarks.filter((obj) => {
-            return obj.exam === "CycleTest1"
+        const CA1 = getMarks.filter((obj) => {
+            return obj.exam === "CA-I"
         })
-        const CycleTest2 = getMarks.filter((obj) => {
-            return obj.exam === "CycleTest2"
+        const CA2 = getMarks.filter((obj) => {
+            return obj.exam === "CA-II"
+        })
+        const CA3 = getMarks.filter((obj) => {
+            return obj.exam === "CA-III"
+        })
+        const CA4 = getMarks.filter((obj) => {
+            return obj.exam === "CA-IV"
         })
         const Semester = getMarks.filter((obj) => {
             return obj.exam === "Semester"
         })
         res.status(200).json({
             result: {
-                CycleTest1,
-                CycleTest2,
+                CA1,
+                CA2,
+                CA3,
+                CA4,
                 Semester
             }
         })
