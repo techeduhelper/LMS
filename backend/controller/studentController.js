@@ -42,7 +42,7 @@ export const studentLogin = async (req, res, next) => {
     jwt.sign(
         payload,
         secretOrKey,
-        { expiresIn: 3600 },
+        { expiresIn: '2d' },
         (err, token) => {
             res.json({
                 success: true,

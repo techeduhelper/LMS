@@ -21,6 +21,13 @@ import FacultyUpdateProfile from "./components/FacultyUpdateProfile";
 import FacultyMarkAttendence from "./components/FacultyMarkAttendence";
 import FacultyMarksUpload from "./components/FacultyMarksUpload";
 import FacultyUpdatePassword from "./components/FacultyUpdatePassword";
+import StudentUpdateProfile from "./components/StudentUpdateProfile";
+import StudentTestPerformance from "./components/StudentTestPerformance";
+import StudentAttendence from "./components/StudentAttendence";
+import StudentAllSubject from "./components/StudentAllSubject";
+import StudentDetails from "./components/StudentDetails";
+import StudentUpdatePassword from "./components/StudentUpdatePassword";
+import StudentCard from "./components/StudentCard";
 
 function App() {
   return (
@@ -50,7 +57,18 @@ function App() {
             <Route path="uploadMarks" element={<FacultyMarksUpload />} />
             <Route path="updatePassword" element={<FacultyUpdatePassword />} />
           </Route>
-          <Route path="/student" element={<StudentHome />}></Route>
+          <Route path="/student" element={<StudentHome />}>
+            <Route index element={<StudentCard />} />
+            <Route path="updateProfile" element={<StudentUpdateProfile />} />
+            <Route
+              path="testPerformance"
+              element={<StudentTestPerformance />}
+            />
+            <Route path="attendence" element={<StudentAttendence />} />
+            <Route path="getAllSubjects" element={<StudentAllSubject />} />
+            <Route path="studentDetails" element={<StudentDetails />} />
+            <Route path="updatePassword" element={<StudentUpdatePassword />} />
+          </Route>
         </Routes>
       </Router>
     </>

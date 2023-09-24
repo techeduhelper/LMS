@@ -136,7 +136,7 @@ const StudentHome = () => {
                           type="button"
                           className="btn"
                         >
-                          <Link to="/studentDetails">STUDENTS</Link>
+                          <Link to="/student/studentDetails">STUDENTS</Link>
                         </button>
                       </li>
                       <li className="nav-item">
