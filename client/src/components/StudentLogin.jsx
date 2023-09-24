@@ -19,12 +19,16 @@ const StudentLogin = () => {
     }
   }, [store.student.isAuthenticated]);
 
+  // For error Storing
   useEffect(() => {
     if (store.errorHelper) {
       setErrorsHelper(store.errorHelper);
+    } else {
+      setErrorsHelper({});
     }
   }, [store.errorHelper]);
 
+  // for login
   const studentFormHandler = (e) => {
     e.preventDefault();
     setIsStudentLoading(true);

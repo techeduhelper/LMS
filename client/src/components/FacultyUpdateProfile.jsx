@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { facultyUpdate } from "../redux/action/facultyAction";
+import { facultyUpdate, facultyLogout } from "../redux/action/facultyAction";
 import toast from "react-hot-toast";
 
 const FacultyUpdateProfile = () => {
@@ -29,10 +29,10 @@ const FacultyUpdateProfile = () => {
     formData.append("avatar", avatar);
     formData.append("email", store.faculty.faculty.faculty.email);
     setIsLoading(true);
-    dispatch(facultyUpdate(formData));
-    toast("Kindly login again to see updates");
     dispatch(facultyUpdate(formData, navigate));
-    navigate("/");
+    alert("Kindly login again to see updates");
+    dispatch(facultyLogout());
+    navigate("/faculty-login");
   };
 
   useEffect(() => {

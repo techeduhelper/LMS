@@ -23,6 +23,8 @@ const FacultyLogin = () => {
     if (store.error) {
       setErrors(store.error);
       setIsFacultyLoading(false);
+    } else {
+      setErrors({});
     }
   }, [store.error]);
 

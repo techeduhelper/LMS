@@ -215,10 +215,8 @@ export const setFacultyUser = data => {
 
 export const facultyLogout = () =>
     (dispatch) => {
-        // Remove token from localStorage
         localStorage.removeItem('facultyJwtToken');
-        // Remove auth header for future requests
         setAuthToken(false);
-        // Set current user to {} which will set isAuthenticated to false
         dispatch(setFaculty({}));
+        toast.success("Logout Successfully")
     };
