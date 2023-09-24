@@ -99,59 +99,65 @@ export const markAttendence = async (req, res, next) => {
             year,
             section
         } = req.body;
-
         const sub = await Subject.findOne({ subjectCode });
 
-        // All Students
+        // Find all students based on department, year, and section
         const allStudents = await Student.find({ department, year, section });
 
-        var filteredArr = allStudents.filter(function (item) {
-            return selectedStudents.indexOf(item.id) === -1;
+        // Filter out the students who are not selected
+        const unselectedStudents = allStudents.filter((student) => {
+            return !selectedStudents.includes(student._id.toString());
         });
 
-        // Attendence mark karne wale log nahi
-        for (let i = 0; i < filteredArr.length; i++) {
+        // Loop through unselected students and update attendance
+        for (let i = 0; i < unselectedStudents.length; i++) {
             const pre = await Attendence.findOne({
-                student: filteredArr[i]._id,
+                student: unselectedStudents[i]._id,
                 subject: sub._id
             });
+
             if (!pre) {
-                const attendence = new Attendence({
-                    student: filteredArr[i],
-                    subject: sub._id
+                const attendance = new Attendence({
+                    student: unselectedStudents[i]._id,
+                    subject: sub._id,
+                    totalLecturesByFaculty: 1
                 });
-                attendence.totalLecturesByFaculty += 1;
-                await attendence.save();
+                await attendance.save();
             } else {
                 pre.totalLecturesByFaculty += 1;
                 await pre.save();
             }
         }
-        for (var a = 0; a < selectedStudents.length; a++) {
+
+        // Loop through selected students and update attendance
+        for (let i = 0; i < selectedStudents.length; i++) {
             const pre = await Attendence.findOne({
-                student: selectedStudents[a],
+                student: selectedStudents[i],
                 subject: sub._id
             });
+
             if (!pre) {
-                const attendence = new Attendence({
-                    student: selectedStudents[a],
-                    subject: sub._id
+                const attendance = new Attendence({
+                    student: selectedStudents[i],
+                    subject: sub._id,
+                    totalLecturesByFaculty: 1,
+                    lectureAttended: 1
                 });
-                attendence.totalLecturesByFaculty += 1;
-                attendence.lectureAttended += 1;
-                await attendence.save();
+                await attendance.save();
             } else {
                 pre.totalLecturesByFaculty += 1;
                 pre.lectureAttended += 1;
                 await pre.save();
             }
         }
-        res.status(200).json({ message: "done" });
+
+        res.status(200).json({ message: "Attendance marked successfully" });
     } catch (err) {
-        console.log("error", err.message);
-        return res.status(400).json({ message: `Error in marking attendence${err.message}` });
+        console.error("Error:", err.message);
+        return res.status(400).json({ message: `Error in marking attendance: ${err.message}` });
     }
 };
+
 
 
 

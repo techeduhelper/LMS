@@ -47,7 +47,7 @@ export const studentLogin = async (req, res, next) => {
             res.json({
                 success: true,
                 message: "Login Successfully",
-                token: token,
+                token: `Bearer` + token,
                 student
             });
         }

@@ -14,12 +14,12 @@ const Header = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              className="w-10 h-10 text-white p-2 bg-yellow-800 rounded-full"
+              className="w-10 h-10 text-white p-2 bg-black rounded-full"
               viewBox="0 0 24 24"
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
-            <span className="ml-3 text-xl font-bold tracking-wide drop-shadow-sm">
+            <span className="ml-3 text-xl font-bold text-white tracking-wide drop-shadow-sm">
               Seacom LMS
             </span>
           </a>

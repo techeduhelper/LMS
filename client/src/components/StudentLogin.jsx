@@ -1,6 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { studentLogin } from "../redux/action/studentAction";
 
 const StudentLogin = () => {
+  const store = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const [studentRegNum, setStudentRegNum] = useState("");
+  const [studentPassword, setStudentPassword] = useState("");
+  const [errorsHelper, setErrorsHelper] = useState({});
+  const [isStudentLoading, setIsStudentLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (store.student.isAuthenticated) {
+      navigate("/student");
+    }
+  }, [store.student.isAuthenticated]);
+
+  useEffect(() => {
+    if (store.errorHelper) {
+      setErrorsHelper(store.errorHelper);
+    }
+  }, [store.errorHelper]);
+
+  const studentFormHandler = (e) => {
+    e.preventDefault();
+    setIsStudentLoading(true);
+    dispatch(
+      studentLogin({
+        registrationNumber: studentRegNum,
+        password: studentPassword,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (store.errorHelper || store.student.isAuthenticated) {
+      setIsStudentLoading(false);
+    } else {
+      setIsStudentLoading(false);
+    }
+  }, [store.errorHelper, store.student.isAuthenticated]);
+
   return (
     <>
       <div className="lg:w-full sm:w-screen lg:h-[85vh]">
@@ -10,12 +53,14 @@ const StudentLogin = () => {
               Student Login
             </p>
 
-            <form className="mt-6">
+            <form className="mt-6" onSubmit={studentFormHandler}>
               <div className="relative">
                 <input
                   className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                   id="username"
                   type="text"
+                  value={studentRegNum}
+                  onChange={(e) => setStudentRegNum(e.target.value)}
                   placeholder="Registration Number"
                 />
 
@@ -32,11 +77,18 @@ const StudentLogin = () => {
                   </svg>
                 </div>
               </div>
+              {errorsHelper.registrationNumber && (
+                <div className="invalid-feedback">
+                  {errorsHelper.registrationNumber}
+                </div>
+              )}
               <div className="relative mt-3">
                 <input
                   className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                   id="password"
                   type="password"
+                  value={studentPassword}
+                  onChange={(e) => setStudentPassword(e.target.value)}
                   placeholder="Password"
                 />
                 <div className="absolute left-0 inset-y-0 flex items-center">
@@ -50,6 +102,9 @@ const StudentLogin = () => {
                   </svg>
                 </div>
               </div>
+              {errorsHelper.password && (
+                <div className="invalid-feedback">{errorsHelper.password}</div>
+              )}
               <div className="mt-4 flex items-center text-white">
                 <input
                   type="checkbox"
@@ -60,7 +115,10 @@ const StudentLogin = () => {
                 <label htmlFor="remember">Remember me</label>
               </div>
               <div className="flex items-center justify-center mt-8">
-                <button className="text-white py-2 px-4 uppercase rounded-full bg-yellow-500 hover:bg-yellow-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 w-full ">
+                <button
+                  type="submit"
+                  className="text-white py-2 px-4 uppercase rounded-full bg-yellow-500 hover:bg-yellow-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 w-full "
+                >
                   Sign in
                 </button>
               </div>

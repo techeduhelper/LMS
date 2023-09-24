@@ -150,6 +150,7 @@ export const facultyUpdate = (updatedData) => {
                 data: updatedData
             })
             dispatch(facultyUpdateProfileFlag(true))
+            toast.success("Profile Updated Successfully")
         }
         catch (err) {
             console.log("Error in sending message", err.message)
@@ -163,17 +164,17 @@ export const markAttendence = (selectedStudents, subjectCode, department, year,
         try {
             await axios({
                 method: 'Post',
-                url: url + "/api/faculty/markAttendence",
+                url: url + "/api/faculty/markAttendance",
                 data: { selectedStudents, subjectCode, department, year, section }
             })
-            alert("attendence has been marked successfully")
             dispatch({
                 type: "HELPER",
                 payload: true
             })
+            toast.success("attendence has been marked successfully")
         }
         catch (err) {
-            console.log("Error in marking attendence, faculty action", err.message)
+            toast.error("Error in marking attendence, faculty action", err.message)
         }
     }
 }

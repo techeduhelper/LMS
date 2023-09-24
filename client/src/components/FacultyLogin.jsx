@@ -22,6 +22,7 @@ const FacultyLogin = () => {
   useEffect(() => {
     if (store.error) {
       setErrors(store.error);
+      setIsFacultyLoading(false);
     }
   }, [store.error]);
 
@@ -85,7 +86,7 @@ const FacultyLogin = () => {
               <div className="relative mt-7">
                 <input
                   className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
-                  id="username"
+                  id="password"
                   type="password"
                   value={facultyPassword}
                   onChange={(e) => setFacultyPassword(e.target.value)}
@@ -118,7 +119,7 @@ const FacultyLogin = () => {
               </div>
               <div className="flex items-center justify-center mt-8">
                 <button className="text-white py-2 px-4 uppercase rounded-full bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 w-full ">
-                  Sign in
+                  {isFacultyLoading ? "Signing.." : "Sign In"}
                 </button>
               </div>
             </form>
