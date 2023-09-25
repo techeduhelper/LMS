@@ -10,11 +10,11 @@ const FacultyProfile = () => {
     <>
       {store.faculty.isAuthenticated ? (
         <>
-          <div className="lg:container mt-5 mx-2">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <div className="col-span-1">
-                <div className="">
-                  <div className="bg-white shadow-lg rounded-lg flex flex-col justify-center items-center">
+          <div className="lg:container mt-5 px-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 sm:gap-4">
+              <div className="lg:col-span-1 sm:w-full">
+                <div className="w-full">
+                  <div className="bg-white shadow-lg rounded-lg flex flex-col justify-center items-center w-full">
                     <img
                       className="w-full h-[28rem] px-2"
                       src={store.faculty.faculty.faculty.avatar}

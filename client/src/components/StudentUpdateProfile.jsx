@@ -54,7 +54,7 @@ const StudentUpdateProfile = () => {
       <div>
         {store.student.isAuthenticated ? (
           <>
-            <div className="container mt-5">
+            <div className="lg:container mt-5 px-3">
               <div className="flex justify-center">
                 <div className="w-full max-w-md">
                   <form

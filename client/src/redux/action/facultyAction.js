@@ -60,7 +60,7 @@ export const facultyUpdatePassword = (passwordData) => {
                 url: url + "/api/faculty/updatePassword",
                 data: passwordData
             })
-            alert("Password Updated Successfully")
+            toast.success("Password Updated Successfully")
         }
         catch (err) {
             dispatch({

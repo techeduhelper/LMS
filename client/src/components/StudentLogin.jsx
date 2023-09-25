@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { studentLogin } from "../redux/action/studentAction";
+import toast from "react-hot-toast";
 
 const StudentLogin = () => {
   const store = useSelector((state) => state);
@@ -15,6 +16,7 @@ const StudentLogin = () => {
 
   useEffect(() => {
     if (store.student.isAuthenticated) {
+      toast.success("Login Successfully");
       navigate("/student");
     }
   }, [store.student.isAuthenticated]);

@@ -46,7 +46,7 @@ const FacultyUpdateProfile = () => {
       <div>
         {store.faculty.isAuthenticated ? (
           <>
-            <div className="container mt-5">
+            <div className="lg:container sm:px-3 mt-5">
               <div className="flex justify-center">
                 <div className="w-full md:w-2/3">
                   <form

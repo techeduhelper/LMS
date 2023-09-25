@@ -2,6 +2,8 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode';
 import { SET_STUDENT, SET_ERRORS_HELPER, SET_ERRORS, STUDENT_UPDATE_PASSWORD, SET_OTP, SET_FLAG } from '../actionTypes'
+import toast from 'react-hot-toast';
+
 
 const url = "http://localhost:8080"
 
@@ -121,7 +123,7 @@ export const studentUpdatePassword = (passwordData) => {
                 url: url + "/api/student/updatePassword",
                 data: passwordData
             })
-            alert("Password Updated Successfully")
+            toast.success("Password Changed Successfully")
         }
         catch (err) {
             dispatch({
@@ -174,7 +176,7 @@ export const getOTPStudent = (studentEmail) => {
                 url: url + '/api/student/forgotPassword',
                 data: studentEmail
             })
-            alert("Otp has been sent to your email")
+            toast.success("Otp has been sent to your email")
             dispatch({ type: SET_FLAG })
         }
         catch (err) {
@@ -195,7 +197,7 @@ export const submitOTPStudent = (newPasswordWithOtp, history) => {
                 url: url + "/api/student/postOTP",
                 data: newPasswordWithOtp
             })
-            alert("Password Update, kindly login with updated password")
+            toast.success("Password Update, kindly login with updated password")
             history.push('/')
         }
         catch (err) {
@@ -248,7 +250,7 @@ export const getPrivateConversation2 = (roomId) => {
             dispatch(privateConversation2(data.result))
         }
         catch (err) {
-            console.log("Error in sending message", err.message)
+            toast.error("Error in sending message", err.message)
         }
     }
 }
@@ -263,7 +265,7 @@ export const previousChats = (senderName) => {
             dispatch(previousChatsHelper(data.result))
         }
         catch (err) {
-            console.log("Error in sending message", err.message)
+            toast.error("Error in sending message", err.message)
         }
     }
 }
@@ -279,7 +281,7 @@ export const newerChats = (receiverName) => {
             dispatch(newerChatsHelper(data.result))
         }
         catch (err) {
-            console.log("Error in sending message", err.message)
+            toast.error("Error in sending message", err.message)
         }
     }
 }
@@ -294,7 +296,7 @@ export const studentUpdate = (updatedData) => {
             })
         }
         catch (err) {
-            console.log("Error in sending message", err.message)
+            toast.error("Error in sending message", err.message)
         }
     }
 }
@@ -309,7 +311,7 @@ export const getAllSubjects = () => {
             dispatch(getAllSubjectsHelper(data.result))
         }
         catch (err) {
-            console.log("Error in sending message", err.message)
+            toast.error("Error in sending message", err.message)
         }
     }
 }
@@ -324,7 +326,7 @@ export const fetchAttendence = () => {
             dispatch(fetchAttendenceHelper(data.result))
         }
         catch (err) {
-            console.log("Error in sending message", err.message)
+            toast.error("Error in sending message", err.message)
         }
 
     }
@@ -340,7 +342,7 @@ export const getMarks = () => {
             dispatch(getMarksHelper(data.result))
         }
         catch (err) {
-            console.log("Error in getting marks", err.message)
+            toast.error("Error in getting marks", err.message)
         }
     }
 }
@@ -356,10 +358,7 @@ export const setStudentUser = data => {
 
 export const studentLogout = () =>
     (dispatch) => {
-        // Remove token from localStorage
         localStorage.removeItem('studentJwtToken');
-        // Remove auth header for future requests
         setAuthToken(false);
-        // Set current user to {} which will set isAuthenticated to false
         dispatch(setStudent({}));
     };

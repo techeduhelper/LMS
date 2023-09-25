@@ -20,6 +20,8 @@ const AdminLogin = () => {
   useEffect(() => {
     if (store.error) {
       setError(store.error);
+    } else {
+      setError({});
     }
   }, [store.error]);
 

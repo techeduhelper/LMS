@@ -108,8 +108,6 @@ export const markAttendence = async (req, res, next) => {
         const unselectedStudents = allStudents.filter((student) => {
             return !selectedStudents.includes(student._id.toString());
         });
-
-        // Loop through unselected students and update attendance
         for (let i = 0; i < unselectedStudents.length; i++) {
             const pre = await Attendence.findOne({
                 student: unselectedStudents[i]._id,

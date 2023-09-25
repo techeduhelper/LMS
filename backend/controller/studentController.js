@@ -85,13 +85,13 @@ export const getAllStudents = async (req, res, next) => {
         const { department, year, section } = req.body;
         const students = await Student.find({ department, year, section })
         if (students.length === 0) {
-            return res.status(400).json({ message: "No student found" })
+            return res.status(400).send({ message: "No student found" })
         }
-        return res.status(200).json({ result: students })
+        return res.status(200).send({ result: students })
 
     }
     catch (err) {
-        return res.status(400).json({ message: err.message })
+        return res.status(400).send({ message: err.message })
     }
 };
 
@@ -382,10 +382,8 @@ export const getAllSubjects = async (req, res, next) => {
 
 export const getMarks = async (req, res, next) => {
     try {
-        console.log("req.user", req.user)
         const { department, year, id } = req.user
         const getMarks = await Mark.find({ department, student: id }).populate('subject')
-        console.log("getMarks", getMarks)
 
         const CA1 = getMarks.filter((obj) => {
             return obj.exam === "CA-I"

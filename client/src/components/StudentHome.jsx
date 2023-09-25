@@ -6,6 +6,8 @@ import {
   newerChats,
   previousChats,
 } from "../redux/action/studentAction";
+import toast from "react-hot-toast";
+import { GiSplitCross } from "react-icons/gi";
 
 const StudentHome = () => {
   const [dropd, setDropd] = useState(false);
@@ -26,6 +28,7 @@ const StudentHome = () => {
   }, [store.student.newerChats.length]);
   const logoutHandler = () => {
     dispatch(studentLogout());
+    toast.success("Logout Successfully");
     navigate("/student-login");
   };
 
@@ -69,11 +72,11 @@ const StudentHome = () => {
                   >
                     <button
                       onClick={handleToggle}
-                      className="lg:hidden right-0"
+                      className="lg:hidden flex justify-end mt-2 mb-2"
                     >
-                      Close
+                      <GiSplitCross size={30} />
                     </button>
-                    <ul className="flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 ">
+                    <ul className="flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 sm:left-0 sm:w-full sm:bg-slate-50 lg:bg-inherit sm:py-4 lg:py-0">
                       <li className="nav-item">
                         <button
                           onClick={
@@ -82,7 +85,9 @@ const StudentHome = () => {
                           type="button"
                           className="btn"
                         >
-                          <Link to="/student">{name?.toUpperCase()}</Link>
+                          <Link className="pl-5" to="/student">
+                            {name?.toUpperCase()}
+                          </Link>
                         </button>
                       </li>
                       <li className="nav-item">
@@ -101,27 +106,30 @@ const StudentHome = () => {
                       <li className="nav-item dropdown relative group">
                         <button
                           onClick={handledropd}
-                          className="text-white group-hover:text-blue-300"
+                          className="sm:text-black lg:text-white group-hover:text-blue-300"
                         >
                           ACADEMIC
                         </button>
                         {dropd && (
-                          <div className="absolute  mt-2 space-y-2 bg-slate-300 border border-gray-200 w-48 left-0 block">
+                          <div className="absolute  mt-2 space-y-2 bg-slate-100 border border-gray-200 w-48 left-0 block text-black">
                             <Link
+                              onClick={handledropd}
                               to="/student/testPerformance"
-                              className="block px-4 py-2 hover:bg-gray-100"
+                              className="block px-4 py-2 hover:bg-gray-200"
                             >
                               Test Performance
                             </Link>
                             <Link
+                              onClick={handledropd}
                               to="/student/attendence"
-                              className="block px-4 py-2 hover:bg-gray-100"
+                              className="block px-4 py-2 hover:bg-gray-200"
                             >
                               Attendance
                             </Link>
                             <Link
+                              onClick={handledropd}
                               to="/student/getAllSubjects"
-                              className="block px-4 py-2 hover:bg-gray-100"
+                              className="block px-4 py-2 hover:bg-gray-200"
                             >
                               Student Subject List
                             </Link>

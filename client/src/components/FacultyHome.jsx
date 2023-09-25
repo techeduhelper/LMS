@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { facultyLogout } from "../redux/action/facultyAction";
 import toast from "react-hot-toast";
+import { GiSplitCross } from "react-icons/gi";
 
 const FacultyHome = () => {
   const store = useSelector((store) => store);
@@ -61,11 +62,11 @@ const FacultyHome = () => {
                   >
                     <button
                       onClick={handleToggle}
-                      className="lg:hidden right-0"
+                      className="lg:hidden flex justify-end mt-2 mb-2"
                     >
-                      Close
+                      <GiSplitCross size={30} />
                     </button>
-                    <ul className="flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 ">
+                    <ul className="flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 sm:left-0 sm:w-full sm:bg-slate-50 lg:bg-inherit sm:py-4 lg:py-0">
                       <li className="nav-item">
                         <button
                           onClick={
@@ -74,7 +75,9 @@ const FacultyHome = () => {
                           type="button"
                           className="btn"
                         >
-                          <Link to="/faculty">{name?.toUpperCase()}</Link>
+                          <Link to="/faculty" className="pl-5">
+                            {name?.toUpperCase()}
+                          </Link>
                         </button>
                       </li>
                       <li className="nav-item">

@@ -57,8 +57,6 @@ const FacultyMarkAttendence = () => {
     setCheckedValue([]);
   };
 
-  console.log(checkedValue);
-
   useEffect(() => {
     if (store.faculty.fetchedStudentsHelper) {
       setIsLoading2(false);
@@ -80,7 +78,7 @@ const FacultyMarkAttendence = () => {
           <>
             {store.faculty.fetchedStudentsHelper && (
               <div className="flex justify-center mt-4">
-                <div className="w-full max-w-md">
+                <div className="sm:w-full lg:w-3/5 px-4">
                   <form noValidate onSubmit={formHandler}>
                     <div className="mb-4">
                       <label
@@ -204,9 +202,9 @@ const FacultyMarkAttendence = () => {
                         )}
                       </select>
                     </div>
-                    <table className="table">
-                      <thead className="flex gap-3">
-                        <tr>
+                    <table className="w-full flex flex-col">
+                      <thead className="flex">
+                        <tr className="w-full flex px-2 justify-between mb-3">
                           <td>
                             <div className="form-check">
                               <input
@@ -222,7 +220,7 @@ const FacultyMarkAttendence = () => {
                           <th>Student Name</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="px-2">
                         {store.faculty.fetchedStudents.map((obj, index) => (
                           <tr
                             key={index}
@@ -235,7 +233,7 @@ const FacultyMarkAttendence = () => {
                             <td>
                               <div className="form-check">
                                 <input
-                                  className="form-check-input"
+                                  className="student-checkbox form-check-input"
                                   type="checkbox"
                                   value={obj._id}
                                   onChange={handleInputChange}

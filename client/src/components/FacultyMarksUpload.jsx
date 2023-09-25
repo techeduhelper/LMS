@@ -69,8 +69,8 @@ const FacultyMarksUpload = () => {
         {store.faculty.isAuthenticated ? (
           <>
             {store.faculty.fetchedStudentsHelper && (
-              <div className="flex justify-center items-center mt-4">
-                <div className="lg:w-1/3 sm:w-full rounded-md bg-slate-100 px-4 py-6">
+              <div className="flex justify-center items-center mt-4 px-3">
+                <div className="lg:w-1/3 sm:w-full rounded-md bg-slate-100 px-4 py-4">
                   <form noValidate onSubmit={formHandler}>
                     <div className="mb-4">
                       <label htmlFor="branchId" className="block text-gray-700">
@@ -156,7 +156,7 @@ const FacultyMarksUpload = () => {
             )}
 
             {!store.faculty.fetchedStudentsHelper && (
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-4 px-3">
                 <div className="lg:w-2/4 sm:w-full bg-slate-100 px-4 py-6">
                   <form onSubmit={secondFormHandler}>
                     <div className="mb-4">
