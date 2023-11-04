@@ -70,7 +70,10 @@ const FacultyMarksUpload = () => {
           <>
             {store.faculty.fetchedStudentsHelper && (
               <div className="flex justify-center items-center mt-4 px-3">
-                <div className="lg:w-1/3 sm:w-full rounded-md bg-slate-100 px-4 py-4">
+                <div className="lg:w-2/4 sm:w-full rounded-md bg-slate-100 px-4 py-4">
+                  <h1 className="text-center bg-slate-300 py-2 text-2xl mb-4 font-semibold rounded-md text-gray-500">
+                    Upload Marks
+                  </h1>
                   <form noValidate onSubmit={formHandler}>
                     <div className="mb-4">
                       <label htmlFor="branchId" className="block text-gray-700">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, Outlet, Navigate } from "react-router-dom";
+import { NavLink, Link, useNavigate, Outlet, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   studentLogout,
@@ -8,6 +8,7 @@ import {
 } from "../redux/action/studentAction";
 import toast from "react-hot-toast";
 import { GiSplitCross } from "react-icons/gi";
+import { BsBoxArrowRight } from "react-icons/bs";
 
 const StudentHome = () => {
   const [dropd, setDropd] = useState(false);
@@ -44,27 +45,27 @@ const StudentHome = () => {
     <>
       {store.student.isAuthenticated ? (
         <div>
-          <div className="student-nav sticky top-0">
-            <nav className="bg-light">
-              <div className="lg:container mx-auto p-4 flex justify-between">
-                <div className="flex items-center gap-3">
+          <div className='student-nav sticky top-0 z-50'>
+            <nav className='bg-light'>
+              <div className='mx-auto p-4 flex justify-between w-full items-center gap-2'>
+                <div className='flex items-center gap-3'>
                   <button
                     onClick={handleToggle}
-                    className="lg:hidden text-xl"
-                    type="button"
+                    className='lg:hidden text-xl'
+                    type='button'
                   >
                     ☰
                   </button>
                   <Link
-                    to="/student"
-                    className="text-2xl font-extrabold sm:text-center text-white"
+                    to='/student'
+                    className='text-2xl font-extrabold sm:text-center text-white'
                   >
                     SEACOM LMS{" "}
-                    <span className="text-sm outline outline-white ml-1 px-1 py-1 drop-shadow-2xl text-green-400">
+                    <span className='text-sm outline outline-white ml-1 px-1 py-1 drop-shadow-2xl text-green-400'>
                       Student Dashboard
                     </span>
                   </Link>
-                  <div className="w-[0.2rem] bg-white h-full mx-4"></div>
+                  <div className='w-[0.2rem] bg-white h-full mx-4'></div>
                   <div
                     className={`lg:flex sm:absolute lg:static sm:top-0 sm:left-0 lg:left-auto lg:top-auto sm:h-[100vh] lg:h-auto sm:bg-slate-200 lg:bg-inherit sm:w-2/3 lg:w-auto sm:text-black lg:text-white sm:px-2 lg:px-0 z-50 ${
                       togglenav ? "hidden space-x-2" : "flex flex-col"
@@ -72,92 +73,104 @@ const StudentHome = () => {
                   >
                     <button
                       onClick={handleToggle}
-                      className="lg:hidden flex justify-end mt-2 mb-2"
+                      className='lg:hidden flex justify-end mt-2 mb-2'
                     >
                       <GiSplitCross size={30} />
                     </button>
-                    <ul className="flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 sm:left-0 sm:w-full sm:bg-slate-50 lg:bg-inherit sm:py-4 lg:py-0">
-                      <li className="nav-item">
+                    <ul className='flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 sm:left-0 sm:w-full sm:bg-slate-50 lg:bg-inherit sm:py-4 lg:py-0'>
+                      <li className='nav-item'>
                         <button
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
-                          type="button"
-                          className="btn"
+                          type='button'
+                          className='btn'
                         >
-                          <Link className="pl-5" to="/student">
-                            {name?.toUpperCase()}
-                          </Link>
+                          <Link to='/student'>{name?.toUpperCase()}</Link>
                         </button>
                       </li>
-                      <li className="nav-item">
+                      <li className='nav-item'>
                         <button
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
-                          type="button"
-                          className="btn"
+                          type='button'
+                          className='btn'
                         >
-                          <Link to="/student/updateProfile">
+                          <NavLink
+                            activeClassName='active'
+                            to='/student/updateProfile'
+                          >
                             UPDATE PROFILE
-                          </Link>
+                          </NavLink>
                         </button>
                       </li>
-                      <li className="nav-item dropdown relative group">
+                      <li className='nav-item dropdown relative group'>
                         <button
                           onClick={handledropd}
-                          className="sm:text-black lg:text-white group-hover:text-blue-300"
+                          className='sm:text-black group-hover:text-blue-300 bg-white text-lg px-3 py-2 rounded-md'
                         >
                           ACADEMIC
                         </button>
                         {dropd && (
-                          <div className="absolute  mt-2 space-y-2 bg-slate-100 border border-gray-200 w-48 left-0 block text-black">
-                            <Link
+                          <div className='absolute  mt-2 space-y-2 bg-slate-100 border border-gray-200 w-48 left-0 block text-black'>
+                            <NavLink
+                              activeClassName='active'
                               onClick={handledropd}
-                              to="/student/testPerformance"
-                              className="block px-4 py-2 hover:bg-gray-200"
+                              to='/student/testPerformance'
+                              className='block px-4 py-2 hover:bg-gray-200'
                             >
                               Test Performance
-                            </Link>
-                            <Link
+                            </NavLink>
+                            <NavLink
+                              activeClassName='active'
                               onClick={handledropd}
-                              to="/student/attendence"
-                              className="block px-4 py-2 hover:bg-gray-200"
+                              to='/student/attendence'
+                              className='block px-4 py-2 hover:bg-gray-200'
                             >
                               Attendance
-                            </Link>
-                            <Link
+                            </NavLink>
+                            <NavLink
+                              activeClassName='active'
                               onClick={handledropd}
-                              to="/student/getAllSubjects"
-                              className="block px-4 py-2 hover:bg-gray-200"
+                              to='/student/getAllSubjects'
+                              className='block px-4 py-2 hover:bg-gray-200'
                             >
                               Student Subject List
-                            </Link>
+                            </NavLink>
                           </div>
                         )}
                       </li>
-                      <li className="nav-item">
+                      <li className='nav-item'>
                         <button
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
-                          type="button"
-                          className="btn"
+                          type='button'
+                          className='btn'
                         >
-                          <Link to="/student/studentDetails">STUDENTS</Link>
+                          <NavLink
+                            activeClassName='active'
+                            to='/student/studentDetails'
+                          >
+                            STUDENTS
+                          </NavLink>
                         </button>
                       </li>
-                      <li className="nav-item">
+                      <li className='nav-item'>
                         <button
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
-                          type="button"
-                          className="btn"
+                          type='button'
+                          className='btn'
                         >
-                          <Link to="/student/updatePassword">
+                          <NavLink
+                            activeClassName='active'
+                            to='/student/updatePassword'
+                          >
                             UPDATE PASSWORD
-                          </Link>
+                          </NavLink>
                         </button>
                       </li>
                     </ul>
@@ -167,21 +180,23 @@ const StudentHome = () => {
                   <button
                     style={{ listStyle: "None" }}
                     onClick={logoutHandler}
-                    type="button"
-                    className="btn text-white font-semibold"
+                    type='button'
+                    className='btn text-white font-semibold px-4 py-2 bg-slate-500 rounded-full hover:bg-slate-700 active:bg-yellow-300 flex items-center justify-center gap-2'
                   >
-                    LOGOUT
+                    <div className='flex items-center gap-2'>
+                      LOGOUT <BsBoxArrowRight size={25} />
+                    </div>
                   </button>
                 </div>
               </div>
             </nav>
           </div>
-          <div className="h-full">
+          <div className='h-full'>
             <Outlet />
           </div>
         </div>
       ) : (
-        <Navigate to="/student-login" />
+        <Navigate to='/student-login' />
       )}
     </>
   );

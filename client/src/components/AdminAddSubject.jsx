@@ -56,117 +56,117 @@ const AdminAddSubject = () => {
       <div>
         {store.admin.isAuthenticated ? (
           <>
-            <div className="lg:container mt-10">
-              <div className="flex justify-center">
-                <div className="w-full lg:w-1/2">
+            <div className='mt-10'>
+              <div className='flex justify-center'>
+                <div className='w-full lg:w-1/2'>
                   <form
                     noValidate
                     onSubmit={formHandler}
-                    className="bg-gray-100 shadow-md rounded-lg px-8 py-4 w-full "
+                    className='bg-gray-100 shadow-md rounded-lg px-8 py-4 w-full '
                   >
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="snameId"
-                        className="block text-gray-700 font-semibold mb-2"
+                        htmlFor='snameId'
+                        className='block text-gray-700 font-semibold mb-2'
                       >
                         Subject Name
                       </label>
                       <input
                         onChange={(e) => setSubjectName(e.target.value)}
-                        type="text"
-                        className="form-input w-full py-2 rounded-md pl-2 border"
-                        id="snameId"
+                        type='text'
+                        className='form-input w-full py-2 rounded-md pl-2 border'
+                        id='snameId'
                       />
                       {error.subjectName && (
-                        <div className="text-red-500">{error.subjectName}</div>
+                        <div className='text-red-500'>{error.subjectName}</div>
                       )}
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="scodeId"
-                        className="block text-gray-700 font-semibold"
+                        htmlFor='scodeId'
+                        className='block text-gray-700 font-semibold'
                       >
                         Subject Code
                       </label>
                       <input
                         onChange={(e) => setSubjectCode(e.target.value)}
-                        type="text"
-                        className="form-input w-full py-2 rounded-md pl-2 border"
-                        id="scodeId"
+                        type='text'
+                        className='form-input w-full py-2 rounded-md pl-2 border'
+                        id='scodeId'
                       />
                       {error.subjectCode && (
-                        <div className="text-red-500">{error.subjectCode}</div>
+                        <div className='text-red-500'>{error.subjectCode}</div>
                       )}
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="totalLectures"
-                        className="block text-gray-700 font-semibold"
+                        htmlFor='totalLectures'
+                        className='block text-gray-700 font-semibold'
                       >
                         Total Lectures
                       </label>
                       <input
                         onChange={(e) => setTotalLectures(e.target.value)}
-                        type="number"
-                        className="form-input w-full py-2 rounded-md pl-2 border"
-                        id="totalLectures"
+                        type='number'
+                        className='form-input w-full py-2 rounded-md pl-2 border'
+                        id='totalLectures'
                       />
                       {error.totalLectures && (
-                        <div className="text-red-500">
+                        <div className='text-red-500'>
                           {error.totalLectures}
                         </div>
                       )}
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="departmentId"
-                        className="block text-gray-700 font-semibold"
+                        htmlFor='departmentId'
+                        className='block text-gray-700 font-semibold'
                       >
                         Department
                       </label>
                       <select
                         onChange={(e) => setDepartment(e.target.value)}
-                        className="form-select w-full py-2 rounded-md pl-2 border"
-                        id="departmentId"
+                        className='form-select w-full py-2 rounded-md pl-2 border'
+                        id='departmentId'
                       >
                         <option>Select</option>
-                        <option value="E.C.E">E.C.E</option>
-                        <option value="E.E.E">E.E.E</option>
-                        <option value="C.S.E">C.S.E</option>
-                        <option value="I.T">I.T</option>
-                        <option value="Mechanical">Mechanical</option>
-                        <option value="Civil">Civil</option>
+                        <option value='E.C.E'>E.C.E</option>
+                        <option value='E.E.E'>E.E.E</option>
+                        <option value='C.S.E'>C.S.E</option>
+                        <option value='I.T'>I.T</option>
+                        <option value='Mechanical'>Mechanical</option>
+                        <option value='Civil'>Civil</option>
                       </select>
                       {error.department && (
-                        <div className="text-red-500">{error.department}</div>
+                        <div className='text-red-500'>{error.department}</div>
                       )}
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="yearId"
-                        className="block text-gray-700 font-semibold"
+                        htmlFor='yearId'
+                        className='block text-gray-700 font-semibold'
                       >
                         Year
                       </label>
                       <select
                         onChange={(e) => setYear(e.target.value)}
-                        className="form-select w-full py-2 rounded-md pl-2 border"
-                        id="yearId"
+                        className='form-select w-full py-2 rounded-md pl-2 border'
+                        id='yearId'
                       >
                         <option>Select</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
                       </select>
                       {error.year && (
-                        <div className="text-red-500">{error.year}</div>
+                        <div className='text-red-500'>{error.year}</div>
                       )}
                     </div>
 
                     <button
-                      type="submit"
-                      className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full w-full"
+                      type='submit'
+                      className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full w-full'
                     >
                       {isLoading ? "Please wait" : " Add Subject"}
                     </button>

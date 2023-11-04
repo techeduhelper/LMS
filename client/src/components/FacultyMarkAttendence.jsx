@@ -77,8 +77,11 @@ const FacultyMarkAttendence = () => {
         {store?.faculty?.isAuthenticated ? (
           <>
             {store.faculty.fetchedStudentsHelper && (
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-6">
                 <div className="sm:w-full lg:w-3/5 px-4">
+                  <h1 className="text-gray-500 bg-slate-200 py-2 text-center text-2xl font-semibold rounded-md mb-4">
+                    Mark Attendance
+                  </h1>
                   <form noValidate onSubmit={formHandler}>
                     <div className="mb-4">
                       <label

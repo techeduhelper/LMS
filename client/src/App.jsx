@@ -5,7 +5,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Home from "./pages/Home";
 import AdminLogin from "./components/AdminLogin";
 import StudentLogin from "./components/StudentLogin";
 import FacultyLogin from "./components/FacultyLogin";
@@ -34,6 +33,14 @@ import StudentDetails from "./components/StudentDetails";
 import StudentUpdatePassword from "./components/StudentUpdatePassword";
 import StudentCard from "./components/StudentCard";
 import { useSelector } from "react-redux";
+import Lectures from "./components/Lectures";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import StudentChat from "./components/StudentChat";
+import About from "./pages/About";
+import Courses from "./pages/Courses";
+import LifeSeacom from "./pages/LifeSeacom";
+import Contact from "./pages/Contact";
 
 function App() {
   const store = useSelector((store) => store);
@@ -43,9 +50,15 @@ function App() {
       <Toaster />
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />}>
+          <Route path='/' element={<Layout />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/about-us' element={<About />} />
+            <Route path='/courses' element={<Courses />} />
+            <Route path='/life-seacom' element={<LifeSeacom />} />
+            <Route path='/Contact-us' element={<Contact />} />
+
             <Route
-              path="/"
+              path='/admin-login'
               element={
                 store.admin.isAuthenticated ? (
                   <Navigate to={"/admin"} />
@@ -54,16 +67,21 @@ function App() {
                 )
               }
             />
-            <Route path="student-login" element={<StudentLogin />} />
-            <Route path="faculty-login" element={<FacultyLogin />} />
+            <Route path='/student-login' element={<StudentLogin />} />
+            <Route path='/faculty-login' element={<FacultyLogin />} />
+            <Route path='/lectures' element={<Lectures />} />
           </Route>
 
           {/* For Admin Route */}
 
           <Route
-            path="/admin"
+            path='/admin'
             element={
-              store.admin.isAuthenticated ? <AdminHome /> : <Navigate to="/" />
+              store.admin.isAuthenticated ? (
+                <AdminHome />
+              ) : (
+                <Navigate to='/admin-login' />
+              )
             }
           >
             <Route
@@ -72,77 +90,77 @@ function App() {
                 store.admin.isAuthenticated ? (
                   <AdminProfile />
                 ) : (
-                  <Navigate to="/" />
+                  <Navigate to='/admin-login' />
                 )
               }
             />
             <Route
-              path="addFaculty"
+              path='addFaculty'
               element={
                 store.admin.isAuthenticated ? (
                   <AdminAddFaculty />
                 ) : (
-                  <Navigate to="/" />
+                  <Navigate to='/admin-login' />
                 )
               }
             />
             <Route
-              path="addStudent"
+              path='addStudent'
               element={
                 store.admin.isAuthenticated ? (
                   <AdminAddStudent />
                 ) : (
-                  <Navigate to="/" />
+                  <Navigate to='/admin-login' />
                 )
               }
             />
             <Route
-              path="addSubject"
+              path='addSubject'
               element={
                 store.admin.isAuthenticated ? (
                   <AdminAddSubject />
                 ) : (
-                  <Navigate to="/" />
+                  <Navigate to='/admin-login' />
                 )
               }
             />
             <Route
-              path="addAdmin"
+              path='addAdmin'
               element={
                 store.admin.isAuthenticated ? (
                   <AdminAddAdmin />
                 ) : (
-                  <Navigate to="/" />
+                  <Navigate to='/admin-login' />
                 )
               }
             />
             <Route
-              path="allFaculties"
+              path='allFaculties'
               element={
                 store.admin.isAuthenticated ? (
                   <AdminGetAllFaculties />
                 ) : (
-                  <Navigate to="/" />
+                  <Navigate to='/admin-login' />
                 )
               }
             />
             <Route
-              path="allStudents"
+              path='allStudents'
               element={
                 store.admin.isAuthenticated ? (
                   <AdminGetAllStudent />
                 ) : (
-                  <Navigate to="/" />
+                  <Navigate to='/admin-login' />
                 )
               }
             />
             <Route
-              path="allSubject"
+              path='allSubject'
               element={
                 store.admin.isAuthenticated ? (
                   <AdminGetAllSubject />
                 ) : (
-                  <Navigate to="/" />
+                  <Navigate to='/admin-login' />
                 )
               }
             />
@@ -151,12 +169,12 @@ function App() {
           {/* For Faculty route */}
 
           <Route
-            path="/faculty"
+            path='/faculty'
             element={
               store.faculty.isAuthenticated ? (
                 <FacultyHome />
               ) : (
-                <Navigate to="/faculty-login" />
+                <Navigate to='/faculty-login' />
               )
             }
           >
@@ -166,47 +184,47 @@ function App() {
                 store.faculty.isAuthenticated ? (
                   <FacultyProfile />
                 ) : (
-                  <Navigate to="/faculty-login" />
+                  <Navigate to='/faculty-login' />
                 )
               }
             />
             <Route
-              path="updateProfile"
+              path='updateProfile'
               element={
                 store.faculty.isAuthenticated ? (
                   <FacultyUpdateProfile />
                 ) : (
-                  <Navigate to="/faculty-login" />
+                  <Navigate to='/faculty-login' />
                 )
               }
             />
             <Route
-              path="markAttendence"
+              path='markAttendence'
               element={
                 store.faculty.isAuthenticated ? (
                   <FacultyMarkAttendence />
                 ) : (
-                  <Navigate to="/faculty-login" />
+                  <Navigate to='/faculty-login' />
                 )
               }
             />
             <Route
-              path="uploadMarks"
+              path='uploadMarks'
               element={
                 store.faculty.isAuthenticated ? (
                   <FacultyMarksUpload />
                 ) : (
-                  <Navigate to="/faculty-login" />
+                  <Navigate to='/faculty-login' />
                 )
               }
             />
             <Route
-              path="updatePassword"
+              path='updatePassword'
               element={
                 store.faculty.isAuthenticated ? (
                   <FacultyUpdatePassword />
                 ) : (
-                  <Navigate to="/faculty-login" />
+                  <Navigate to='/faculty-login' />
                 )
               }
             />
@@ -215,12 +233,12 @@ function App() {
           {/* For Student Route */}
 
           <Route
-            path="/student"
+            path='/student'
             element={
               store.student.isAuthenticated ? (
                 <StudentHome />
               ) : (
-                <Navigate to="/student-login" />
+                <Navigate to='/student-login' />
               )
             }
           >
@@ -235,62 +253,72 @@ function App() {
               }
             />
             <Route
-              path="updateProfile"
+              path='updateProfile'
               element={
                 store.student.isAuthenticated ? (
                   <StudentUpdateProfile />
                 ) : (
-                  <Navigate to="/student-login" />
+                  <Navigate to='/student-login' />
                 )
               }
             />
             <Route
-              path="testPerformance"
+              path='testPerformance'
               element={
                 store.student.isAuthenticated ? (
                   <StudentTestPerformance />
                 ) : (
-                  <Navigate to="/student-login" />
+                  <Navigate to='/student-login' />
                 )
               }
             />
             <Route
-              path="attendence"
+              path='attendence'
               element={
                 store.student.isAuthenticated ? (
                   <StudentAttendence />
                 ) : (
-                  <Navigate to="/student-login" />
+                  <Navigate to='/student-login' />
                 )
               }
             />
             <Route
-              path="getAllSubjects"
+              path='getAllSubjects'
               element={
                 store.student.isAuthenticated ? (
                   <StudentAllSubject />
                 ) : (
-                  <Navigate to="/student-login" />
+                  <Navigate to='/student-login' />
                 )
               }
             />
             <Route
-              path="studentDetails"
+              path='studentDetails'
               element={
                 store.student.isAuthenticated ? (
                   <StudentDetails />
                 ) : (
-                  <Navigate to="/student-login" />
+                  <Navigate to='/student-login' />
                 )
               }
             />
             <Route
-              path="updatePassword"
+              path='updatePassword'
               element={
                 store.student.isAuthenticated ? (
                   <StudentUpdatePassword />
                 ) : (
-                  <Navigate to="/student-login" />
+                  <Navigate to='/student-login' />
+                )
+              }
+            />
+            <Route
+              path='chat/:room'
+              element={
+                store.student.isAuthenticated ? (
+                  <StudentChat />
+                ) : (
+                  <Navigate to='/student-login' />
                 )
               }
             />

@@ -54,108 +54,111 @@ const StudentUpdateProfile = () => {
       <div>
         {store.student.isAuthenticated ? (
           <>
-            <div className="lg:container mt-5 px-3">
-              <div className="flex justify-center">
-                <div className="w-full max-w-md">
+            <div className='mt-5 px-3'>
+              <div className='flex justify-center'>
+                <div className='w-full max-w-2xl'>
+                  <h1 className='text-center text-xl text-gray-500 font-semibold capitalize'>
+                    Update profile
+                  </h1>
                   <form
                     onSubmit={formHandler}
-                    className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                    className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
                   >
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="inputId"
-                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor='inputId'
+                        className='block text-gray-700 text-sm font-bold mb-2'
                       >
                         Profile Picture
                       </label>
                       <input
                         required
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="file"
-                        accept=".jpg,.png,.jpeg"
-                        id="inputId"
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        type='file'
+                        accept='.jpg,.png,.jpeg'
+                        id='inputId'
                         onChange={imagehandler}
                       />
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="genderId"
-                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor='genderId'
+                        className='block text-gray-700 text-sm font-bold mb-2'
                       >
                         Gender
                       </label>
                       <select
                         onChange={(e) => setGender(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="genderId"
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        id='genderId'
                       >
                         <option>Select</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
+                        <option value='Male'>Male</option>
+                        <option value='Female'>Female</option>
+                        <option value='Other'>Other</option>
                       </select>
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="numberId"
-                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor='numberId'
+                        className='block text-gray-700 text-sm font-bold mb-2'
                       >
                         Contact Number
                       </label>
                       <input
                         onChange={(e) => setContactNumber(e.target.value)}
                         required
-                        type="number"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="numberId"
+                        type='number'
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        id='numberId'
                       />
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="fatherId"
-                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor='fatherId'
+                        className='block text-gray-700 text-sm font-bold mb-2'
                       >
                         Father Name
                       </label>
                       <input
                         onChange={(e) => setFatherName(e.target.value)}
-                        type="text"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="fatherId"
+                        type='text'
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        id='fatherId'
                       />
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="fathercnId"
-                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor='fathercnId'
+                        className='block text-gray-700 text-sm font-bold mb-2'
                       >
                         Father Contact Number
                       </label>
                       <input
                         onChange={(e) => setFatherContactNumber(e.target.value)}
-                        type="number"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="fathercnId"
+                        type='number'
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        id='fathercnId'
                       />
                     </div>
-                    <div className="mb-4">
+                    <div className='mb-4'>
                       <label
-                        htmlFor="aadharId"
-                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor='aadharId'
+                        className='block text-gray-700 text-sm font-bold mb-2'
                       >
                         Aadhar Card Number
                       </label>
                       <input
                         onChange={(e) => setAadharCard(e.target.value)}
-                        type="number"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="aadharId"
+                        type='number'
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        id='aadharId'
                       />
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className='flex items-center justify-between'>
                       <button
-                        type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type='submit'
+                        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
                       >
                         {isLoading ? "Updating" : "Update"}
                       </button>

@@ -27,15 +27,15 @@
   background: #40e0d0; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #ff0080,
+    #d85496,
     #ff8c00,
     #40e0d0
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #ff0080,
+    #a1bc06,
     #ff8c00,
-    #40e0d0
+    #c8cb01
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -113,4 +113,11 @@
     #ec2f4b,
     #009fff
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.active {
+  background-color: #fff;
+  padding: 0.5rem 0.6rem;
+  color: black;
+  font-weight: 700;
 }

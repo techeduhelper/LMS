@@ -27,14 +27,12 @@ const StudentUpdatePassword = () => {
     e.preventDefault();
     setIsLoading(true);
     dispatch(
-      studentUpdatePassword(
-        {
-          registrationNumber: store.student.student.student.registrationNumber,
-          oldPassword,
-          newPassword,
-          confirmNewPassword,
-        },
-      )
+      studentUpdatePassword({
+        registrationNumber: store.student.student.student.registrationNumber,
+        oldPassword,
+        newPassword,
+        confirmNewPassword,
+      })
     );
   };
 
@@ -43,17 +41,17 @@ const StudentUpdatePassword = () => {
       <div>
         {store.student.isAuthenticated ? (
           <>
-            <div className="lg:container m-5">
-              <div className="flex justify-center items-center h-[80vh]">
+            <div className='m-5'>
+              <div className='flex justify-center items-center h-[80vh]'>
                 <form
                   noValidate
                   onSubmit={formHandler}
-                  className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96"
+                  className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96'
                 >
-                  <div className="mb-4">
+                  <div className='mb-4'>
                     <label
-                      htmlFor="emailId"
-                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor='emailId'
+                      className='block text-gray-700 text-sm font-bold mb-2'
                     >
                       Old Password
                     </label>
@@ -66,19 +64,19 @@ const StudentUpdatePassword = () => {
                           "border-red-500": error.oldPassword,
                         }
                       )}
-                      id="emailId"
-                      type="password"
+                      id='emailId'
+                      type='password'
                     />
                     {error.oldPassword && (
-                      <p className="text-red-500 text-xs italic">
+                      <p className='text-red-500 text-xs italic'>
                         {error.oldPassword}
                       </p>
                     )}
                   </div>
-                  <div className="mb-4">
+                  <div className='mb-4'>
                     <label
-                      htmlFor="passwordId"
-                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor='passwordId'
+                      className='block text-gray-700 text-sm font-bold mb-2'
                     >
                       New Password
                     </label>
@@ -91,19 +89,19 @@ const StudentUpdatePassword = () => {
                           "border-red-500": error.newPassword,
                         }
                       )}
-                      id="passwordId"
-                      type="password"
+                      id='passwordId'
+                      type='password'
                     />
                     {error.newPassword && (
-                      <p className="text-red-500 text-xs italic">
+                      <p className='text-red-500 text-xs italic'>
                         {error.newPassword}
                       </p>
                     )}
                   </div>
-                  <div className="mb-4">
+                  <div className='mb-4'>
                     <label
-                      htmlFor="passwordCId"
-                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor='passwordCId'
+                      className='block text-gray-700 text-sm font-bold mb-2'
                     >
                       Confirm New Password
                     </label>
@@ -116,19 +114,19 @@ const StudentUpdatePassword = () => {
                           "border-red-500": error.confirmNewPassword,
                         }
                       )}
-                      id="passwordCId"
-                      type="password"
+                      id='passwordCId'
+                      type='password'
                     />
                     {error.confirmNewPassword && (
-                      <p className="text-red-500 text-xs italic">
+                      <p className='text-red-500 text-xs italic'>
                         {error.confirmNewPassword}
                       </p>
                     )}
                   </div>
-                  <div className="mb-6">
+                  <div className='mb-6'>
                     <button
-                      type="submit"
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+                      type='submit'
+                      className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline '
                     >
                       Update Password
                     </button>

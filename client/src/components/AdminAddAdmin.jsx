@@ -65,6 +65,9 @@ const AdminAddAdmin = () => {
             <div className="lg:container mx-auto mt-5">
               <div className="md:flex md:justify-center">
                 <div className="w-full lg:px-40 sm:px-4 ">
+                  <h1 className="bg-gray-300 text-center  py-2 text-2xl mb-2 rounded-md text-gray-600 font-semibold">
+                    Add Admin
+                  </h1>
                   <form
                     noValidate
                     onSubmit={formHandler}
@@ -83,12 +86,12 @@ const AdminAddAdmin = () => {
                             onChange={(e) => setName(e.target.value)}
                             type="text"
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
-                              error.name ? "border-red-500" : ""
+                              error.message ? "border-red-500" : ""
                             }`}
                             id="nameId"
                           />
-                          {error.name && (
-                            <p className="text-red-500 mt-2">{error.name}</p>
+                          {error.message && (
+                            <p className="text-red-500 mt-2">{error.message}</p>
                           )}
                         </div>
                         <div className="mb-4">
@@ -106,7 +109,7 @@ const AdminAddAdmin = () => {
                             }`}
                             id="emailId"
                           />
-                          {error.message && (
+                          {error.email && (
                             <p className="text-red-500 mt-2">{error.message}</p>
                           )}
                         </div>
