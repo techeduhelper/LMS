@@ -51,8 +51,8 @@ const FacultyLogin = () => {
     <>
       <div className='lg:w-full sm:w-screen lg:h-[85vh]'>
         <div className='p-8 w-full  h-full flex justify-center items-center '>
-          <div className='faculty-login rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center w-full'>
-            <p className='text-center text-2xl text-white font-semibold'>
+          <div className='faculty-login rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center lg:w-4/5 w-full'>
+            <p className='text-center text-3xl text-white font-semibold'>
               Faculty Login
             </p>
 

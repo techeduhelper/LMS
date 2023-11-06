@@ -6,11 +6,11 @@ import { IoMdArrowDropdown } from "react-icons/io";
 const Header = () => {
   return (
     <>
-      <div className='drawer w-full top-0 sticky'>
+      <div className='drawer w-full top-0 mt-0 sticky z-50'>
         <input id='my-drawer-3' type='checkbox' className='drawer-toggle' />
         <div className='drawer-content flex flex-col items-center'>
           {/* Navbar */}
-          <div className='w-full navbar bg-white brightness-105 border-b-2 lg:px-28 flex items-center justify-center'>
+          <div className='w-full navbar h-[100px] bg-white border-b-2 lg:px-28 flex items-center justify-center'>
             <div className='flex-none lg:hidden'>
               <label
                 htmlFor='my-drawer-3'
@@ -36,30 +36,30 @@ const Header = () => {
               <img src={logo} alt='logo' className='h-14 w-32' />
             </div>
             <div className='flex-none hidden lg:block my-auto'>
-              <ul className='menu menu-horizontal text-lg flex items-center space-x-2'>
+              <ul className='menu menu-horizontal text-lg flex items-center space-x-2 text-black font-medium'>
                 {/* Navbar menu content here */}
                 <li>
-                  <NavLink to={"/"} activeClassName='active'>
+                  <NavLink to={"/"} activeclassname='active'>
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/about-us"} activeClassName='active'>
+                  <NavLink to={"/about-us"} activeclassname='active'>
                     About us
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/Courses"} activeClassName='active'>
+                  <NavLink to={"/Courses"} activeclassname='active'>
                     Courses
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/life-seacom"} activeClassName='active'>
+                  <NavLink to={"/life-seacom"} activeclassname='active'>
                     Life@Seacom
                   </NavLink>
                 </li>
                 <li className='dropdown'>
-                  <li activeClassName='active' tabIndex={0}>
+                  <li activeclassname='active' tabIndex={0}>
                     We@Manage (CMS)
                   </li>
                   <ul
@@ -67,14 +67,14 @@ const Header = () => {
                     className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-lg space-y-2'
                   >
                     <NavLink
-                      activeClassName='active'
+                      activeclassname='active'
                       to={"/student-login"}
                       className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 border-yellow-400 text-black text-md '
                     >
                       Student
                     </NavLink>
                     <NavLink
-                      activeClassName='active'
+                      activeclassname='active'
                       to={"/faculty-login"}
                       className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
                     >
@@ -82,14 +82,14 @@ const Header = () => {
                     </NavLink>
                     <NavLink
                       to={"/admin-login"}
-                      activeClassName='active'
+                      activeclassname='active'
                       className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
                     >
                       Admin
                     </NavLink>
                     <NavLink
                       to={"/lectures"}
-                      activeClassName='active'
+                      activeclassname='active'
                       className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
                     >
                       Lectures
@@ -97,13 +97,13 @@ const Header = () => {
                   </ul>
                 </li>
                 <li>
-                  <NavLink to={"/contact-us"} activeClassName='active'>
+                  <NavLink to={"/contact-us"} activeclassname='active'>
                     Contact us
                   </NavLink>
                 </li>
               </ul>
             </div>
-            <button className='btn btn-primary font-semibold text-lg'>
+            <button className='btn lg:btn-primary btn-warning font-semibold lg:text-lg'>
               Online Application
             </button>
           </div>
@@ -117,27 +117,27 @@ const Header = () => {
           <ul className='menu p-4 w-80 min-h-full bg-base-200'>
             {/* Sidebar content here */}
             <li>
-              <NavLink to={"/"} activeClassName='active'>
+              <NavLink to={"/"} activeclassname='active'>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/about-us"} activeClassName='active'>
+              <NavLink to={"/about-us"} activeclassname='active'>
                 About us
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/Courses"} activeClassName='active'>
+              <NavLink to={"/Courses"} activeclassname='active'>
                 Courses
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/life-seacom"} activeClassName='active'>
+              <NavLink to={"/life-seacom"} activeclassname='active'>
                 Life@Seacom
               </NavLink>
             </li>
             <li className='dropdown'>
-              <li activeClassName='active' tabIndex={0}>
+              <li activeclassname='active' tabIndex={0}>
                 We@Manage
               </li>{" "}
               <IoMdArrowDropdown />
@@ -146,14 +146,14 @@ const Header = () => {
                 className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-lg space-y-2'
               >
                 <NavLink
-                  activeClassName='active'
+                  activeclassname='active'
                   to={"/student-login"}
                   className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 border-yellow-400 text-black text-md '
                 >
                   Student
                 </NavLink>
                 <NavLink
-                  activeClassName='active'
+                  activeclassname='active'
                   to={"/faculty-login"}
                   className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
                 >
@@ -161,14 +161,14 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   to={"/admin-login"}
-                  activeClassName='active'
+                  activeclassname='active'
                   className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
                 >
                   Admin
                 </NavLink>
                 <NavLink
                   to={"/lectures"}
-                  activeClassName='active'
+                  activeclassname='active'
                   className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
                 >
                   Lectures
@@ -176,7 +176,7 @@ const Header = () => {
               </ul>
             </li>
             <li>
-              <NavLink to={"/contact-us"} activeClassName='active'>
+              <NavLink to={"/contact-us"} activeclassname='active'>
                 Contact us
               </NavLink>
             </li>

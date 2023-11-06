@@ -44,7 +44,7 @@ const FacultyHome = () => {
         <div>
           <div className='adminfaculty sticky top-0'>
             <nav className='bg-light'>
-              <div className='mx-auto p-4 flex justify-between'>
+              <div className='mx-auto p-4 flex justify-between items-center gap-2'>
                 <div className='flex items-center gap-3'>
                   <button
                     onClick={handleToggle}
@@ -55,7 +55,7 @@ const FacultyHome = () => {
                   </button>
                   <Link
                     to='/faculty'
-                    className='text-2xl font-extrabold sm:text-center'
+                    className='text-2xl font-extrabold sm:text-center flex lg:flex-row flex-col lg:gap-2'
                   >
                     SEACOM LMS{" "}
                     <span className='text-sm outline outline-black ml-1 px-1 py-1 drop-shadow-2xl text-black'>
@@ -81,7 +81,7 @@ const FacultyHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn '
                         >
                           <Link to='/faculty'>{name?.toUpperCase()}</Link>
                         </button>
@@ -144,6 +144,22 @@ const FacultyHome = () => {
                         >
                           <NavLink
                             activeClassName='active'
+                            to='/faculty/notices'
+                          >
+                            UPLOAD NOTICES
+                          </NavLink>
+                        </button>
+                      </li>
+                      <li className='nav-item'>
+                        <button
+                          onClick={
+                            window.innerWidth <= 1024 ? handleToggle : null
+                          }
+                          type='button'
+                          className='btn'
+                        >
+                          <NavLink
+                            activeClassName='active'
                             to='/faculty/updatePassword'
                           >
                             UPDATE PASSWORD
@@ -160,8 +176,10 @@ const FacultyHome = () => {
                     type='button'
                     className='btn text-white font-semibold bg-slate-500 px-4 py-2 rounded-full hover:bg-slate-600 active:bg-pink-600 flex items-center justify-center gap-2'
                   >
-                    LOGOUT
-                    <BsBoxArrowRight size={25} />
+                    <div className='flex items-center justify-center gap-2'>
+                      LOGOUT
+                      <BsBoxArrowRight size={25} />
+                    </div>
                   </button>
                 </div>
               </div>

@@ -43,12 +43,12 @@ const AdminLogin = () => {
     <>
       {!store.admin.isAuthenticated ? (
         <div className='lg:w-full sm:w-screen lg:h-[85vh]'>
-          <p className='text-center text-2xl text-black font-semibold mt-6'>
-            Admin Login
-          </p>
           <div className='p-8 w-full  h-full flex justify-center items-center '>
-            <div className='login-palet rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center w-full'>
-              <form className='mt-6 w-1/3'>
+            <div className='login-palet rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center lg:w-4/5 w-full'>
+              <p className='text-center text-3xl text-white font-semibold mt-6'>
+                Admin Login
+              </p>
+              <form className='mt-6 lg:w-1/3 w-full '>
                 <div className='relative'>
                   <input
                     className='appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline'

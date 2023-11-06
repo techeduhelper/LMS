@@ -1,26 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import poster from "../assets/sec1.jpg";
+import { GoUnmute } from "react-icons/go";
+import { IoVolumeMuteOutline } from "react-icons/io5";
 
 const HomeAbout = () => {
+  const [muted, setMuted] = useState(true);
+
+  const toggleMute = () => {
+    const video = document.getElementById("backgroundVideo");
+    video.muted = !muted;
+    setMuted(!muted);
+  };
+  useEffect(() => {
+    const video = document.getElementById("backgroundVideo");
+    video.play();
+  }, []);
+
   return (
     <>
-      <div className='hero min-h-[60vh] bg-slate-50'>
-        <div className='hero-content flex-col lg:flex-row gap-8'>
-          <div className='w-full'>
+      <div className='hero min-h-[60vh] bg-slate-50 drop-shadow-sm'>
+        <div className='hero-content flex-col lg:flex-row gap-8 max-w-[90rem] lg:px-0 px-4'>
+          <div className='w-full relative'>
             <video
-              id='my-video'
-              class='video-js'
-              controls
-              preload='auto'
+              loop
+              id='backgroundVideo'
+              muted={muted}
+              playsInline
+              className='w-full object-fill brightness-90'
               poster={poster}
-              data-setup='{}'
-              className='w-full'
             >
               <source
-                src='https://www.seacomengineering.org/images/VID-20200909-WA0011.mp4'
+                className='left-0 w-full'
                 type='video/mp4'
+                src='https://www.seacomengineering.org/images/VID-20200909-WA0011.mp4'
               />
             </video>
+            <button
+              onClick={toggleMute}
+              className='absolute top-2 left-2 hover:bg-slate-500 p-1 rounded-full'
+            >
+              {muted ? (
+                <IoVolumeMuteOutline size={36} />
+              ) : (
+                <GoUnmute size={36} />
+              )}
+            </button>
           </div>
           <div className='w-full'>
             <h1 className='text-md font-bold'>Who we are</h1>
@@ -40,10 +64,6 @@ const HomeAbout = () => {
             </p>
           </div>
         </div>
-      </div>
-
-      <div className='flex flex-col lg:flex-row w-full'>
-        <div></div>
       </div>
     </>
   );

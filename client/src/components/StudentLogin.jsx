@@ -54,12 +54,15 @@ const StudentLogin = () => {
     <>
       <div className='lg:w-full sm:w-screen lg:h-[85vh]'>
         <div className='p-8 w-full  h-full flex justify-center items-center '>
-          <div className='student-login rounded-lg py-12 px-4 lg:px-36 flex flex-col items-center justify-center w-full '>
+          <div className='student-login rounded-lg py-12 px-4 lg:px-36 flex flex-col items-center justify-center lg:w-4/5 w-full '>
             <p className='text-center text-4xl text-white font-semibold'>
               Student Login 🖐
             </p>
 
-            <form className='mt-6 lg:w-1/3 w-full lg:px-0 px-6' onSubmit={studentFormHandler}>
+            <form
+              className='mt-6 lg:w-1/3 w-full lg:px-0 px-6'
+              onSubmit={studentFormHandler}
+            >
               <div className='relative'>
                 <input
                   className='appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline'

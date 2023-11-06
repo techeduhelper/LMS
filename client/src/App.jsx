@@ -41,6 +41,8 @@ import About from "./pages/About";
 import Courses from "./pages/Courses";
 import LifeSeacom from "./pages/LifeSeacom";
 import Contact from "./pages/Contact";
+import "react-multi-carousel/lib/styles.css";
+import FacultyNotices from "./components/FacultyNotices";
 
 function App() {
   const store = useSelector((store) => store);
@@ -213,6 +215,16 @@ function App() {
               element={
                 store.faculty.isAuthenticated ? (
                   <FacultyMarksUpload />
+                ) : (
+                  <Navigate to='/faculty-login' />
+                )
+              }
+            />
+            <Route
+              path='notices'
+              element={
+                store.faculty.isAuthenticated ? (
+                  <FacultyNotices />
                 ) : (
                   <Navigate to='/faculty-login' />
                 )
