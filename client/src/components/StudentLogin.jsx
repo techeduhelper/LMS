@@ -87,7 +87,7 @@ const StudentLogin = () => {
                 </div>
               </div>
               {errorsHelper.registrationNumber && (
-                <div className='invalid-feedback'>
+                <div className='invalid-feedback text-red-700'>
                   {errorsHelper.registrationNumber}
                 </div>
               )}
@@ -112,7 +112,9 @@ const StudentLogin = () => {
                 </div>
               </div>
               {errorsHelper.password && (
-                <div className='invalid-feedback'>{errorsHelper.password}</div>
+                <div className='invalid-feedback text-red-600'>
+                  {errorsHelper.password}
+                </div>
               )}
               <div className='mt-4 flex items-center text-white'>
                 <input

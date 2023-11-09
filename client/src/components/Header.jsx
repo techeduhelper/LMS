@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/seacom.png";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { CgBot } from "react-icons/cg";
 
 const Header = () => {
   return (
@@ -55,7 +56,8 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink to={"/life-seacom"} activeclassname='active'>
-                    Life@Seacom
+                    Ask to AI
+                    <CgBot size={30} className='text-yellow-600' />
                   </NavLink>
                 </li>
                 <li className='dropdown'>

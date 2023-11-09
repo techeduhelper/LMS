@@ -43,6 +43,7 @@ import LifeSeacom from "./pages/LifeSeacom";
 import Contact from "./pages/Contact";
 import "react-multi-carousel/lib/styles.css";
 import FacultyNotices from "./components/FacultyNotices";
+import RecieverUserDetails from "./components/RecieverUserDetails";
 
 function App() {
   const store = useSelector((store) => store);
@@ -329,6 +330,16 @@ function App() {
               element={
                 store.student.isAuthenticated ? (
                   <StudentChat />
+                ) : (
+                  <Navigate to='/student-login' />
+                )
+              }
+            />
+            <Route
+              path='student/:registrationNumber'
+              element={
+                store.student.isAuthenticated ? (
+                  <RecieverUserDetails />
                 ) : (
                   <Navigate to='/student-login' />
                 )
