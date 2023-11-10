@@ -13,7 +13,12 @@ dotenv.config();
 // MIDDLEWARES
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173", // Replace with your frontend domain
+    methods: ["GET", "POST"],
+  },
+});
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

@@ -326,20 +326,20 @@ function App() {
               }
             />
             <Route
-              path='chat/:room'
+              path=':registrationNumber'
               element={
                 store.student.isAuthenticated ? (
-                  <StudentChat />
+                  <RecieverUserDetails />
                 ) : (
                   <Navigate to='/student-login' />
                 )
               }
             />
             <Route
-              path='student/:registrationNumber'
+              path='chat/:room'
               element={
                 store.student.isAuthenticated ? (
-                  <RecieverUserDetails />
+                  <StudentChat />
                 ) : (
                   <Navigate to='/student-login' />
                 )

@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  sendMessage,
+  getPrivateConversation,
+  getPrivateConversation2,
+} from "../redux/action/studentAction";
+import io from "socket.io-client";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
+
+// Swap HelperFunction
+function swap(input, value_1, value_2) {
+  var temp = input[value_1];
+  input[value_1] = input[value_2];
+  input[value_2] = temp;
+}
+
+let socket;
 
 const StudentChat = () => {
   const store = useSelector((store) => store);
-  const history = useHistory();
   const dispatch = useDispatch();
   const [room1, setRoom1] = useState("");
   const [room2, setRoom2] = useState("");
@@ -11,10 +28,12 @@ const StudentChat = () => {
   const [message, setMessage] = useState("");
   const [messageArray, setMessageArray] = useState([]);
   const [olderMessages, setOlderMessages] = useState([]);
-  const ENDPOINT = "https://apna-erp.herokuapp.com";
+  const { room: roomParam } = useParams();
+  const ENDPOINT = "http://localhost:8080";
+  const navigate = useNavigate();
 
   useEffect(() => {
-    let temp = props.match.params.room;
+    let temp = roomParam;
     socket = io(ENDPOINT);
     let tempArr = temp.split(".");
     setReceiverRegistrationNumber(tempArr[0]);
@@ -22,21 +41,21 @@ const StudentChat = () => {
     swap(tempArr, 0, 1);
     let tempRoom2 = tempArr[0] + "." + tempArr[1];
     setRoom2(tempRoom2);
-  }, [ENDPOINT, props.match.params.room]);
+  }, [ENDPOINT, roomParam]);
 
   useEffect(() => {
     dispatch(getPrivateConversation(room1));
     dispatch(getPrivateConversation2(room2));
-    socket = io(ENDPOINT);
     socket.emit("join room", {
       room1,
       room2,
     });
     socket.on("new Message", (data) => {
-      setMessageArray([...messageArray, data]);
+      setMessageArray((prevArray) => [...prevArray, data]);
     });
+
     return () => {
-      socket.emit("disconnect");
+      socket.disconnect();
       socket.off();
     };
   }, [room1, room2]);
@@ -61,14 +80,21 @@ const StudentChat = () => {
       };
       dispatch(sendMessage(room1, messageObj));
     } else {
-      alert("Can't send empty message");
+      toast.success("Can't send an empty message");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      formHandler(e);
     }
   };
 
   useEffect(() => {
     socket.on("new Message", (data) => {
       setOlderMessages(store.student.privateChat);
-      setMessageArray([...messageArray, data]);
+      setMessageArray((prevArray) => [...prevArray, data]);
     });
   }, [messageArray, olderMessages]);
 
@@ -76,31 +102,61 @@ const StudentChat = () => {
     <div>
       {store.student.isAuthenticated ? (
         <>
-          <HomeHelper />
-          <div className='container mx-auto p-4'>
-            <div className='flex'>
-              <div className='w-1/2'>
-                <form className='flex items-center' onSubmit={formHandler}>
+          <div className='lg:container w-full mx-auto p-4'>
+            <div className='flex flex-col-reverse justify-between min-h-[80vh]'>
+              <div className='w-full'>
+                <div className='chat-area'>
+                  {messageArray &&
+                    messageArray.map((message, index) => (
+                      <div key={index} className='message'>
+                        <strong>{message.sender}:</strong> {message.message}
+                      </div>
+                    ))}
+                </div>
+                <form
+                  className='flex items-center w-full'
+                  onSubmit={formHandler}
+                >
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={handleKeyPress}
                     placeholder='Type here..'
                     className='resize-none w-full border rounded py-2 px-3'
                   />
                   <button
                     type='submit'
-                    className='bg-blue-500 text-white ml-2 py-2 px-4 rounded'
+                    className='bg-blue-500 text-white ml-2 py-5 px-5 rounded'
                   >
                     Send
                   </button>
                 </form>
               </div>
-              <div className='w-1/2'>{/* ... your existing code */}</div>
+              <div className='w-full bg-slate-100 lg:px-10 px-4 py-10 overflow-auto'>
+                {store.student.privateChat?.map((obj, index) => (
+                  <div key={index} className='mb-4'>
+                    <p className='text-gray-600'>
+                      <span className='font-bold text-blue-700'>
+                        {obj.senderName}:
+                      </span>
+                      {obj.message}, {obj.createdAt}
+                    </p>
+                  </div>
+                ))}
+                {messageArray.map((obj, index) => (
+                  <p key={index} className='text-blue-600 mb-4'>
+                    <span className='font-bold text-green-700'>
+                      {obj.sender}:
+                    </span>
+                    {obj.message}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </>
       ) : (
-        history.push("/")
+        navigate("/")
       )}
     </div>
   );

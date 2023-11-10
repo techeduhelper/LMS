@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-// import {newerChats, previousChats} from '../redux/action/studentAction'
+import { newerChats, previousChats } from "../redux/action/studentAction";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -170,19 +170,20 @@ const StudentDetails = () => {
                       </div>
                       <div className='md:w-1/2'>
                         <h4 className='text-center text-lg font-semibold p-3 bg-gray-200'>
-                          Older Chats
+                          Recents Chats
                         </h4>
-                        <table className='table'>
-                          <tbody>
+                        <table className='table bg-slate-200 my-3'>
+                          <tbody className='px-3 text-base'>
                             {store.student.previousChats.map((res, index) => (
                               <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{res.receiverName}</td>
-                                <td>
+                                <td className='text-right'>
                                   <Link
+                                    className='btn'
                                     to={`/student/${res.receiverRegistrationNumber}`}
                                   >
-                                    Explore
+                                    See the Message
                                   </Link>
                                 </td>
                               </tr>
@@ -222,7 +223,7 @@ const StudentDetails = () => {
                           <td>{obj.name}</td>
                           <td>
                             <Link
-                              to={`/chat/${obj.registrationNumber}`}
+                              to={`/student/${obj.registrationNumber}`}
                               className='px-3 font-medium py-1 bg-green-600 rounded-full text-white'
                             >
                               Chat Now
