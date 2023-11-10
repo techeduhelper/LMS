@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { newerChats, previousChats } from "../redux/action/studentAction";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 const StudentDetails = () => {
   const store = useSelector((store) => store);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [department, setDepartment] = useState("");
   const [year, setYear] = useState("");
@@ -61,6 +62,28 @@ const StudentDetails = () => {
       filterStudentHelper();
     }
   };
+
+  useEffect(() => {
+    const senderName = store.student.student.student.name;
+    const receiverName = store.student.student.student.name;
+
+    const fetchNewerChats = () => {
+      dispatch(newerChats(receiverName));
+    };
+
+    const fetchPreviousChats = () => {
+      dispatch(previousChats(senderName));
+    };
+
+    const fetchChats = () => {
+      fetchNewerChats();
+      fetchPreviousChats();
+    };
+
+    const interval = setInterval(fetchChats, 10000);
+
+    return () => clearInterval(interval);
+  }, [dispatch]);
 
   return (
     <>
@@ -144,9 +167,9 @@ const StudentDetails = () => {
                       </form>
                     </div>
                   </div>
-                  <div className='md:w-3/4 border ml-0 mt-4 md:mt-0'>
+                  <div className='lg:w-3/4 border ml-0 mt-4 md:mt-0 w-full'>
                     <div className='flex lg:flex-row sm:flex-col sm:gap-5 lg:gap-0'>
-                      <div className='md:w-1/2 border-b'>
+                      <div className='lg:w-1/2 border-b'>
                         <h4 className='text-center text-lg font-semibold p-3 bg-gray-200'>
                           New Chats
                         </h4>
@@ -160,7 +183,7 @@ const StudentDetails = () => {
                                   <Link
                                     to={`/student/${res.senderRegistrationNumber}`}
                                   >
-                                    Explore
+                                    See the Message
                                   </Link>
                                 </td>
                               </tr>
@@ -168,9 +191,9 @@ const StudentDetails = () => {
                           </tbody>
                         </table>
                       </div>
-                      <div className='md:w-1/2'>
+                      <div className='lg:w-1/2'>
                         <h4 className='text-center text-lg font-semibold p-3 bg-gray-200'>
-                          Recents Chats
+                          Older Chats
                         </h4>
                         <table className='table bg-slate-200 my-3'>
                           <tbody className='px-3 text-base'>

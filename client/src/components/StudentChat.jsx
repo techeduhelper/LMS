@@ -139,8 +139,8 @@ const StudentChat = () => {
                       <span className='font-bold text-blue-700'>
                         {obj.senderName}:
                       </span>
-                      {obj.message}, {obj.createdAt}
                     </p>
+                    {obj.message}, {obj.createdAt}
                   </div>
                 ))}
                 {messageArray.map((obj, index) => (

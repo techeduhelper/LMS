@@ -19,7 +19,7 @@ const LifeSeacom = () => {
     try {
       const userMessage = userInput.trim();
       if (userMessage === "") {
-        return; // Don't send empty messages
+        return;
       }
 
       const newUserMessage = { role: "user", content: userMessage };
@@ -32,7 +32,7 @@ const LifeSeacom = () => {
         {
           messages: [
             { role: "system", content: "You are a helpful assistant." },
-            newUserMessage, // Include the user's question
+            newUserMessage,
           ],
           model: "gpt-3.5-turbo-1106",
           max_tokens: 256,
@@ -69,7 +69,7 @@ const LifeSeacom = () => {
       <div className='chat-container lg:w-[60%] w-full mx-auto pt-16 lg:px-0 px-6 flex flex-col gap-4 pb-16 lg:pb-0 border-t-4 border-blue-600 h-full'>
         <div className='flex items-center justify-center space-x-2 py-2 rounded-xl bg-white'>
           <img src={chatbotLogo} alt='logo' className='w-10' />
-          <h1 className='text-4xl font-bold text-center'>SEACOM</h1>
+          <h1 className='text-4xl font-bold text-center'>SEACOM AI</h1>
         </div>
         <p className='text-center text-xl mb-10 text-green-700'>
           Seacom AI that provides information about sciences and engineering.
@@ -95,7 +95,15 @@ const LifeSeacom = () => {
                     />
                   </div>
                 )}
-                {message.content}
+                <div
+                  className={
+                    message.role === "chatbot"
+                      ? "bg-black text-white rounded-lg px-3 py-2 mt-2"
+                      : null
+                  }
+                >
+                  {message.content}
+                </div>
               </div>
             )}
           </div>
