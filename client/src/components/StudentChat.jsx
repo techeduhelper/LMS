@@ -9,7 +9,6 @@ import io from "socket.io-client";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
-// Swap HelperFunction
 function swap(input, value_1, value_2) {
   var temp = input[value_1];
   input[value_1] = input[value_2];
@@ -27,7 +26,6 @@ const StudentChat = () => {
     useState("");
   const [message, setMessage] = useState("");
   const [messageArray, setMessageArray] = useState([]);
-  const [olderMessages, setOlderMessages] = useState([]);
   const { room: roomParam } = useParams();
   const ENDPOINT = "http://localhost:8080";
   const navigate = useNavigate();
@@ -41,11 +39,14 @@ const StudentChat = () => {
     swap(tempArr, 0, 1);
     let tempRoom2 = tempArr[0] + "." + tempArr[1];
     setRoom2(tempRoom2);
-  }, [ENDPOINT, roomParam]);
 
-  useEffect(() => {
-    dispatch(getPrivateConversation(room1));
-    dispatch(getPrivateConversation2(room2));
+    const fetchData = () => {
+      dispatch(getPrivateConversation(room1));
+      dispatch(getPrivateConversation2(room2));
+    };
+
+    fetchData();
+
     socket.emit("join room", {
       room1,
       room2,
@@ -54,11 +55,19 @@ const StudentChat = () => {
       setMessageArray((prevArray) => [...prevArray, data]);
     });
 
+    const interval = setInterval(() => {
+      fetchData();
+      socket.on("new Message", (data) => {
+        setMessageArray((prevArray) => [...prevArray, data]);
+      });
+    }, 1000);
+
     return () => {
+      clearInterval(interval);
       socket.disconnect();
       socket.off();
     };
-  }, [room1, room2]);
+  }, [ENDPOINT, roomParam, room1, room2, dispatch]);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -91,70 +100,50 @@ const StudentChat = () => {
     }
   };
 
-  useEffect(() => {
-    socket.on("new Message", (data) => {
-      setOlderMessages(store.student.privateChat);
-      setMessageArray((prevArray) => [...prevArray, data]);
-    });
-  }, [messageArray, olderMessages]);
-
   return (
     <div>
       {store.student.isAuthenticated ? (
-        <>
-          <div className='lg:container w-full mx-auto p-4'>
-            <div className='flex flex-col-reverse justify-between min-h-[80vh]'>
-              <div className='w-full'>
-                <div className='chat-area'>
-                  {messageArray &&
-                    messageArray.map((message, index) => (
-                      <div key={index} className='message'>
-                        <strong>{message.sender}:</strong> {message.message}
-                      </div>
-                    ))}
-                </div>
-                <form
-                  className='flex items-center w-full'
-                  onSubmit={formHandler}
+        <div className='lg:container w-full mx-auto p-4'>
+          <div className='flex flex-col-reverse justify-between min-h-[80vh]'>
+            <div className='w-full'>
+              {/* <div className='chat-area'>
+                {messageArray &&
+                  messageArray.map((message, index) => (
+                    <div key={index} className='message'>
+                      <strong>{message.sender}:</strong> {message.message}
+                    </div>
+                  ))}
+              </div> */}
+              <form className='flex items-center w-full' onSubmit={formHandler}>
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onKeyDown={handleKeyPress}
+                  placeholder='Type here..'
+                  className='resize-none w-full border rounded py-2 px-3'
+                />
+                <button
+                  type='submit'
+                  className='bg-blue-500 text-white ml-2 py-5 px-5 rounded'
                 >
-                  <textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    onKeyDown={handleKeyPress}
-                    placeholder='Type here..'
-                    className='resize-none w-full border rounded py-2 px-3'
-                  />
-                  <button
-                    type='submit'
-                    className='bg-blue-500 text-white ml-2 py-5 px-5 rounded'
-                  >
-                    Send
-                  </button>
-                </form>
-              </div>
-              <div className='w-full bg-slate-100 lg:px-10 px-4 py-10 overflow-auto'>
-                {store.student.privateChat?.map((obj, index) => (
-                  <div key={index} className='mb-4'>
-                    <p className='text-gray-600'>
-                      <span className='font-bold text-blue-700'>
-                        {obj.senderName}:
-                      </span>
-                    </p>
-                    {obj.message}, {obj.createdAt}
-                  </div>
-                ))}
-                {messageArray.map((obj, index) => (
-                  <p key={index} className='text-blue-600 mb-4'>
-                    <span className='font-bold text-green-700'>
-                      {obj.sender}:
+                  Send
+                </button>
+              </form>
+            </div>
+            <div className='w-full bg-slate-100 lg:px-10 px-4 py-10 overflow-auto'>
+              {store.student.privateChat?.map((obj, index) => (
+                <div key={index} className='mb-4'>
+                  <p className='text-gray-600'>
+                    <span className='font-bold text-blue-700'>
+                      {obj.senderName}:
                     </span>
-                    {obj.message}
                   </p>
-                ))}
-              </div>
+                  {obj.message}, {obj.createdAt}
+                </div>
+              ))}
             </div>
           </div>
-        </>
+        </div>
       ) : (
         navigate("/")
       )}

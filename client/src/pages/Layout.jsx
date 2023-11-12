@@ -3,6 +3,8 @@ import sec from "../assets/sec1.jpg";
 import Header from "../components/Header";
 import { Outlet } from "react-router-dom";
 import Header2 from "../components/Header2";
+import Footer from "../components/Footer";
+import Footer2 from "../components/Footer2";
 
 const styles = {
   checkAnimation: {
@@ -17,8 +19,12 @@ const Layout = () => {
     <>
       <Header2 />
       <Header />
-      <div>
+      <div className="min-h-screen">
         <Outlet />
+      </div>
+      <div className='bottom-0'>
+        <Footer />
+        <Footer2 />
       </div>
     </>
   );

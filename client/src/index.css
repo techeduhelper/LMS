@@ -137,3 +137,25 @@ background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, F
       transform: translateY(0);
   }
 }
+
+
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+
+.modal-box {
+  width: 80%; /* Or adjust as needed */
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}

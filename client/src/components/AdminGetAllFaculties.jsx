@@ -11,6 +11,7 @@ const AdminGetAllFaculties = () => {
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [selectedFaculty, setSelectedFaculty] = useState(null);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -54,6 +55,12 @@ const AdminGetAllFaculties = () => {
     } else {
       console.error("Element with ID 'contentToPrint' not found.");
     }
+  };
+
+  // for particullar faculties
+  const handleViewClick = (res) => {
+    setSelectedFaculty(res);
+    document.getElementById("my_modal_1").showModal();
   };
 
   return (
@@ -152,10 +159,134 @@ const AdminGetAllFaculties = () => {
                                   {res.joiningYear}
                                 </td>
                                 <td className='border px-4 py-2'>
-                                  <Link className='text-blue-600 hover:text-blue-800'>
+                                  <Link
+                                    onClick={() => handleViewClick(res)}
+                                    className='text-blue-600 hover:text-blue-800'
+                                  >
                                     View
                                   </Link>
                                 </td>
+                                <dialog
+                                  id='my_modal_1'
+                                  className='modal w-[80%]'
+                                >
+                                  <div className='modal-box max-w-[80%]'>
+                                    {selectedFaculty && (
+                                      <div className='grid grid-cols-1 lg:grid-cols-3 sm:gap-4 w-full'>
+                                        <div className='lg:col-span-1 sm:w-full'>
+                                          <div className='w-full'>
+                                            <div className='bg-white rounded-lg flex flex-col justify-center items-center w-full'>
+                                              <img
+                                                className='w-full h-[28rem] px-2'
+                                                src={selectedFaculty.avatar}
+                                                alt='Faculty Avatar'
+                                              />
+                                              <div className='flex flex-col justify-center items-center py-4'>
+                                                <h5 className='text-xl font-bold mb-2'>
+                                                  {selectedFaculty.name}
+                                                </h5>
+                                                <h5 className='text-xl font-bold mb-2'>
+                                                  {
+                                                    selectedFaculty.registrationNumber
+                                                  }
+                                                </h5>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className='relative -z-10 col-span-2 mb-4 flex justify-center items-start'>
+                                          <table className='w-full border-collapse border border-gray-300 bg-slate-50 p-4'>
+                                            <tbody>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Name
+                                                </td>
+                                                <td className='px-4 py-2 '>
+                                                  {selectedFaculty.name}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Email
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedFaculty.email}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Employee Id
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {
+                                                    selectedFaculty.registrationNumber
+                                                  }
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Date Of Birth
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedFaculty.dob}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Designation
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedFaculty.designation}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Joining Year
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedFaculty.joiningYear}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Department
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedFaculty.department}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Gender
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedFaculty.gender
+                                                    ? selectedFaculty.gender
+                                                    : "NA"}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Contact Number
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedFaculty.facultyMobileNumber
+                                                    ? selectedFaculty.facultyMobileNumber
+                                                    : "NA"}
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    )}
+                                    <div className='modal-action'>
+                                      <form method='dialog'>
+                                        <button className='btn'>Close</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </dialog>
                               </tr>
                             ))}
                           </tbody>
