@@ -117,7 +117,7 @@ export const updatePassword = async (req, res, next) => {
     const { registrationNumber, oldPassword, newPassword, confirmNewPassword } =
       req.body;
     if (newPassword !== confirmNewPassword) {
-      errors.confirmNewpassword = "Password Mismatch";
+      errors.confirmNewPassword = "Password Mismatch";
       return res.status(400).json(errors);
     }
     const student = await Student.findOne({ registrationNumber });

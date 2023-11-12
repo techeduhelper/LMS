@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { adminAddAdmin } from "../redux/action/adminAction";
-import Message from "./../../../backend/models/message";
 
 const AdminAddAdmin = () => {
   const store = useSelector((state) => state);
@@ -59,64 +58,64 @@ const AdminAddAdmin = () => {
 
   return (
     <>
-      <div className="min-h-screen ">
+      <div>
         {store.admin.isAuthenticated ? (
           <>
-            <div className="lg:container mx-auto mt-5">
-              <div className="md:flex md:justify-center">
-                <div className="w-full lg:px-40 sm:px-4 ">
-                  <h1 className="bg-gray-300 text-center  py-2 text-2xl mb-2 rounded-md text-gray-600 font-semibold">
+            <div className='mx-auto mt-5'>
+              <div className='md:flex md:justify-center'>
+                <div className='w-full lg:px-40 sm:px-4 '>
+                  <h1 className='bg-gray-300 text-center  py-2 text-2xl mb-2 rounded-md text-gray-600 font-semibold'>
                     Add Admin
                   </h1>
                   <form
                     noValidate
                     onSubmit={formHandler}
-                    className="bg-gray-200 shadow-md rounded-lg p-6"
+                    className='bg-gray-200 shadow-md rounded-lg p-6'
                   >
-                    <div className="md:flex md:space-x-4">
-                      <div className="md:w-1/2">
-                        <div className="mb-4">
+                    <div className='md:flex md:space-x-4'>
+                      <div className='md:w-1/2'>
+                        <div className='mb-4'>
                           <label
-                            htmlFor="nameId"
-                            className="block text-gray-700"
+                            htmlFor='nameId'
+                            className='block text-gray-700'
                           >
                             Admin Name
                           </label>
                           <input
                             onChange={(e) => setName(e.target.value)}
-                            type="text"
+                            type='text'
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.message ? "border-red-500" : ""
                             }`}
-                            id="nameId"
+                            id='nameId'
                           />
                           {error.message && (
-                            <p className="text-red-500 mt-2">{error.message}</p>
+                            <p className='text-red-500 mt-2'>{error.message}</p>
                           )}
                         </div>
-                        <div className="mb-4">
+                        <div className='mb-4'>
                           <label
-                            htmlFor="emailId"
-                            className="block text-gray-700"
+                            htmlFor='emailId'
+                            className='block text-gray-700'
                           >
                             Email
                           </label>
                           <input
                             onChange={(e) => setEmail(e.target.value)}
-                            type="email"
+                            type='email'
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.message ? "border-red-500" : ""
                             }`}
-                            id="emailId"
+                            id='emailId'
                           />
                           {error.email && (
-                            <p className="text-red-500 mt-2">{error.message}</p>
+                            <p className='text-red-500 mt-2'>{error.message}</p>
                           )}
                         </div>
-                        <div className="mb-4">
+                        <div className='mb-4'>
                           <label
-                            htmlFor="departmentId"
-                            className="block text-gray-700"
+                            htmlFor='departmentId'
+                            className='block text-gray-700'
                           >
                             Department
                           </label>
@@ -125,70 +124,70 @@ const AdminAddAdmin = () => {
                             className={`form-select w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.department ? "border-red-500" : ""
                             }`}
-                            id="departmentId"
+                            id='departmentId'
                           >
-                            <option value="">Select</option>
-                            <option value="E.C.E">E.C.E</option>
-                            <option value="C.S.E">C.S.E</option>
-                            <option value="E.E.E">E.E.E</option>
-                            <option value="I.T">I.T</option>
-                            <option value="Mechanical">Mechanical</option>
-                            <option value="Civil">Civil</option>
+                            <option value=''>Select</option>
+                            <option value='E.C.E'>E.C.E</option>
+                            <option value='C.S.E'>C.S.E</option>
+                            <option value='E.E.E'>E.E.E</option>
+                            <option value='I.T'>I.T</option>
+                            <option value='Mechanical'>Mechanical</option>
+                            <option value='Civil'>Civil</option>
                           </select>
                           {error.department && (
-                            <p className="text-red-500 mt-2">
+                            <p className='text-red-500 mt-2'>
                               {error.department}
                             </p>
                           )}
                         </div>
                       </div>
-                      <div className="md:w-1/2">
-                        <div className="mb-4">
+                      <div className='md:w-1/2'>
+                        <div className='mb-4'>
                           <label
-                            htmlFor="dobId"
-                            className="block text-gray-700 pl-1"
+                            htmlFor='dobId'
+                            className='block text-gray-700 pl-1'
                           >
                             D.O.B
                           </label>
                           <input
                             onChange={(e) => setDob(e.target.value)}
-                            type="date"
+                            type='date'
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.dob ? "border-red-500" : ""
                             }`}
-                            id="dobId"
+                            id='dobId'
                           />
                           {error.dob && (
-                            <p className="text-red-500 mt-2">{error.dob}</p>
+                            <p className='text-red-500 mt-2'>{error.dob}</p>
                           )}
                         </div>
-                        <div className="mb-4">
+                        <div className='mb-4'>
                           <label
-                            htmlFor="numberId"
-                            className="block text-gray-700"
+                            htmlFor='numberId'
+                            className='block text-gray-700'
                           >
                             Contact Number
                           </label>
                           <input
                             onChange={(e) => setContactNumber(e.target.value)}
-                            type="number"
+                            type='number'
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.contactNumber ? "border-red-500" : ""
                             }`}
-                            id="numberId"
+                            id='numberId'
                           />
                           {error.contactNumber && (
-                            <p className="text-red-500 mt-2">
+                            <p className='text-red-500 mt-2'>
                               {error.contactNumber}
                             </p>
                           )}
                         </div>
                       </div>
                     </div>
-                    <div className="flex justify-center mt-4">
+                    <div className='flex justify-center mt-4'>
                       <button
-                        type="submit"
-                        className="bg-green-500 w-1/3 py-2 rounded-full shadow-md text-white font-bold"
+                        type='submit'
+                        className='bg-green-500 w-1/3 py-2 rounded-full shadow-md text-white font-bold'
                       >
                         {isLoading ? "Please wait.." : "Add Admin"}
                       </button>

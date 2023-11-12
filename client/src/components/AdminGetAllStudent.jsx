@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { adminGetAllStudent } from "../redux/action/adminAction";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AiFillPrinter } from "react-icons/ai";
 
 const AdminGetAllStudent = () => {
@@ -12,6 +12,7 @@ const AdminGetAllStudent = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({});
   const navigate = useNavigate();
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -55,6 +56,12 @@ const AdminGetAllStudent = () => {
     } else {
       console.error("Element with ID 'contentToPrint' not found.");
     }
+  };
+
+  // for particullar Student
+  const handleViewClick = (res) => {
+    setSelectedStudent(res);
+    document.getElementById("my_modal_1").showModal();
   };
 
   return (
@@ -157,6 +164,9 @@ const AdminGetAllStudent = () => {
                               <th scope='col' className='px-4 py-2'>
                                 Department
                               </th>
+                              <th scope='col' className='px-4 py-2'>
+                                Details
+                              </th>
                             </tr>
                           </thead>
                           <tbody className='bg-gray-100 font-medium text-gray-600'>
@@ -183,6 +193,173 @@ const AdminGetAllStudent = () => {
                                 <td className='border px-4 py-2'>
                                   {res.department}
                                 </td>
+                                <td className='border px-4 py-2'>
+                                  <Link
+                                    onClick={() => handleViewClick(res)}
+                                    className='text-blue-600 hover:text-blue-800'
+                                  >
+                                    View
+                                  </Link>
+                                </td>
+                                <dialog
+                                  id='my_modal_1'
+                                  className='modal w-[80%]'
+                                >
+                                  <div className='modal-box max-w-[80%]'>
+                                    {selectedStudent && (
+                                      <div className='grid grid-cols-1 lg:grid-cols-3 sm:gap-4 w-full'>
+                                        <div className='lg:col-span-1 sm:w-full'>
+                                          <div className='w-full'>
+                                            <div className='bg-white rounded-lg flex flex-col justify-center items-center w-full'>
+                                              <img
+                                                className='w-full h-[28rem] px-2'
+                                                src={selectedStudent.avatar}
+                                                alt='Faculty Avatar'
+                                              />
+                                              <div className='flex flex-col justify-center items-center py-4'>
+                                                <h5 className='text-xl font-bold mb-2'>
+                                                  {selectedStudent.name}
+                                                </h5>
+                                                <h5 className='text-xl font-bold mb-2'>
+                                                  {
+                                                    selectedStudent.registrationNumber
+                                                  }
+                                                </h5>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className='relative -z-10 col-span-2 mb-4 flex justify-center items-start'>
+                                          <table className='w-full border-collapse border border-gray-300 bg-slate-50 p-4'>
+                                            <tbody>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Name
+                                                </td>
+                                                <td className='px-4 py-2 '>
+                                                  {selectedStudent.name}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Email
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.email}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Student Id
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {
+                                                    selectedStudent.registrationNumber
+                                                  }
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Date Of Birth
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.dob}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Year
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.year}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Section
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.section}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Batch
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.batch}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Department
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.department}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Gender
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.gender
+                                                    ? selectedStudent.gender
+                                                    : "NA"}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Adhaar Card No.
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.aadharCard
+                                                    ? selectedStudent.aadharCard
+                                                    : "NA"}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Father's Name
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.fatherName
+                                                    ? selectedStudent.fatherName
+                                                    : "NA"}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  House Contact No.
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.fatherMobileNumber
+                                                    ? selectedStudent.fatherMobileNumber
+                                                    : "NA"}
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td className='w-1/4 px-4 py-2 font-semibold'>
+                                                  Contact No.
+                                                </td>
+                                                <td className='px-4 py-2'>
+                                                  {selectedStudent.studentMobileNumber
+                                                    ? selectedStudent.studentMobileNumber
+                                                    : "NA"}
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    )}
+                                    <div className='modal-action'>
+                                      <form method='dialog'>
+                                        <button className='btn'>Close</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </dialog>
                               </tr>
                             ))}
                           </tbody>

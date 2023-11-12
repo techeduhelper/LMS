@@ -85,6 +85,13 @@ const StudentDetails = () => {
     return () => clearInterval(interval);
   }, [dispatch]);
 
+  const newChats = store.student?.newerChats || [];
+  const prevChats = store.student?.previousChats || [];
+
+  const difference = prevChats.filter(
+    (prevChat) => !newChats.some((newChat) => newChat.id === prevChat.id)
+  );
+
   return (
     <>
       <>
@@ -103,85 +110,94 @@ const StudentDetails = () => {
                             placeholder='Search Students by their name'
                             type='text'
                             className='w-full px-3 py-2 border rounded focus:outline-none'
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                formHandler(e);
+                              }
+                            }}
                           />
                         </div>
-                      </form>
-                    </div>
-                    <h1 className='text-center my-2 bg-slate-600 mx-40 py-1 rounded-full text-white font-semibold'>
-                      OR
-                    </h1>
-                    <div className='md:border-t'>
-                      <form noValidate>
-                        <div className='mb-2'>
-                          <label htmlFor='branchId'>Branch</label>
-                          <select
-                            onChange={(e) => setDepartment(e.target.value)}
-                            className='w-full px-3 py-2 border rounded focus:outline-none'
-                            id='branchId'
-                          >
-                            <option>Select</option>
-                            <option value='E.C.E'>E.C.E</option>
-                            <option value='E.E.E'>E.E.E</option>
-                            <option value='Mechanical'>Mechanical</option>
-                            <option value='Civil'>Civil</option>
-                            <option value='I.T'>I.T</option>
-                            <option value='C.S.E'>C.S.E</option>
-                          </select>
+                        <h1 className='text-center my-2 bg-slate-600 mx-40 py-1 rounded-full text-white font-semibold'>
+                          OR
+                        </h1>
+                        <div className='md:border-t'>
+                          <form noValidate>
+                            <div className='mb-2'>
+                              <label htmlFor='branchId'>Branch</label>
+                              <select
+                                onChange={(e) => setDepartment(e.target.value)}
+                                className='w-full px-3 py-2 border rounded focus:outline-none'
+                                id='branchId'
+                              >
+                                <option>Select</option>
+                                <option value='E.C.E'>E.C.E</option>
+                                <option value='E.E.E'>E.E.E</option>
+                                <option value='Mechanical'>Mechanical</option>
+                                <option value='Civil'>Civil</option>
+                                <option value='I.T'>I.T</option>
+                                <option value='C.S.E'>C.S.E</option>
+                              </select>
+                            </div>
+                            <div className='mb-2'>
+                              <label htmlFor='yearId'>Year</label>
+                              <select
+                                onChange={(e) => setYear(e.target.value)}
+                                className='w-full px-3 py-2 border rounded focus:outline-none'
+                                id='yearId'
+                              >
+                                <option>Select</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                              </select>
+                            </div>
+                            <div className='mb-2'>
+                              <label htmlFor='sectionId'>Section</label>
+                              <select
+                                onChange={(e) => setSection(e.target.value)}
+                                className='w-full px-3 py-2 border rounded focus:outline-none'
+                                id='sectionId'
+                              >
+                                <option>Select</option>
+                                <option value='A'>A</option>
+                                <option value='B'>B</option>
+                                <option value='C'>C</option>
+                                <option value='D'>D</option>
+                                <option value='E'>E</option>
+                                <option value='F'>F</option>
+                              </select>
+                            </div>
+                            <button
+                              onClick={formHandler}
+                              className='w-full px-3 py-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none'
+                            >
+                              {isLoading ? "Searching.." : "Search"}
+                            </button>
+                          </form>
                         </div>
-                        <div className='mb-2'>
-                          <label htmlFor='yearId'>Year</label>
-                          <select
-                            onChange={(e) => setYear(e.target.value)}
-                            className='w-full px-3 py-2 border rounded focus:outline-none'
-                            id='yearId'
-                          >
-                            <option>Select</option>
-                            <option value='1'>1</option>
-                            <option value='2'>2</option>
-                            <option value='3'>3</option>
-                            <option value='4'>4</option>
-                          </select>
-                        </div>
-                        <div className='mb-2'>
-                          <label htmlFor='sectionId'>Section</label>
-                          <select
-                            onChange={(e) => setSection(e.target.value)}
-                            className='w-full px-3 py-2 border rounded focus:outline-none'
-                            id='sectionId'
-                          >
-                            <option>Select</option>
-                            <option value='A'>A</option>
-                            <option value='B'>B</option>
-                            <option value='C'>C</option>
-                            <option value='D'>D</option>
-                            <option value='E'>E</option>
-                            <option value='F'>F</option>
-                          </select>
-                        </div>
-                        <button
-                          onClick={formHandler}
-                          className='w-full px-3 py-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none'
-                        >
-                          {isLoading ? "Searching.." : "Search"}
-                        </button>
                       </form>
                     </div>
                   </div>
                   <div className='lg:w-3/4 border ml-0 mt-4 md:mt-0 w-full'>
                     <div className='flex lg:flex-row sm:flex-col sm:gap-5 lg:gap-0'>
-                      <div className='lg:w-1/2 border-b'>
-                        <h4 className='text-center text-lg font-semibold p-3 bg-gray-200'>
+                      <div className='lg:w-1/2 border-b lg:px-2'>
+                        <h4 className='text-center text-lg font-semibold p-3 bg-blue-400 '>
                           New Chats
                         </h4>
-                        <table className='table'>
+                        <table className='table bg-slate-300 mt-4 rounded-md text-lg'>
                           <tbody>
-                            {store.student.newerChats.map((res, index) => (
-                              <tr key={index}>
+                            {difference?.map((res, index) => (
+                              <tr
+                                key={index}
+                                className='flex justify-between items-center'
+                              >
                                 <td>{index + 1}</td>
                                 <td>{res.senderName}</td>
                                 <td>
                                   <Link
                                     to={`/student/${res.senderRegistrationNumber}`}
+                                    className='btn'
                                   >
                                     See the Message
                                   </Link>
@@ -197,7 +213,7 @@ const StudentDetails = () => {
                         </h4>
                         <table className='table bg-slate-200 my-3'>
                           <tbody className='px-3 text-base'>
-                            {store.student.previousChats.map((res, index) => (
+                            {prevChats?.map((res, index) => (
                               <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{res.receiverName}</td>

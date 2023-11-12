@@ -21,10 +21,10 @@ const AdminProfile = () => {
                       alt='Card image cap'
                     />
                     <div className='text-center'>
-                      <h5 className='card-title text-2xl font-semibold mt-2 text-gray-800'>
+                      <h5 className='text-3xl font-semibold mt-2 text-gray-800'>
                         {store.admin.admin.name}
                       </h5>
-                      <h5 className='card-title'>
+                      <h5 className='font-medium'>
                         {store.admin.admin.registrationNumber}
                       </h5>
                     </div>
