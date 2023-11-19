@@ -1,3 +1,4 @@
+import validateAddNoticeInput from "../validation/addNotice.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendEmail from "../utils/nodemailer.js";
@@ -12,7 +13,6 @@ import keys from "../config/key.js";
 // File Handler
 import bufferConversion from "../utils/bufferConversion.js";
 import cloudinary from "../utils/cloudinary.js";
-
 import validateFacultyLoginInput from "../validation/facultyLogin.js";
 import validateFetchStudentsInput from "../validation/facultyFetchStudent.js";
 import validateFacultyUpdatePassword from "../validation/FacultyUpdatePassword.js";
@@ -323,33 +323,50 @@ export const updateProfile = async (req, res, next) => {
 
 export const addNotice = async (req, res, next) => {
   try {
-    const { title, content, publisher, publisherName } = req.body;
-    const file = req.files ? req.files[0] : null;
-    if (file) {
-      const result = await cloudinary.uploader.upload(file.path);
+    const { errors, isValid } = validateAddNoticeInput(req.body);
 
-      const newNotice = new Notice({
-        title,
-        content,
-        file: result.secure_url,
-        publisher,
-        publisherName,
-      });
-
-      await newNotice.save();
-    } else {
-      const newNotice = new Notice({
-        title,
-        content,
-        publisher,
-        publisherName,
-      });
-      await newNotice.save();
+    if (!isValid) {
+      return res.status(400).json(errors);
     }
 
+    const { title, content, publisher, publisherName } = req.body;
+    let result;
+    const file = req.files ? req.files[0] : null;
+
+    if (file) {
+      try {
+        result = await cloudinary.uploader.upload(file.path);
+        console.log("Cloudinary upload result:", result);
+      } catch (error) {
+        console.error("Error uploading file to Cloudinary:", error);
+        return res
+          .status(500)
+          .json({ error: "Error uploading file to Cloudinary" });
+      }
+    }
+
+    const newNotice = new Notice({
+      title,
+      content,
+      publisher,
+      publisherName,
+      file: result ? result.secure_url : null,
+    });
+
+    await newNotice.save();
     res.status(201).json({ message: "Notice added successfully" });
   } catch (err) {
     console.error("Error adding notice:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const getNotice = async (req, res) => {
+  try {
+    const notices = await Notice.find().sort({ createdAt: -1 });
+
+    res.status(200).json(notices);
+  } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

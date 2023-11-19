@@ -105,9 +105,12 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-            <button className='btn lg:btn-primary btn-warning font-semibold lg:text-lg'>
+            <Link
+              to={"/application"}
+              className='btn lg:btn-primary btn-warning font-semibold lg:text-lg'
+            >
               Online Application
-            </button>
+            </Link>
           </div>
         </div>
         <div className='drawer-side z-50'>

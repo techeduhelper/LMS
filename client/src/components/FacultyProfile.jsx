@@ -114,7 +114,7 @@ const FacultyProfile = () => {
                 </table>
                 <div className='logo absolute right-0 mt-4 lg:mr-16 sm:mr-10 flex justify-center flex-col items-center'>
                   <div className='relative'>
-                    <img src={logo} alt='' className='h-24' />
+                    <img src={logo} alt='' className='h-24 brightness-60' />
                   </div>
                   <div className='absolute -mt-12 ml-3 text-green-700'>
                     <svg

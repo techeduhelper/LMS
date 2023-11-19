@@ -300,6 +300,8 @@ export const differentChats = async (req, res, next) => {
     for (var i = 0; i < filteredListPro.length; i++) {
       for (var j = 0; j < filteredListTemp.length; j++) {
         if (
+          filteredListPro[i] &&
+          filteredListTemp[j] &&
           filteredListPro[i].senderName === filteredListTemp[j].receiverName
         ) {
           filteredListPro.splice(i, 1);

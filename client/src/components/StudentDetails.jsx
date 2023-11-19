@@ -15,13 +15,14 @@ const StudentDetails = () => {
   const [section, setSection] = useState("");
   const [result, setResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const url = import.meta.env.VITE_URL;
 
   const filterStudentHelper = async () => {
     try {
       setIsLoading(true);
       const { data } = await axios({
         method: "Post",
-        url: "http://localhost:8080/api/student/getAllStudents",
+        url: `${url}/api/student/getAllStudents`,
         data: {
           department,
           year,
@@ -41,7 +42,7 @@ const StudentDetails = () => {
       setIsLoading(true);
       const { data } = await axios({
         method: "Post",
-        url: "http://localhost:8080/api/student/getStudentByName",
+        url: `${url}/api/student/getStudentByName`,
         data: {
           name,
         },
@@ -87,10 +88,6 @@ const StudentDetails = () => {
 
   const newChats = store.student?.newerChats || [];
   const prevChats = store.student?.previousChats || [];
-
-  const difference = prevChats.filter(
-    (prevChat) => !newChats.some((newChat) => newChat.id === prevChat.id)
-  );
 
   return (
     <>
@@ -187,16 +184,16 @@ const StudentDetails = () => {
                         </h4>
                         <table className='table bg-slate-300 mt-4 rounded-md text-lg'>
                           <tbody>
-                            {difference?.map((res, index) => (
+                            {newChats?.map((res, index) => (
                               <tr
                                 key={index}
                                 className='flex justify-between items-center'
                               >
                                 <td>{index + 1}</td>
-                                <td>{res.senderName}</td>
+                                <td>{res?.senderName}</td>
                                 <td>
                                   <Link
-                                    to={`/student/${res.senderRegistrationNumber}`}
+                                    to={`/student/${res?.senderRegistrationNumber}`}
                                     className='btn'
                                   >
                                     See the Message

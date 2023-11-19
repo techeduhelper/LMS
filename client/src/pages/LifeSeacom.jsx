@@ -65,13 +65,13 @@ const LifeSeacom = () => {
   };
 
   return (
-    <div className='bg-slate-900 min-h-[100vh] lg:min-h-[85vh] w-full'>
-      <div className='chat-container lg:w-[60%] w-full mx-auto pt-16 lg:px-0 px-6 flex flex-col gap-4 pb-16 lg:pb-0 border-t-4 border-blue-600 h-full'>
-        <div className='flex items-center justify-center space-x-2 py-2 rounded-xl bg-white'>
+    <div className='bg-slate-900 min-h-[100vh] lg:min-h-[90vh] w-full relative'>
+      <div className='chat-container lg:w-[60%] w-full mx-auto pt-16 lg:px-0  flex flex-col gap-4 pb-16 lg:pb-0 border-t-4 border-blue-600 h-full'>
+        <div className='flex items-center justify-center space-x-2 py-2 rounded-xl bg-white mx-4'>
           <img src={chatbotLogo} alt='logo' className='w-10' />
           <h1 className='text-4xl font-bold text-center'>SEACOM AI</h1>
         </div>
-        <p className='text-center text-xl mb-10 text-green-700'>
+        <p className='text-center text-xl mb-10 text-green-700 mx-4'>
           Seacom AI that provides information about sciences and engineering.
         </p>
         {chatHistory.map((message, index) => (
@@ -87,11 +87,11 @@ const LifeSeacom = () => {
                 }`}
               >
                 {message.role === "chatbot" && (
-                  <div className='bg-black max-w-fit rounded-full shadow-2xl flex items-center gap-2 p-1'>
+                  <div className='max-w-fit rounded-full shadow-2xl flex items-center gap-2 p-1'>
                     <img
                       src={chatbotLogo}
                       alt='logo'
-                      className='w-10 h-10 self-center shadow-2xl'
+                      className='w-10 h-10 self-center shadow-2xl brightness-70'
                     />
                   </div>
                 )}
@@ -111,7 +111,7 @@ const LifeSeacom = () => {
         {isLoading && (
           <div className='chat chatbot'>
             <div className='chat-bubble response-bubble shadow-xl'>
-              <div className='bg-black max-w-fit rounded-full shadow-2xl flex items-center gap-2 p-1'>
+              <div className=' max-w-fit rounded-full shadow-2xl flex items-center gap-2 p-1'>
                 <img
                   src={chatbotLogo}
                   alt='logo'
@@ -122,8 +122,8 @@ const LifeSeacom = () => {
             </div>
           </div>
         )}
-        <div ref={msgEnd}></div>
-        <div className='chat user'>
+        <div ref={msgEnd} className='mb-16'></div>
+        <div className='chat user bottom-0 absolute lg:w-[60%] w-full lg:px-0 px-6 mx-auto'>
           <input
             type='text'
             value={userInput}

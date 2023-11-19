@@ -19,10 +19,10 @@ const Layout = () => {
     <>
       <Header2 />
       <Header />
-      <div className="min-h-screen">
+      <div className='min-h-[90vh]'>
         <Outlet />
       </div>
-      <div className='bottom-0'>
+      <div>
         <Footer />
         <Footer2 />
       </div>

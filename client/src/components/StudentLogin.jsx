@@ -60,7 +60,7 @@ const StudentLogin = () => {
             </p>
 
             <form
-              className='mt-6 lg:w-1/3 w-full lg:px-0 px-6'
+              className='mt-6 lg:w-2/4 w-full lg:px-0 px-6'
               onSubmit={studentFormHandler}
             >
               <div className='relative'>
@@ -130,7 +130,11 @@ const StudentLogin = () => {
                   type='submit'
                   className='text-white py-2 px-4 uppercase rounded-full bg-yellow-500 hover:bg-yellow-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 w-full '
                 >
-                  Sign in
+                  {isStudentLoading ? (
+                    <div className='loader'>loading</div>
+                  ) : (
+                    "Sign in"
+                  )}
                 </button>
               </div>
             </form>
