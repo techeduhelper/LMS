@@ -27,7 +27,7 @@ const StudentChat = () => {
   const [message, setMessage] = useState("");
   const [messageArray, setMessageArray] = useState([]);
   const { room: roomParam } = useParams();
-  const ENDPOINT = "http://localhost:8080";
+  const ENDPOINT = import.meta.env.VITE_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -100,20 +100,25 @@ const StudentChat = () => {
     }
   };
 
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
+  };
+
   return (
     <div>
       {store.student.isAuthenticated ? (
         <div className='lg:container w-full mx-auto p-4'>
-          <div className='flex flex-col-reverse justify-between min-h-[80vh]'>
+          <div className='flex flex-col-reverse justify-between min-h-[80vh] bg-slate-200 mb-3'>
             <div className='w-full'>
-              {/* <div className='chat-area'>
-                {messageArray &&
+              <div className='chat-area'>
+                {/* {messageArray &&
                   messageArray.map((message, index) => (
                     <div key={index} className='message'>
                       <strong>{message.sender}:</strong> {message.message}
                     </div>
-                  ))}
-              </div> */}
+                  ))} */}
+              </div>
               <form className='flex items-center w-full' onSubmit={formHandler}>
                 <textarea
                   value={message}
@@ -130,15 +135,19 @@ const StudentChat = () => {
                 </button>
               </form>
             </div>
-            <div className='w-full bg-slate-100 lg:px-10 px-4 py-10 overflow-auto'>
+            <div className='w-full lg:px-10 px-4 py-10 overflow-auto'>
               {store.student.privateChat?.map((obj, index) => (
-                <div key={index} className='mb-4'>
-                  <p className='text-gray-600'>
-                    <span className='font-bold text-blue-700'>
-                      {obj.senderName}:
+                <div
+                  key={index}
+                  className='mb-4 flex flex-col gap-2 bg-white lg:w-1/3  p-3 rounded-md drop-shadow-lg'
+                >
+                  <div className='text-gray-600 flex items-center justify-between'>
+                    <span className='font-bold text-blue-700 text-xl'>
+                      {obj.senderName}
                     </span>
-                  </p>
-                  {obj.message}, {obj.createdAt}
+                    <span className='text-xs'>{formatDate(obj.createdAt)}</span>
+                  </div>
+                  <h1 className='text-lg'>{obj.message}</h1>
                 </div>
               ))}
             </div>

@@ -15,6 +15,7 @@ import {
   updateProfile,
   markAttendence,
   addNotice,
+  getNotice,
 } from "../controller/facultyController.js";
 
 // LOGIN || POST METHOD
@@ -35,7 +36,7 @@ router.post(
 router.post(
   "/addNotice",
   passport.authenticate("jwt", { session: false }),
-  upload.array("files", 5),
+  upload.single("file"),
   addNotice
 );
 
@@ -68,5 +69,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   updatePassword
 );
+
+router.get("/getNotice", getNotice);
 
 export default router;

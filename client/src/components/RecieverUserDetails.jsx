@@ -37,7 +37,7 @@ const RecieverUserDetails = (props) => {
                           {store.student.regNumStudent.name}
                         </h5>
                         <Link
-                          to={`/student/chat/${store.student.regNumStudent.registrationNumber}.${store.student.student.student.registrationNumber}`}
+                          to={`/student/chat/${store.student.regNumStudent?.registrationNumber}.${store.student.student.student?.registrationNumber}`}
                           className='bg-green-500 text-white py-3 px-4 rounded inline-block mt-2 font-semibold w-full text-center'
                         >
                           CHAT NOW

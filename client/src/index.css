@@ -95,7 +95,7 @@ background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, F
 .active {
   background-color: #fff;
   padding: 0.5rem 0.6rem;
-  color: black;
+  color: blue;
   font-weight: 700;
 }
 

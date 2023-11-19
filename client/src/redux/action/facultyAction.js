@@ -17,7 +17,7 @@ const setFaculty = (data) => {
   };
 };
 
-const url = "http://localhost:8080";
+const url = import.meta.env.VITE_URL;
 
 const fetchStudentsHelper = (data) => {
   return {
@@ -164,11 +164,15 @@ const addNoticeSuccess = (data) => {
 export const addNotice = (noticeData) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios({
-        method: "Post",
-        url: `${url}/api/faculty/addNotice`,
-        data: noticeData,
-      });
+      const { data } = await axios.post(
+        `${url}/api/faculty/addNotice`,
+        noticeData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       toast.success("Notice added successfully");
       dispatch(addNoticeSuccess(data));

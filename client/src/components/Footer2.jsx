@@ -10,7 +10,7 @@ const Footer2 = () => {
             Seacom Engineering College.
           </span>
           All Rights Reserved. Developed by
-          <span className='text-red-500 font-semibold px-2'>LMS TEAM</span>
+          <span className='text-red-500 font-semibold px-2'>❤LMS TEAM</span>
         </h1>
       </div>
     </>

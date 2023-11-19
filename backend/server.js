@@ -12,13 +12,7 @@ dotenv.config();
 
 // MIDDLEWARES
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:5173", // Replace with your frontend domain
-    methods: ["GET", "POST"],
-  },
-});
+const expressServer = http.createServer(app);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -27,6 +21,7 @@ app.use(cors());
 import adminRoutes from "./routes/adminRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -35,25 +30,8 @@ app.use(passport.initialize());
 import passportConfig from "./config/passport.js";
 passportConfig(passport);
 
-// For showing status of req
+// For showing the status of req
 app.use(morgan("dev"));
-
-// socket connection
-io.on("connection", (socket) => {
-  socket.on("join room", ({ room1, room2 }) => {
-    socket.join(room1);
-    socket.join(room2);
-  });
-  socket.on("private message", (message) => {
-    io.to(message.room).emit("new Message", {
-      message: message.message,
-      sender: message.sender,
-    });
-  });
-  socket.on("disconnect", () => {
-    console.log("Socket disconnected");
-  });
-});
 
 let response = {};
 
@@ -61,6 +39,7 @@ let response = {};
 app.use("/api/admin", adminRoutes);
 app.use("/api/faculty", facultyRoutes);
 app.use("/api/student", studentRoutes);
+app.use("/api", applicationRoutes);
 
 app.use("/", (req, res) => {
   res.status(200).json(`Hello from LMS`);
@@ -83,21 +62,54 @@ app.use((error, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const EXPRESS_PORT = process.env.PORT || 5000;
 
+// Connect to MongoDB
 try {
   await mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
   response.database = "Healthy";
-  console.log(`Server Started on PORT ${PORT}`.bgMagenta.bold);
   console.log("Database Connected successfully".bgGreen.yellow);
 } catch (err) {
   response.database = "Unhealthy";
   console.error("Error in connecting to DataBase:", err.message);
 }
 
-server.listen(PORT, () => {
-  response.server = "Healthy";
+// Start Express server on its port
+expressServer.listen(EXPRESS_PORT, () => {
+  response.server = "Express server is Healthy";
+  console.log(`Express Server Started on PORT ${EXPRESS_PORT}`.bgMagenta.bold);
+});
+
+// Create a separate HTTP server for Socket.IO
+const socketIOServer = http.createServer();
+const io = new Server(socketIOServer, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
+
+// socket connection
+io.on("connection", (socket) => {
+  socket.on("join room", ({ room1, room2 }) => {
+    socket.join(room1);
+    socket.join(room2);
+  });
+
+  socket.on("private message", (message) => {
+    try {
+      io.to(message.room).emit("new Message", {
+        message: message.message,
+        sender: message.sender,
+      });
+    } catch (error) {
+      console.error("Error sending private message:", error);
+    }
+  });
+  socket.on("disconnect", () => {
+    console.log("Socket disconnected");
+  });
 });

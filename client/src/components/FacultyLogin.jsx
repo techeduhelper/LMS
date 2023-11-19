@@ -57,7 +57,7 @@ const FacultyLogin = () => {
             </p>
 
             <form
-              className='mt-6 w-full lg:w-1/3 px-6 lg:px-0'
+              className='mt-6 w-full lg:w-2/4 px-6 lg:px-0'
               onSubmit={facultyFormHandler}
             >
               <div className='relative'>

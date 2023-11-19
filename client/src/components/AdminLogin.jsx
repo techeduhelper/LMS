@@ -48,7 +48,7 @@ const AdminLogin = () => {
               <p className='text-center text-3xl text-white font-semibold mt-6'>
                 Admin Login
               </p>
-              <form className='mt-6 lg:w-1/3 w-full '>
+              <form className='mt-6 lg:w-2/4 w-full '>
                 <div className='relative'>
                   <input
                     className='appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline'

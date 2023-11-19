@@ -60,7 +60,7 @@ const AdminHome = () => {
                       Close
                     </button>
                     <ul className='flex lg:flex-row sm:flex-col space-x-3 sm:gap-4 lg:gap-0'>
-                      <li className='nav-item'>
+                      <li className='nav-item lg:ml-0 ml-6'>
                         <button
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
@@ -72,85 +72,95 @@ const AdminHome = () => {
                         </button>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          to='/admin/addFaculty'
+                          activeClassName='active'
                         >
-                          <NavLink to='/admin/addFaculty'>ADD FACULTY</NavLink>
-                        </button>
+                          <h1>ADD FACULTY</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          to='/admin/addStudent'
+                          activeClassName='active'
                         >
-                          <NavLink to='/admin/addStudent'>ADD STUDENT</NavLink>
-                        </button>
+                          <h1>ADD STUDENT</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          to='/admin/addSubject'
+                          activeClassName='active'
                         >
-                          <NavLink to='/admin/addSubject'>ADD SUBJECT</NavLink>
-                        </button>
+                          <h1>ADD SUBJECT</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          to='/admin/addAdmin'
+                          activeClassName='active'
                         >
-                          <NavLink to='/admin/addAdmin'>ADD ADMIN</NavLink>
-                        </button>
+                          <h1>ADD ADMIN</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          to='/admin/allFaculties'
+                          activeClassName='active'
                         >
-                          <NavLink to='/admin/allFaculties'>
-                            OUR FACULTIES
-                          </NavLink>
-                        </button>
+                          <h1>OUR FACULTIES</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          to='/admin/allStudents'
+                          activeClassName='active'
                         >
-                          <NavLink to='/admin/allStudents'>
-                            OUR STUDENTS
-                          </NavLink>
-                        </button>
+                          <h1>OUR STUDENTS</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          to='/admin/allSubject'
+                          activeClassName='active'
                         >
-                          <NavLink to='/admin/allSubject'>SUBJECTS</NavLink>
-                        </button>
+                          <h1>SUBJECTS</h1>
+                        </NavLink>
                       </li>
                     </ul>
                   </div>

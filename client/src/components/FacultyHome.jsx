@@ -55,7 +55,7 @@ const FacultyHome = () => {
                   </button>
                   <Link
                     to='/faculty'
-                    className='text-2xl font-extrabold sm:text-center flex lg:flex-row flex-col lg:gap-2'
+                    className='text-2xl font-extrabold sm:text-center flex lg:flex-col flex-col lg:gap-2'
                   >
                     SEACOM LMS{" "}
                     <span className='text-sm outline outline-black ml-1 px-1 py-1 drop-shadow-2xl text-black'>
@@ -75,7 +75,7 @@ const FacultyHome = () => {
                       <GiSplitCross size={30} />
                     </button>
                     <ul className='flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 sm:left-0 sm:w-full sm:bg-slate-50 lg:bg-inherit sm:py-4 lg:py-0'>
-                      <li className='nav-item'>
+                      <li className='nav-item lg:ml-0 ml-6'>
                         <button
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
@@ -87,84 +87,69 @@ const FacultyHome = () => {
                         </button>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          activeClassName='active'
+                          to='/faculty/updateProfile'
                         >
-                          <NavLink
-                            activeClassName='active'
-                            to='/faculty/updateProfile'
-                          >
-                            UPDATE PROFILE
-                          </NavLink>
-                        </button>
+                          <h1>UPDATE PROFILE</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          activeClassName='active'
+                          to='/faculty/markAttendence'
                         >
-                          <NavLink
-                            activeClassName='active'
-                            to='/faculty/markAttendence'
-                          >
-                            MARK ATTENDANCE
-                          </NavLink>
-                        </button>
+                          <h1>MARK ATTENDANCE</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          activeClassName='active'
+                          to='/faculty/uploadMarks'
                         >
-                          <NavLink
-                            activeClassName='active'
-                            to='/faculty/uploadMarks'
-                          >
-                            UPLOAD MARKS
-                          </NavLink>
-                        </button>
+                          <h1>UPLOAD MARKS</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
-                        <button
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          activeClassName='active'
+                          to='/faculty/notices'
                         >
-                          <NavLink
-                            activeClassName='active'
-                            to='/faculty/notices'
-                          >
-                            UPLOAD NOTICES
-                          </NavLink>
-                        </button>
+                          <h1>UPLOAD NOTICES</h1>
+                        </NavLink>
                       </li>
-                      <li className='nav-item'>
-                        <button
+                      <li className='nav-item '>
+                        <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
                           className='btn'
+                          activeClassName='active'
+                          to='/faculty/updatePassword'
                         >
-                          <NavLink
-                            activeClassName='active'
-                            to='/faculty/updatePassword'
-                          >
-                            UPDATE PASSWORD
-                          </NavLink>
-                        </button>
+                          <h1>UPDATE PASSWORD</h1>
+                        </NavLink>
                       </li>
                     </ul>
                   </div>

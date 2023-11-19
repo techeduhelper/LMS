@@ -44,6 +44,8 @@ import Contact from "./pages/Contact";
 import "react-multi-carousel/lib/styles.css";
 import FacultyNotices from "./components/FacultyNotices";
 import RecieverUserDetails from "./components/RecieverUserDetails";
+import HomeApplication from "./components/HomeApplication";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const store = useSelector((store) => store);
@@ -59,6 +61,8 @@ function App() {
             <Route path='/courses' element={<Courses />} />
             <Route path='/life-seacom' element={<LifeSeacom />} />
             <Route path='/Contact-us' element={<Contact />} />
+            <Route path='/application' element={<HomeApplication />} />
+            <Route path='*' element={<NotFound />} />
 
             <Route
               path='/admin-login'
