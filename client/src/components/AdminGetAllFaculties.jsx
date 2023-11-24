@@ -68,7 +68,7 @@ const AdminGetAllFaculties = () => {
       <div>
         {store.admin.isAuthenticated ? (
           <>
-            <div className='mx-auto mt-5'>
+            <div className='mx-auto mt-1 py-5 bg-gray-900 min-h-screen'>
               <div className='flex flex-col lg:flex-row sm:flex-col justify-center'>
                 <div className='w-full md:w-1/3 px-4 mb-8'>
                   <form
@@ -111,7 +111,7 @@ const AdminGetAllFaculties = () => {
                     </button>
                   </form>
                 </div>
-                <div className='w-full md:w-2/3 px-4 '>
+                <div className='w-full md:w-2/3 px-4'>
                   {store.admin.allFaculty.length !== 0 && (
                     <>
                       <div className='w-full flex justify-end px-3 mb-2 text-gray-600 '>
@@ -121,7 +121,10 @@ const AdminGetAllFaculties = () => {
                           onClick={handlePrintClick}
                         />
                       </div>
-                      <div id='contentToPrint'>
+                      <div
+                        id='contentToPrint'
+                        className='lg:overflow-hidden sm:overflow-x-auto'
+                      >
                         <table className='printfacultie table-auto w-full border bg-slate-300 '>
                           <thead>
                             <tr>
@@ -168,16 +171,16 @@ const AdminGetAllFaculties = () => {
                                 </td>
                                 <dialog
                                   id='my_modal_1'
-                                  className='modal w-[80%]'
+                                  className='modal min-w-[80%]  overflow-y-visible'
                                 >
-                                  <div className='modal-box max-w-[80%]'>
+                                  <div className='modal-box max-w-[80%] min-h-[80%] '>
                                     {selectedFaculty && (
                                       <div className='grid grid-cols-1 lg:grid-cols-3 sm:gap-4 w-full'>
                                         <div className='lg:col-span-1 sm:w-full'>
                                           <div className='w-full'>
                                             <div className='bg-white rounded-lg flex flex-col justify-center items-center w-full'>
                                               <img
-                                                className='w-full h-[28rem] px-2'
+                                                className='w-full lg:h-[28rem] h-[16rem] px-2'
                                                 src={selectedFaculty.avatar}
                                                 alt='Faculty Avatar'
                                               />

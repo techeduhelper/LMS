@@ -27,7 +27,7 @@ const StudentTestPerformance = () => {
               <h1>Searching...</h1>
             </div>
           ) : (
-            <div className=''>
+            <div className='min-h-[80vh]'>
               {/* Check object value if value greater than 0 then execute 1st condition */}
               {Object.values(store.student.allMarks).every(
                 (marksArray) => marksArray.length > 0

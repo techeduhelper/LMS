@@ -98,7 +98,11 @@ const Footer = () => {
           </div>
           {NavsItems &&
             NavsItems.map((item, index) => (
-              <Link key={index} to={item.href} className='text-white text-base'>
+              <Link
+                key={index}
+                to={item.href}
+                className='text-white text-base active:text-yellow-400'
+              >
                 {item.label}
               </Link>
             ))}
@@ -114,7 +118,7 @@ const Footer = () => {
                 <Link
                   key={index}
                   to={item.href}
-                  className='text-white text-base'
+                  className='text-white text-base active:text-yellow-400'
                 >
                   {item.label}
                 </Link>
@@ -132,7 +136,7 @@ const Footer = () => {
                 <Link
                   key={index}
                   to={item.href}
-                  className='text-white text-base'
+                  className='text-white text-base active:text-yellow-400'
                 >
                   {item.label}
                 </Link>

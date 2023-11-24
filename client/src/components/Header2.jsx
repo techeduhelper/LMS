@@ -19,10 +19,10 @@ const Header2 = () => {
           className='cursor-pointer hover:bg-gray-200 hover:p-1 hover:rounded-full transition-all'
         />
       </div>
-      <div className='flex flex-col lg:flex-row items-center text-center space-x-6 font-semibold space-y-2 lg:space-y-0'>
+      <div className='hidden lg:flex-row items-center text-center space-x-6 font-semibold space-y-2 lg:space-y-0 lg:flex'>
         <p>Email: admission@seacomengineering.org</p>
         <div className='lg:w-[4px] w-[20px] bg-white lg:h-4 h-1'></div>
-        <p>Contact: 7605050242 / 7605050243</p>
+        <p className='text-[0.9rem]'>Contact: 7605050242 / 7605050243</p>
       </div>
     </div>
   );

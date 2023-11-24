@@ -69,7 +69,7 @@ const AdminGetAllStudent = () => {
       <div>
         {store.admin.isAuthenticated ? (
           <>
-            <div className='mx-auto mt-5 p-4'>
+            <div className='mx-auto mt-1 bg-gray-900 py-5 p-4 min-h-screen'>
               <div className='lg:flex gap-4'>
                 <div className='lg:w-1/3 '>
                   <form
@@ -142,7 +142,10 @@ const AdminGetAllStudent = () => {
                           onClick={handlePrintClick}
                         />
                       </div>
-                      <div id='student-details'>
+                      <div
+                        id='student-details'
+                        className='lg:overflow-hidden sm:overflow-x-auto'
+                      >
                         <table className='table-auto bg-white p-4 shadow-md rounded-lg w-full '>
                           <thead className='bg-blue-500 text-white'>
                             <tr>

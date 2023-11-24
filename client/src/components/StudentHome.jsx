@@ -9,6 +9,7 @@ import {
 import toast from "react-hot-toast";
 import { GiSplitCross } from "react-icons/gi";
 import { BsBoxArrowRight } from "react-icons/bs";
+import Footer2 from "./Footer2";
 
 const StudentHome = () => {
   const [dropd, setDropd] = useState(false);
@@ -58,10 +59,10 @@ const StudentHome = () => {
                   </button>
                   <Link
                     to='/student'
-                    className='text-2xl font-extrabold sm:text-center text-white'
+                    className='text-2xl font-extrabold sm:text-center text-white flex flex-col'
                   >
                     SEACOM LMS{" "}
-                    <span className='text-sm outline outline-white ml-1 px-1 py-1 drop-shadow-2xl text-green-400'>
+                    <span className='text-sm outline outline-white ml-1 mt-1 px-[0.15rem] py-[0.15rem] drop-shadow-2xl text-green-400'>
                       Student Dashboard
                     </span>
                   </Link>
@@ -110,12 +111,12 @@ const StudentHome = () => {
                           ACADEMIC
                         </button>
                         {dropd && (
-                          <div className='absolute  mt-2 space-y-2 bg-slate-100 border border-gray-200 w-48 left-0 block text-black'>
+                          <div className='absolute rounded-sm mt-2 space-y-2 bg-slate-100 border border-gray-200 w-48 left-0 block text-black'>
                             <NavLink
                               activeClassName='active'
                               onClick={handledropd}
                               to='/student/testPerformance'
-                              className='block px-4 py-2 hover:bg-gray-200'
+                              className='block px-4 py-2 hover:bg-yellow-400'
                             >
                               Test Performance
                             </NavLink>
@@ -123,7 +124,7 @@ const StudentHome = () => {
                               activeClassName='active'
                               onClick={handledropd}
                               to='/student/attendence'
-                              className='block px-4 py-2 hover:bg-gray-200'
+                              className='block px-4 py-2 hover:bg-yellow-400'
                             >
                               Attendance
                             </NavLink>
@@ -131,9 +132,9 @@ const StudentHome = () => {
                               activeClassName='active'
                               onClick={handledropd}
                               to='/student/getAllSubjects'
-                              className='block px-4 py-2 hover:bg-gray-200'
+                              className='block px-4 py-2 hover:bg-yellow-400'
                             >
-                              Student Subject List
+                              Subject List
                             </NavLink>
                           </div>
                         )}
@@ -183,7 +184,10 @@ const StudentHome = () => {
             </nav>
           </div>
           <div className='h-full'>
+            <div className='h-1 bg-yellow-400'></div>
             <Outlet />
+            <div className='h-1 bg-yellow-400 mt-2'></div>
+            <Footer2 />
           </div>
         </div>
       ) : (

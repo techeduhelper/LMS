@@ -46,6 +46,7 @@ import FacultyNotices from "./components/FacultyNotices";
 import RecieverUserDetails from "./components/RecieverUserDetails";
 import HomeApplication from "./components/HomeApplication";
 import NotFound from "./pages/NotFound";
+import axios from "axios";
 
 function App() {
   const store = useSelector((store) => store);

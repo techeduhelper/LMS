@@ -11,7 +11,7 @@ const AdminProfile = () => {
       <div>
         {store.admin.isAuthenticated ? (
           <>
-            <div className='profile mx-auto mt-5'>
+            <div className='profile mx-auto mt-1 bg-gray-900 py-5 min-h-screen'>
               <div className=' flex flex-col lg:flex-row  justify-center'>
                 <div className='sm:w-full lg:w-1/3 px-4 mb-8'>
                   <div className='bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4'>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { adminLogout } from "../redux/action/adminAction";
 import { BsBoxArrowRight } from "react-icons/bs";
+import { GiSplitCross } from "react-icons/gi";
 
 const AdminHome = () => {
   const store = useSelector((store) => store);
@@ -32,7 +33,7 @@ const AdminHome = () => {
           <div className='adminhome sticky top-0 w-full'>
             <nav className='bg-light w-full'>
               <div className='p-4 flex justify-between items-center w-full'>
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-2'>
                   <button
                     onClick={handleToggle}
                     className='lg:hidden text-xl'
@@ -43,33 +44,49 @@ const AdminHome = () => {
                   <Link
                     to='/admin'
                     activeClassName=''
-                    className='text-2xl font-extrabold sm:text-center'
+                    className='text-xl font-extrabold sm:text-center flex flex-col gap-1 w-40'
                   >
-                    SEACOM CMS{" "}
+                    SEACOM CMS
                     <span className='text-sm outline outline-black ml-1 px-1 py-1 drop-shadow-2xl text-black'>
                       Admin Panel
                     </span>
                   </Link>
                   <div className='w-[0.2rem] bg-white h-full mx-4'></div>
                   <div
-                    className={`lg:flex sm:absolute lg:static sm:top-0 sm:left-0 lg:left-auto lg:top-auto sm:h-[100vh] lg:h-auto sm:bg-slate-200 lg:bg-inherit sm:w-2/3 lg:w-auto sm:text-black lg:text-white sm:px-2 lg:px-0 ${
+                    className={`lg:flex sm:absolute lg:static sm:top-0 sm:left-0 lg:left-auto lg:top-auto sm:h-[100vh] lg:h-auto sm:bg-slate-200 lg:bg-inherit sm:w-2/3 lg:w-auto sm:text-black lg:text-white sm:px-2 lg:px-0 z-50 ${
                       togglenav ? "hidden space-x-2" : "flex flex-col"
                     }`}
                   >
-                    <button onClick={handleToggle} className='lg:hidden'>
-                      Close
+                    <button
+                      onClick={handleToggle}
+                      className='lg:hidden flex justify-end mt-2 mb-2'
+                    >
+                      <GiSplitCross size={30} />
                     </button>
-                    <ul className='flex lg:flex-row sm:flex-col space-x-3 sm:gap-4 lg:gap-0'>
-                      <li className='nav-item lg:ml-0 ml-6'>
+                    <ul className='flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 sm:left-0 sm:w-full sm:bg-slate-50 lg:bg-inherit sm:py-4 lg:py-0'>
+                      <li className='nav-item lg:-ml-10 ml-6'>
                         <button
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn break-words'
                         >
                           <Link to='/admin'>{name.toUpperCase()}</Link>
                         </button>
+                      </li>
+                      <li className='nav-item'>
+                        <NavLink
+                          onClick={
+                            window.innerWidth <= 1024 ? handleToggle : null
+                          }
+                          type='button'
+                          className='btn whitespace-normal'
+                          to='/admin/addAdmin'
+                          activeClassName='active'
+                        >
+                          <h1>ADD ADMIN</h1>
+                        </NavLink>
                       </li>
                       <li className='nav-item'>
                         <NavLink
@@ -110,19 +127,7 @@ const AdminHome = () => {
                           <h1>ADD SUBJECT</h1>
                         </NavLink>
                       </li>
-                      <li className='nav-item'>
-                        <NavLink
-                          onClick={
-                            window.innerWidth <= 1024 ? handleToggle : null
-                          }
-                          type='button'
-                          className='btn'
-                          to='/admin/addAdmin'
-                          activeClassName='active'
-                        >
-                          <h1>ADD ADMIN</h1>
-                        </NavLink>
-                      </li>
+
                       <li className='nav-item'>
                         <NavLink
                           onClick={
@@ -149,7 +154,7 @@ const AdminHome = () => {
                           <h1>OUR STUDENTS</h1>
                         </NavLink>
                       </li>
-                      <li className='nav-item'>
+                      <li className='nav-item '>
                         <NavLink
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
@@ -165,7 +170,7 @@ const AdminHome = () => {
                     </ul>
                   </div>
                 </div>
-                <div>
+                <div className='ml-4'>
                   <button
                     onClick={logoutHandler}
                     type='button'

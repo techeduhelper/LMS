@@ -19,7 +19,7 @@ const Layout = () => {
     <>
       <Header2 />
       <Header />
-      <div className='min-h-[90vh]'>
+      <div className='min-h-[50vh]'>
         <Outlet />
       </div>
       <div>

@@ -16,12 +16,12 @@ const StudentAttendence = () => {
     <>
       {store.student.isAuthenticated ? (
         <>
-          <div className='mt-5'>
+          <div className='mt-5 min-h-[80vh]'>
             <div className=''>
               <div className='w-full lg:px-10 lg:overflow-hidden sm:overflow-x-auto'>
                 <table className='table border w-full'>
                   <thead>
-                    <tr className="text-[1rem]">
+                    <tr className='text-[1rem]'>
                       <th scope='col' className='px-4 py-2'>
                         S.No
                       </th>

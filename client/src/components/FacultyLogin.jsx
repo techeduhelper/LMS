@@ -124,7 +124,7 @@ const FacultyLogin = () => {
               </div>
               <div className='flex items-center justify-center mt-8'>
                 <button className='text-white py-2 px-4 uppercase rounded-full bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 w-full '>
-                  {isFacultyLoading ? "Signing.." : "Sign In"}
+                  {isFacultyLoading ? "Signing In.." : "Sign In"}
                 </button>
               </div>
             </form>

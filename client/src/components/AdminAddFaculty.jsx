@@ -8,6 +8,7 @@ const AdminAddFaculty = () => {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
   const history = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
@@ -29,6 +30,7 @@ const AdminAddFaculty = () => {
   const formHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     dispatch(
       adminAddFaculty({
         name,
@@ -40,21 +42,23 @@ const AdminAddFaculty = () => {
         gender,
         dob: dob.split("-").reverse().join("-"),
       })
-    );
+    ).then(() => {
+      setName("");
+      setEmail("");
+      setDepartment("");
+      setDesignation("");
+      setFacultyMobileNumber("");
+      setDob("");
+      setGender("");
+      setAadharCard("");
+      setIsLoading(false);
+    });
   };
 
   useEffect(() => {
     if (store.admin.adminAddFacultyFlag) {
       setError({});
       setIsLoading(false);
-      setName("");
-      setEmail("");
-      setDesignation("");
-      setFacultyMobileNumber("");
-      setDepartment("");
-      setAadharCard("");
-      setGender("");
-      setDob("");
     }
   }, [store.admin.adminAddFacultyFlag]);
 
@@ -71,7 +75,7 @@ const AdminAddFaculty = () => {
       <div>
         {store.admin.isAuthenticated ? (
           <>
-            <div className='mt-5 flex justify-center items-center'>
+            <div className='mt-1 py-5 bg-gray-900 min-h-screen'>
               <div className='w-full lg:px-10 sm:px-2'>
                 <h1 className='text-center text-3xl font-bold text-gray-500 bg-slate-200 py-3 rounded-md'>
                   Add Faculty Here
@@ -79,7 +83,7 @@ const AdminAddFaculty = () => {
                 <form
                   noValidate
                   onSubmit={formHandler}
-                  className='bg-gray-200 shadow-md rounded-md  px-8 pt-6 pb-8 mb-4 mt-5 w-full flex flex-col justify-center'
+                  className='bg-gray-200 shadow-md rounded-md px-8 pt-6 pb-8 mb-4 mt-5 w-full flex flex-col justify-center'
                 >
                   <div className='grid lg:grid-cols-2 sm:grid-cols-1 gap-10 w-full'>
                     <div className='w-full'>
@@ -92,6 +96,7 @@ const AdminAddFaculty = () => {
                         </label>
                         <input
                           onChange={(e) => setName(e.target.value)}
+                          value={name}
                           type='text'
                           className={classnames(
                             "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
@@ -116,6 +121,7 @@ const AdminAddFaculty = () => {
                         </label>
                         <input
                           onChange={(e) => setEmail(e.target.value)}
+                          value={email}
                           type='email'
                           className={classnames(
                             "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
@@ -140,6 +146,7 @@ const AdminAddFaculty = () => {
                         </label>
                         <select
                           onChange={(e) => setDesignation(e.target.value)}
+                          value={designation}
                           className={classnames(
                             "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
                             {
@@ -171,6 +178,7 @@ const AdminAddFaculty = () => {
                         </label>
                         <select
                           onChange={(e) => setDepartment(e.target.value)}
+                          value={department}
                           className={classnames(
                             "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
                             {
@@ -204,6 +212,7 @@ const AdminAddFaculty = () => {
                         </label>
                         <input
                           onChange={(e) => setDob(e.target.value)}
+                          value={dob}
                           type='date'
                           className={classnames(
                             "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
@@ -228,6 +237,7 @@ const AdminAddFaculty = () => {
                         </label>
                         <select
                           onChange={(e) => setGender(e.target.value)}
+                          value={gender}
                           className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                           id='genderId'
                         >
@@ -248,6 +258,7 @@ const AdminAddFaculty = () => {
                           onChange={(e) =>
                             setFacultyMobileNumber(e.target.value)
                           }
+                          value={facultyMobileNUmber}
                           type='number'
                           className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                           id='numberId'
@@ -262,6 +273,7 @@ const AdminAddFaculty = () => {
                         </label>
                         <input
                           onChange={(e) => setAadharCard(e.target.value)}
+                          value={aadharCard}
                           type='number'
                           className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                           id='aadharId'

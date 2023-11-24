@@ -16,7 +16,11 @@ const expressServer = http.createServer(app);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+  })
+);
 
 import adminRoutes from "./routes/adminRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
@@ -87,7 +91,7 @@ expressServer.listen(EXPRESS_PORT, () => {
 const socketIOServer = http.createServer();
 const io = new Server(socketIOServer, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST"],
   },
 });

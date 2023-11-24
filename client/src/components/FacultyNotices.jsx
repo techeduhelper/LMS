@@ -62,14 +62,14 @@ function FacultyNotices() {
     <form
       onSubmit={handleAddNotice}
       encType='multipart/form-data'
-      className='p-4 border border-gray-300 shadow-md rounded-md max-w-xl mx-auto mt-5'
+      className='p-4 border border-gray-300 shadow-md rounded-md lg:max-w-4xl w-full lg:mx-auto mt-5'
     >
       <div className='mb-4'>
         <label
           htmlFor='title'
           className='block text-gray-700 font-semibold mb-2'
         >
-          Title:
+          Subject:
         </label>
         <input
           type='text'

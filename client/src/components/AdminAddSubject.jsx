@@ -56,7 +56,7 @@ const AdminAddSubject = () => {
       <div>
         {store.admin.isAuthenticated ? (
           <>
-            <div className='mt-10'>
+            <div className='mt-1 bg-gray-900 min-h-screen py-5'>
               <div className='flex justify-center'>
                 <div className='w-full lg:w-1/2'>
                   <form

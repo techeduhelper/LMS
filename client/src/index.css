@@ -154,8 +154,7 @@ background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, F
 }
 
 .modal-box {
-  width: 80%; /* Or adjust as needed */
+  width: 80%;
   background: white;
   border-radius: 10px;
-  overflow: hidden;
 }
