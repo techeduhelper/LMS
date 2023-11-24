@@ -7,6 +7,7 @@ const AdminAddAdmin = () => {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
@@ -22,29 +23,33 @@ const AdminAddAdmin = () => {
       setError({});
     }
   }, [store.error]);
+
   const formHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     dispatch(
       adminAddAdmin({
         name,
         email,
         department,
         contactNumber,
-        dob: dob.split("-").reverse().join("-"),
+        dob: dob.split("-").reverse().join("/"),
       })
-    );
+    ).then(() => {
+      setName("");
+      setEmail("");
+      setDepartment("");
+      setContactNumber("");
+      setDob("");
+      setIsLoading(false);
+    });
   };
 
   useEffect(() => {
     if (store.admin.adminAddAdminFlag) {
       setError({});
       setIsLoading(false);
-      setName("");
-      setEmail("");
-      setDepartment("");
-      setContactNumber("");
-      setDob("");
     }
   }, [store.admin.adminAddAdminFlag]);
 
@@ -61,10 +66,10 @@ const AdminAddAdmin = () => {
       <div>
         {store.admin.isAuthenticated ? (
           <>
-            <div className='mx-auto mt-5'>
+            <div className='mx-auto mt-1 bg-gray-900 py-5 min-h-screen'>
               <div className='md:flex md:justify-center'>
                 <div className='w-full lg:px-40 sm:px-4 '>
-                  <h1 className='bg-gray-300 text-center  py-2 text-2xl mb-2 rounded-md text-gray-600 font-semibold'>
+                  <h1 className='bg-gray-300 text-center py-2 text-2xl mb-2 rounded-md text-gray-600 font-semibold'>
                     Add Admin
                   </h1>
                   <form
@@ -83,6 +88,7 @@ const AdminAddAdmin = () => {
                           </label>
                           <input
                             onChange={(e) => setName(e.target.value)}
+                            value={name}
                             type='text'
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.message ? "border-red-500" : ""
@@ -102,6 +108,7 @@ const AdminAddAdmin = () => {
                           </label>
                           <input
                             onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             type='email'
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.message ? "border-red-500" : ""
@@ -109,7 +116,7 @@ const AdminAddAdmin = () => {
                             id='emailId'
                           />
                           {error.email && (
-                            <p className='text-red-500 mt-2'>{error.message}</p>
+                            <p className='text-red-500 mt-2'>{error.email}</p>
                           )}
                         </div>
                         <div className='mb-4'>
@@ -121,6 +128,7 @@ const AdminAddAdmin = () => {
                           </label>
                           <select
                             onChange={(e) => setDepartment(e.target.value)}
+                            value={department}
                             className={`form-select w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.department ? "border-red-500" : ""
                             }`}
@@ -151,6 +159,7 @@ const AdminAddAdmin = () => {
                           </label>
                           <input
                             onChange={(e) => setDob(e.target.value)}
+                            value={dob}
                             type='date'
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.dob ? "border-red-500" : ""
@@ -170,6 +179,7 @@ const AdminAddAdmin = () => {
                           </label>
                           <input
                             onChange={(e) => setContactNumber(e.target.value)}
+                            value={contactNumber}
                             type='number'
                             className={`form-input w-full px-2 py-2 rounded-md mt-1 border-2 ${
                               error.contactNumber ? "border-red-500" : ""

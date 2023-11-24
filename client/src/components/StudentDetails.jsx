@@ -94,7 +94,7 @@ const StudentDetails = () => {
       <>
         {store.student.isAuthenticated ? (
           <>
-            <div>
+            <div className='min-h-[85vh]'>
               {result.length === 0 && (
                 <div className='mt-2 flex sm:flex-col lg:flex-row px-4 gap-2'>
                   <div className='lg:w-1/4 sm:w-full border mb-4 md:mb-0 px-2 py-2'>

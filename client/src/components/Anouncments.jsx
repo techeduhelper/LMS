@@ -45,7 +45,7 @@ const NoticeSection = ({ title, notices }) => {
   return (
     <div className='w-full flex flex-col justify-center items-center'>
       <div className='flex flex-col space-y-4'>
-        <h1 className='text-3xl text-black font-bold'>{title}</h1>
+        <h1 className='text-3xl text-black font-bold text-center'>{title}</h1>
         <div className='bg-red-600 w-md h-[7px] rounded-md'></div>
       </div>
       <div className='w-full mt-5 flex justify-center'>

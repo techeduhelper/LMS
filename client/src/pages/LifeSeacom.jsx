@@ -13,13 +13,13 @@ const LifeSeacom = () => {
 
   useEffect(() => {
     msgEnd.current.scrollIntoView({ behavior: "smooth" });
-  }, [chatHistory]);
+  }, []);
 
   const sendMessage = async () => {
     try {
       const userMessage = userInput.trim();
       if (userMessage === "") {
-        return;
+        return null;
       }
 
       const newUserMessage = { role: "user", content: userMessage };
@@ -65,7 +65,8 @@ const LifeSeacom = () => {
   };
 
   return (
-    <div className='bg-slate-900 min-h-[100vh] lg:min-h-[90vh] w-full relative'>
+    <div className='bg-slate-900 min-h-[40vh] lg:min-h-[90vh] w-full px-4'>
+      <div ref={msgEnd} className='mb-4'></div>
       <div className='chat-container lg:w-[60%] w-full mx-auto pt-16 lg:px-0  flex flex-col gap-4 pb-16 lg:pb-0 border-t-4 border-blue-600 h-full'>
         <div className='flex items-center justify-center space-x-2 py-2 rounded-xl bg-white mx-4'>
           <img src={chatbotLogo} alt='logo' className='w-10' />
@@ -74,6 +75,7 @@ const LifeSeacom = () => {
         <p className='text-center text-xl mb-10 text-green-700 mx-4'>
           Seacom AI that provides information about sciences and engineering.
         </p>
+
         {chatHistory.map((message, index) => (
           <div key={index} className={`chat ${message.role}`}>
             {message.role === "chatbot" && message.content.startsWith("```") ? (
@@ -108,6 +110,7 @@ const LifeSeacom = () => {
             )}
           </div>
         ))}
+
         {isLoading && (
           <div className='chat chatbot'>
             <div className='chat-bubble response-bubble shadow-xl'>
@@ -122,8 +125,8 @@ const LifeSeacom = () => {
             </div>
           </div>
         )}
-        <div ref={msgEnd} className='mb-16'></div>
-        <div className='chat user bottom-0 absolute lg:w-[60%] w-full lg:px-0 px-6 mx-auto'>
+
+        <div className='chat user '>
           <input
             type='text'
             value={userInput}

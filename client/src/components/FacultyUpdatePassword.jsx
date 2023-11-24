@@ -37,8 +37,8 @@ const FacultyUpdatePassword = () => {
       <div>
         {store.faculty.isAuthenticated ? (
           <>
-            <div className='mx-auto mt-5 px-3'>
-              <div className='flex justify-center'>
+            <div className='mx-auto mt-5 px-3 min-h-[80vh]'>
+              <div className='flex justify-center items-center'>
                 <div className='sm:w-full lg:w-1/3 bg-slate-100 px-4 py-4 rounded-sm'>
                   <form noValidate onSubmit={formHandler}>
                     <div className='mb-4'>

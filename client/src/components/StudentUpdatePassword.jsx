@@ -41,7 +41,7 @@ const StudentUpdatePassword = () => {
       <div>
         {store.student.isAuthenticated ? (
           <>
-            <div className='m-5'>
+            <div className='m-5 min-h-[80vh]'>
               <div className='flex justify-center items-center h-[80vh]'>
                 <form
                   noValidate

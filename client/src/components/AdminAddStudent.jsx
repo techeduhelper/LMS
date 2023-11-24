@@ -7,6 +7,7 @@ const AdminAddStudent = () => {
   const store = useSelector((store) => store);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
@@ -31,6 +32,7 @@ const AdminAddStudent = () => {
   const formHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     dispatch(
       adminAddStudent({
         name,
@@ -45,13 +47,7 @@ const AdminAddStudent = () => {
         studentMobileNumber,
         fatherMobileNumber,
       })
-    );
-  };
-
-  useEffect(() => {
-    if (store.admin.adminAddStudentFlag) {
-      setError({});
-      setIsLoading(false);
+    ).then(() => {
       setName("");
       setEmail("");
       setYear("");
@@ -61,19 +57,31 @@ const AdminAddStudent = () => {
       setGender("");
       setContactNumber("");
       setFatherName("");
+      setFatherContactNumber("");
+      setAadharCard("");
+      setIsLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    if (store.admin.adminAddStudentFlag) {
+      setError({});
+      setIsLoading(false);
     }
   }, [store.admin.adminAddStudentFlag]);
 
   useEffect(() => {
     if (store.error || store.admin.adminAddStudentFlag) {
       setIsLoading(false);
+      setError(store.error);
     }
   }, [store.error, store.admin.adminAddStudentFlag]);
+
   return (
     <>
       {store.admin.isAuthenticated ? (
-        <>
-          <h1 className='text-center text-2xl mt-4 bg-slate-300 mx-3 rounded-full py-1 font-bold'>
+        <div className='bg-gray-900 py-5 mt-1 min-h-screen'>
+          <h1 className='text-center text-2xl bg-white mx-8 rounded-full py-1 font-bold'>
             Add Student
           </h1>
           <div className='mx-auto mt-5 lg:px-8 px-4'>
@@ -92,6 +100,7 @@ const AdminAddStudent = () => {
                         </label>
                         <input
                           onChange={(e) => setName(e.target.value)}
+                          value={name}
                           type='text'
                           className={`form-input w-full py-2 border-2 rounded-md mt-1 px-2 ${
                             error.name ? "border-red-500" : ""
@@ -111,6 +120,7 @@ const AdminAddStudent = () => {
                         </label>
                         <input
                           onChange={(e) => setEmail(e.target.value)}
+                          value={email}
                           type='email'
                           className={`form-input w-full py-2 border-2 rounded-md mt-1 px-2 ${
                             error.email ? "border-red-500" : ""
@@ -130,6 +140,7 @@ const AdminAddStudent = () => {
                         </label>
                         <select
                           onChange={(e) => setDepartment(e.target.value)}
+                          value={department}
                           className={`form-select w-full py-2 border-2 rounded-md mt-1 px-2 ${
                             error.department ? "border-red-500" : ""
                           }`}
@@ -155,6 +166,7 @@ const AdminAddStudent = () => {
                         </label>
                         <select
                           onChange={(e) => setYear(e.target.value)}
+                          value={year}
                           className={`form-select w-full py-2 border-2 rounded-md mt-1 px-2 ${
                             error.year ? "border-red-500" : ""
                           }`}
@@ -179,6 +191,7 @@ const AdminAddStudent = () => {
                         </label>
                         <input
                           onChange={(e) => setSection(e.target.value)}
+                          value={section}
                           type='text'
                           className={`form-input  w-full py-2 border-2 rounded-md mt-1 px-2 ${
                             error.section ? "border-red-500" : ""
@@ -195,6 +208,7 @@ const AdminAddStudent = () => {
                         </label>
                         <input
                           onChange={(e) => setDob(e.target.value)}
+                          value={dob}
                           type='date'
                           className={`form-input w-full py-2 border-2 rounded-md mt-1 px-2 ${
                             error.dob ? "border-red-500" : ""
@@ -216,6 +230,7 @@ const AdminAddStudent = () => {
                         </label>
                         <select
                           onChange={(e) => setGender(e.target.value)}
+                          value={gender}
                           className='form-select w-full py-2 border-2 rounded-md mt-1 px-2'
                           id='genderId'
                         >
@@ -234,6 +249,7 @@ const AdminAddStudent = () => {
                         </label>
                         <input
                           onChange={(e) => setContactNumber(e.target.value)}
+                          value={studentMobileNumber}
                           required
                           type='number'
                           className='form-input w-full py-2 border-2 rounded-md mt-1 px-2'
@@ -249,6 +265,7 @@ const AdminAddStudent = () => {
                         </label>
                         <input
                           onChange={(e) => setFatherName(e.target.value)}
+                          value={fatherName}
                           type='text'
                           className='form-input w-full py-2 border-2 rounded-md mt-1 px-2'
                           id='fatherId'
@@ -265,6 +282,7 @@ const AdminAddStudent = () => {
                           onChange={(e) =>
                             setFatherContactNumber(e.target.value)
                           }
+                          value={fatherMobileNumber}
                           type='number'
                           className='form-input w-full py-2 border-2 rounded-md mt-1 px-2'
                           id='fathercnId'
@@ -279,6 +297,7 @@ const AdminAddStudent = () => {
                         </label>
                         <input
                           onChange={(e) => setAadharCard(e.target.value)}
+                          value={aadharCard}
                           type='number'
                           className='form-input w-full py-2 border-2 rounded-md mt-1 px-2'
                           id='aadharId'
@@ -298,7 +317,7 @@ const AdminAddStudent = () => {
               </div>
             </div>
           </div>
-        </>
+        </div>
       ) : (
         navigate("/")
       )}

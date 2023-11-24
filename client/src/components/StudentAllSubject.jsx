@@ -15,7 +15,7 @@ const StudentAllSubject = () => {
     <>
       {store.student.isAuthenticated ? (
         <>
-          <div className='sm:w-full'>
+          <div className='sm:w-full min-h-[80vh]'>
             <div className='mt-4'>
               <div className='w-full mx-auto px-4'>
                 <div className='bg-white shadow-md rounded-lg lg:overflow-hidden sm:overflow-x-auto'>

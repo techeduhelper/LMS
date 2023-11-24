@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +12,12 @@ const StudentLogin = () => {
   const [studentPassword, setStudentPassword] = useState("");
   const [errorsHelper, setErrorsHelper] = useState({});
   const [isStudentLoading, setIsStudentLoading] = useState(false);
-
   const navigate = useNavigate();
+  const loginStart = useRef();
+
+  useEffect(() => {
+    loginStart.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
     if (store.student.isAuthenticated) {
@@ -53,6 +58,7 @@ const StudentLogin = () => {
   return (
     <>
       <div className='lg:w-full sm:w-screen lg:h-[85vh]'>
+        <div ref={loginStart} className='mb-4'></div>
         <div className='p-8 w-full  h-full flex justify-center items-center '>
           <div className='student-login rounded-lg py-12 px-4 lg:px-36 flex flex-col items-center justify-center lg:w-4/5 w-full '>
             <p className='text-center text-4xl text-white font-semibold'>

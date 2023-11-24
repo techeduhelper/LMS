@@ -45,7 +45,7 @@ const FacultyUpdateProfile = () => {
       <div>
         {store.faculty.isAuthenticated ? (
           <>
-            <div className='sm:px-3 mt-4'>
+            <div className='sm:px-3 mt-4 min-h-[80vh]'>
               <div className='flex justify-center'>
                 <div className='w-full md:w-2/3'>
                   <h1 className='text-center py-2 bg-slate-300 mb-4 rounded-md text-2xl text-gray-600 font-semibold'>

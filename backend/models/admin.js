@@ -1,40 +1,43 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const adminSchema = new Schema({
+const adminSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String
+      type: String,
     },
     registrationNumber: {
-        type: String
+      type: String,
     },
     department: {
-        type: String
+      type: String,
     },
     dob: {
-        type: String
+      type: String,
     },
     joiningYear: {
-        type: String
+      type: String,
     },
     avatar: {
-        type: String
+      type: String,
     },
     contactNumber: {
-        type: Number
-    }
-}, { strict: false });
+      type: Number,
+    },
+  },
+  { strict: false }
+);
 
-const Admin = mongoose.model('admin', adminSchema);
+const Admin = mongoose.model("admin", adminSchema);
 
 export default Admin;

@@ -28,7 +28,7 @@ const StudentCard = () => {
                       </div>
                     </div>
                     <div className='w-3/4 bg-gray-100 text-black px-4 rounded-tr-md'>
-                      <table className='table-auto w-full'>
+                      <table className='table-auto w-full '>
                         <tbody>
                           <tr>
                             <td className='font-semibold'>Name</td>

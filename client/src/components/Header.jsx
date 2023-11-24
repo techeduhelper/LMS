@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/seacom.png";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { CgBot } from "react-icons/cg";
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
+  const handleLinkClick = () => {
+    if (open) {
+      handleToggle();
+    }
+  };
   return (
     <>
       <div className='drawer w-full top-0 mt-0 sticky z-50'>
@@ -33,12 +44,11 @@ const Header = () => {
                 </svg>
               </label>
             </div>
-            <div className='flex-1 px-2 mx-2'>
+            <Link to={"/"} className='flex-1 px-2 mx-2'>
               <img src={logo} alt='logo' className='h-14 w-32' />
-            </div>
+            </Link>
             <div className='flex-none hidden lg:block my-auto'>
-              <ul className='menu menu-horizontal text-lg flex items-center space-x-2 text-black font-medium'>
-                {/* Navbar menu content here */}
+              <ul className='menu menu-horizontal text-[1rem] flex items-center space-x-2 text-black font-medium'>
                 <li>
                   <NavLink to={"/"} activeclassname='active'>
                     Home
@@ -49,11 +59,7 @@ const Header = () => {
                     About us
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to={"/Courses"} activeclassname='active'>
-                    Courses
-                  </NavLink>
-                </li>
+
                 <li>
                   <NavLink to={"/life-seacom"} activeclassname='active'>
                     Ask to AI
@@ -62,41 +68,47 @@ const Header = () => {
                 </li>
                 <li className='dropdown'>
                   <li activeclassname='active' tabIndex={0}>
-                    We@Manage (CMS)
+                    We@Manage (LMS)
                   </li>
                   <ul
                     tabIndex={0}
-                    className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-lg space-y-2'
+                    className='dropdown-content z-[1] menu shadow bg-base-100 rounded-box w-52 text-lg space-y-2'
                   >
-                    <NavLink
-                      activeclassname='active'
-                      to={"/student-login"}
-                      className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 border-yellow-400 text-black text-md '
-                    >
-                      Student
-                    </NavLink>
-                    <NavLink
-                      activeclassname='active'
-                      to={"/faculty-login"}
-                      className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
-                    >
-                      Faculty
-                    </NavLink>
                     <NavLink
                       to={"/admin-login"}
                       activeclassname='active'
-                      className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
+                      className=' hover:text-gray-900 cursor-pointer text-black text-md hover:bg-yellow-400 hover:rounded-md hover:py-2 hover:px-3 px-3 py-2'
                     >
                       Admin
                     </NavLink>
                     <NavLink
+                      activeclassname='active'
+                      to={"/faculty-login"}
+                      className='hover:text-gray-900 cursor-pointer text-black text-md hover:bg-yellow-400 hover:rounded-md hover:py-2 hover:px-3 px-3 py-2'
+                    >
+                      Faculty
+                    </NavLink>
+                    <NavLink
+                      activeclassname='active'
+                      to={"/student-login"}
+                      className=' hover:text-gray-900 cursor-pointe text-black text-md hover:bg-yellow-400 hover:rounded-md hover:py-2 hover:px-3 px-3 py-2'
+                    >
+                      Student
+                    </NavLink>
+
+                    <NavLink
                       to={"/lectures"}
                       activeclassname='active'
-                      className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
+                      className=' hover:text-gray-900 cursor-pointer  text-black text-md hover:bg-yellow-400 hover:rounded-md hover:py-2 hover:px-3 px-3 py-2'
                     >
                       Lectures
                     </NavLink>
                   </ul>
+                </li>
+                <li>
+                  <NavLink to={"/Courses"} activeclassname='active'>
+                    Courses
+                  </NavLink>
                 </li>
                 <li>
                   <NavLink to={"/contact-us"} activeclassname='active'>
@@ -107,7 +119,7 @@ const Header = () => {
             </div>
             <Link
               to={"/application"}
-              className='btn lg:btn-primary btn-warning font-semibold lg:text-lg'
+              className='btn btn-primary lg:btn-warning font-semibold lg:text-lg'
             >
               Online Application
             </Link>
@@ -122,22 +134,38 @@ const Header = () => {
           <ul className='menu p-4 w-80 min-h-full bg-base-200'>
             {/* Sidebar content here */}
             <li>
-              <NavLink to={"/"} activeclassname='active'>
+              <NavLink
+                to={"/"}
+                activeclassname='active'
+                onClick={handleLinkClick}
+              >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/about-us"} activeclassname='active'>
+              <NavLink
+                to={"/about-us"}
+                activeclassname='active'
+                onClick={handleLinkClick}
+              >
                 About us
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/Courses"} activeclassname='active'>
+              <NavLink
+                to={"/Courses"}
+                activeclassname='active'
+                onClick={handleLinkClick}
+              >
                 Courses
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/life-seacom"} activeclassname='active'>
+              <NavLink
+                to={"/life-seacom"}
+                activeclassname='active'
+                onClick={handleLinkClick}
+              >
                 Life@Seacom
               </NavLink>
             </li>
@@ -152,36 +180,44 @@ const Header = () => {
               >
                 <NavLink
                   activeclassname='active'
+                  onClick={handleLinkClick}
                   to={"/student-login"}
-                  className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 border-yellow-400 text-black text-md '
+                  className=' hover:text-gray-900 cursor-pointer  text-black text-md hover:bg-yellow-400 hover:rounded-md hover:py-2 hover:px-3 px-3 py-2'
                 >
                   Student
                 </NavLink>
                 <NavLink
                   activeclassname='active'
                   to={"/faculty-login"}
-                  className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
+                  onClick={handleLinkClick}
+                  className=' hover:text-gray-900 cursor-pointer  text-black text-md hover:bg-yellow-400 hover:rounded-md hover:py-2 hover:px-3 px-3 py-2'
                 >
                   Faculty
                 </NavLink>
                 <NavLink
                   to={"/admin-login"}
                   activeclassname='active'
-                  className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
+                  onClick={handleLinkClick}
+                  className=' hover:text-gray-900 cursor-pointer  text-black text-md hover:bg-yellow-400 hover:rounded-md hover:py-2 hover:px-3 px-3 py-2'
                 >
                   Admin
                 </NavLink>
                 <NavLink
                   to={"/lectures"}
                   activeclassname='active'
-                  className='mr-5 hover:text-gray-900 cursor-pointer hover:border-b-2 text-black text-md border-yellow-400'
+                  onClick={handleLinkClick}
+                  className=' hover:text-gray-900 cursor-pointer  text-black text-md hover:bg-yellow-400 hover:rounded-md hover:py-2 hover:px-3 px-3 py-2'
                 >
                   Lectures
                 </NavLink>
               </ul>
             </li>
             <li>
-              <NavLink to={"/contact-us"} activeclassname='active'>
+              <NavLink
+                to={"/contact-us"}
+                activeclassname='active'
+                onClick={handleLinkClick}
+              >
                 Contact us
               </NavLink>
             </li>

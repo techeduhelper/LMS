@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
 const HomeApplication = () => {
   const url = import.meta.env.VITE_URL;
+  const loginStart = useRef();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     dob: "",
     course: "Select Option",
   });
+
+  useEffect(() => {
+    loginStart.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -47,6 +52,7 @@ const HomeApplication = () => {
   return (
     <div className='min-h-[90vh] flex items-center justify-center bg-slate-900'>
       <div className='bg-white p-8 rounded shadow-md lg:w-1/2 w-full px-6 mx-4 drop-shadow-2xl'>
+        <div ref={loginStart} className='mb-4'></div>
         <h2 className='text-2xl font-bold mb-6 text-center'>
           College Admission Form
         </h2>

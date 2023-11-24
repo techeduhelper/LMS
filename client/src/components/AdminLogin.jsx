@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { adminLogin } from "../redux/action/adminAction";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -11,6 +11,11 @@ const AdminLogin = () => {
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const loginStart = useRef();
+
+  useEffect(() => {
+    loginStart.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
     if (store.admin.isAuthenticated) {
@@ -43,6 +48,7 @@ const AdminLogin = () => {
     <>
       {!store.admin.isAuthenticated ? (
         <div className='lg:w-full sm:w-screen lg:h-[85vh]'>
+          <div ref={loginStart} className='mb-4'></div>
           <div className='p-8 w-full  h-full flex justify-center items-center '>
             <div className='login-palet rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center lg:w-4/5 w-full'>
               <p className='text-center text-3xl text-white font-semibold mt-6'>
