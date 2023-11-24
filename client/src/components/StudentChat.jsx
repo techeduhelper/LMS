@@ -109,49 +109,66 @@ const StudentChat = () => {
     <div>
       {store.student.isAuthenticated ? (
         <div className='lg:container w-full mx-auto p-4'>
-          <div className='flex flex-col-reverse justify-between min-h-[80vh] bg-slate-200 mb-3'>
+          <div className='flex flex-col-reverse justify-between min-h-[75vh] bg-slate-200 mb-3'>
             <div className='w-full'>
-              <div className='chat-area'>
-                {/* {messageArray &&
-                  messageArray.map((message, index) => (
-                    <div key={index} className='message'>
-                      <strong>{message.sender}:</strong> {message.message}
-                    </div>
-                  ))} */}
-              </div>
-              <form className='flex items-center w-full' onSubmit={formHandler}>
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={handleKeyPress}
-                  placeholder='Type here..'
-                  className='resize-none w-full border rounded py-2 px-3'
-                />
-                <button
-                  type='submit'
-                  className='bg-blue-500 text-white ml-2 py-5 px-5 rounded'
-                >
-                  Send
-                </button>
-              </form>
+              <div className='chat-area'></div>
             </div>
             <div className='w-full lg:px-10 px-4 py-10 overflow-auto'>
               {store.student.privateChat?.map((obj, index) => (
-                <div
-                  key={index}
-                  className='mb-4 flex flex-col gap-2 bg-white lg:w-1/3  p-3 rounded-md drop-shadow-lg'
-                >
-                  <div className='text-gray-600 flex items-center justify-between'>
-                    <span className='font-bold text-blue-700 text-xl'>
-                      {obj.senderName}
-                    </span>
-                    <span className='text-xs'>{formatDate(obj.createdAt)}</span>
-                  </div>
-                  <h1 className='text-lg'>{obj.message}</h1>
+                <div>
+                  {obj.senderRegistrationNumber ===
+                  store.student.student.student.registrationNumber ? (
+                    <div className='mb-4 flex gap-2 p-3 rounded-md '>
+                      <div className='text-gray-600 flex justify-between flex-col gap-2 bg-white drop-shadow-lg px-4 py-3 rounded-md'>
+                        <div className="flex flex-col">
+                          <span className='font-bold text-yellow-400 text-xl'>
+                            {obj.senderName}
+                          </span>
+                          <span className='text-xs'>
+                            {formatDate(obj.createdAt)}
+                          </span>
+                        </div>
+                        <h1 className='text-lg'>{obj.message}</h1>
+                      </div>
+                    </div>
+                  ) : (
+                    <div
+                      key={index}
+                      className='mb-4 flex justify-end items-end gap-2 p-3 rounded-md '
+                    >
+                      <div className='text-gray-600 flex justify-between gap-2 bg-white flex-col px-4 py-3 drop-shadow-lg rounded-md'>
+                        <div className='flex flex-col'>
+                          <span className='font-bold text-blue-700 text-xl'>
+                            {obj.senderName}
+                          </span>
+                          <span className='text-xs'>
+                            {formatDate(obj.createdAt)}
+                          </span>
+                        </div>
+
+                        <h1 className='text-lg'>{obj.message}</h1>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
+          <form className='flex items-center w-full' onSubmit={formHandler}>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleKeyPress}
+              placeholder='Type here..'
+              className='resize-none w-full border rounded py-2 px-3'
+            />
+            <button
+              type='submit'
+              className='bg-yellow-400 text-white ml-2 py-5 px-5 rounded'
+            >
+              Send
+            </button>
+          </form>
         </div>
       ) : (
         navigate("/")

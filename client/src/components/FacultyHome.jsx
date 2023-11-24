@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { facultyLogout } from "../redux/action/facultyAction";
 import { GiSplitCross } from "react-icons/gi";
 import { BsBoxArrowRight } from "react-icons/bs";
+import Footer2 from "./Footer2";
 
 const FacultyHome = () => {
   const store = useSelector((store) => store);
@@ -81,7 +82,7 @@ const FacultyHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn '
+                          className='btn text-[0.8rem]'
                         >
                           <Link to='/faculty'>{name?.toUpperCase()}</Link>
                         </button>
@@ -92,7 +93,7 @@ const FacultyHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           activeClassName='active'
                           to='/faculty/updateProfile'
                         >
@@ -105,7 +106,7 @@ const FacultyHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           activeClassName='active'
                           to='/faculty/markAttendence'
                         >
@@ -118,7 +119,7 @@ const FacultyHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           activeClassName='active'
                           to='/faculty/uploadMarks'
                         >
@@ -131,7 +132,7 @@ const FacultyHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           activeClassName='active'
                           to='/faculty/notices'
                         >
@@ -144,7 +145,7 @@ const FacultyHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           activeClassName='active'
                           to='/faculty/updatePassword'
                         >
@@ -171,7 +172,10 @@ const FacultyHome = () => {
             </nav>
           </div>
           <div className='h-full'>
+            <div className='h-1 bg-yellow-400'></div>
             <Outlet />
+            <div className='h-1 bg-yellow-400 mt-1'></div>
+            <Footer2 />
           </div>
         </div>
       ) : (

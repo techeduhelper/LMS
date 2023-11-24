@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { adminLogout } from "../redux/action/adminAction";
 import { BsBoxArrowRight } from "react-icons/bs";
 import { GiSplitCross } from "react-icons/gi";
+import Footer2 from "./Footer2";
 
 const AdminHome = () => {
   const store = useSelector((store) => store);
@@ -63,14 +64,14 @@ const AdminHome = () => {
                     >
                       <GiSplitCross size={30} />
                     </button>
-                    <ul className='flex lg:flex-row sm:flex-col space-x-6 sm:gap-4 lg:gap-0 sm:left-0 sm:w-full sm:bg-slate-50 lg:bg-inherit sm:py-4 lg:py-0'>
+                    <ul className='flex lg:flex-row  sm:flex-col space-x-6 sm:gap-4 lg:gap-0 sm:left-0 sm:w-full sm:bg-slate-50 lg:bg-inherit sm:py-4 lg:py-0'>
                       <li className='nav-item lg:-ml-10 ml-6'>
                         <button
                           onClick={
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn break-words'
+                          className='btn break-words text-[0.8rem]'
                         >
                           <Link to='/admin'>{name.toUpperCase()}</Link>
                         </button>
@@ -81,7 +82,7 @@ const AdminHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn whitespace-normal'
+                          className='btn whitespace-normal text-[0.8rem]'
                           to='/admin/addAdmin'
                           activeClassName='active'
                         >
@@ -94,7 +95,7 @@ const AdminHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           to='/admin/addFaculty'
                           activeClassName='active'
                         >
@@ -107,7 +108,7 @@ const AdminHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           to='/admin/addStudent'
                           activeClassName='active'
                         >
@@ -120,7 +121,7 @@ const AdminHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           to='/admin/addSubject'
                           activeClassName='active'
                         >
@@ -134,7 +135,7 @@ const AdminHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           to='/admin/allFaculties'
                           activeClassName='active'
                         >
@@ -147,7 +148,7 @@ const AdminHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           to='/admin/allStudents'
                           activeClassName='active'
                         >
@@ -160,7 +161,7 @@ const AdminHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           to='/admin/allSubject'
                           activeClassName='active'
                         >
@@ -177,7 +178,7 @@ const AdminHome = () => {
                     className='btn bg-slate-200 px-4 py-2 rounded-full text-black font-semibold active:to-blue-500 hover:bg-slate-100 flex justify-center items-center gap-2'
                   >
                     <div className='flex gap-2 items-center'>
-                      LOGOUT <BsBoxArrowRight size={22} />
+                      LOGOUT <BsBoxArrowRight size={24} />
                     </div>
                   </button>
                 </div>
@@ -185,7 +186,10 @@ const AdminHome = () => {
             </nav>
           </div>
           <div className='h-full w-full'>
+            <div className='h-1 bg-yellow-400'></div>
             <Outlet />
+            <div className='h-1 bg-yellow-400 mt-1'></div>
+            <Footer2 />
           </div>
         </div>
       ) : (

@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +11,12 @@ const FacultyLogin = () => {
   const [facultyPassword, setFacultyPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [isFacultyLoading, setIsFacultyLoading] = useState(false);
-
   const navigate = useNavigate();
+  const loginStart = useRef();
+
+  useEffect(() => {
+    loginStart.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
     if (store.faculty.isAuthenticated) {
@@ -50,6 +55,7 @@ const FacultyLogin = () => {
   return (
     <>
       <div className='lg:w-full sm:w-screen lg:h-[85vh]'>
+        <div ref={loginStart} className='mb-4'></div>
         <div className='p-8 w-full  h-full flex justify-center items-center '>
           <div className='faculty-login rounded-lg py-12 px-4 lg:px-28 flex flex-col items-center justify-center lg:w-4/5 w-full'>
             <p className='text-center text-3xl text-white font-semibold'>

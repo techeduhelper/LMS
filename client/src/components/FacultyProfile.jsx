@@ -10,7 +10,7 @@ const FacultyProfile = () => {
     <>
       {store.faculty.isAuthenticated ? (
         <>
-          <div className='mt-5 px-3'>
+          <div className='mt-5 px-3 min-h-[80vh]'>
             <div className='grid grid-cols-1 lg:grid-cols-3 sm:gap-4'>
               <div className='lg:col-span-1 sm:w-full'>
                 <div className='w-full'>
