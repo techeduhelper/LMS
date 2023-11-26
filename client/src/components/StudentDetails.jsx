@@ -94,10 +94,10 @@ const StudentDetails = () => {
       <>
         {store.student.isAuthenticated ? (
           <>
-            <div className='min-h-[85vh]'>
+            <div className='min-h-screen bg-gray-800'>
               {result.length === 0 && (
-                <div className='mt-2 flex sm:flex-col lg:flex-row px-4 gap-2'>
-                  <div className='lg:w-1/4 sm:w-full border mb-4 md:mb-0 px-2 py-2'>
+                <div className='flex sm:flex-col lg:flex-row px-4 gap-2'>
+                  <div className='lg:w-1/4 sm:w-full mb-2 md:mb-0 px-2 py-2'>
                     <div className='mb-3'>
                       <form>
                         <div className='mb-2'>
@@ -123,7 +123,7 @@ const StudentDetails = () => {
                               <label htmlFor='branchId'>Branch</label>
                               <select
                                 onChange={(e) => setDepartment(e.target.value)}
-                                className='w-full px-3 py-2 border rounded focus:outline-none'
+                                className='w-full px-3 py-2 rounded focus:outline-none'
                                 id='branchId'
                               >
                                 <option>Select</option>
@@ -139,7 +139,7 @@ const StudentDetails = () => {
                               <label htmlFor='yearId'>Year</label>
                               <select
                                 onChange={(e) => setYear(e.target.value)}
-                                className='w-full px-3 py-2 border rounded focus:outline-none'
+                                className='w-full px-3 py-2 rounded focus:outline-none'
                                 id='yearId'
                               >
                                 <option>Select</option>
@@ -153,7 +153,7 @@ const StudentDetails = () => {
                               <label htmlFor='sectionId'>Section</label>
                               <select
                                 onChange={(e) => setSection(e.target.value)}
-                                className='w-full px-3 py-2 border rounded focus:outline-none'
+                                className='w-full px-3 py-2 rounded focus:outline-none'
                                 id='sectionId'
                               >
                                 <option>Select</option>
@@ -176,10 +176,10 @@ const StudentDetails = () => {
                       </form>
                     </div>
                   </div>
-                  <div className='lg:w-3/4 border ml-0 mt-4 md:mt-0 w-full'>
-                    <div className='flex lg:flex-row sm:flex-col sm:gap-5 lg:gap-0'>
-                      <div className='lg:w-1/2 border-b lg:px-2'>
-                        <h4 className='text-center text-lg font-semibold p-3 bg-blue-400 '>
+                  <div className='lg:w-3/4 ml-0 md:mt-0 w-full'>
+                    <div className='flex lg:flex-row sm:flex-col sm:gap-5 lg:gap-0 mt-2'>
+                      <div className='lg:w-1/2 lg:px-2'>
+                        <h4 className='text-center text-lg font-semibold p-3 bg-green-500 '>
                           New Chats
                         </h4>
                         <table className='table bg-slate-300 mt-4 rounded-md text-lg'>
@@ -233,8 +233,8 @@ const StudentDetails = () => {
               )}
 
               {result.length !== 0 && (
-                <div className='mt-4 md:w-1/2 mx-auto bg-slate-200 px-2 py-2'>
-                  <table className='table w-full bg-slate-100'>
+                <div className='md:w-2/3 mx-auto px-2 py-2'>
+                  <table className='table w-full bg-slate-100 mt-2 rounded-none text-md'>
                     <thead className='bg-slate-400'>
                       <tr>
                         <th scope='col' className='text-left py-2 px-2'>
@@ -246,7 +246,7 @@ const StudentDetails = () => {
                         <th scope='col' className='text-center'>
                           Name
                         </th>
-                        <th scope='col' className='text-center'>
+                        <th scope='col' className='text-right'>
                           Chat
                         </th>
                       </tr>
@@ -254,13 +254,13 @@ const StudentDetails = () => {
                     <tbody className='text-center'>
                       {result.map((obj, index) => (
                         <tr key={index}>
-                          <td className='text-left px-2 py-2'>{index + 1}</td>
+                          <td className='text-left px-2 py-3'>{index + 1}</td>
                           <td>{obj.registrationNumber}</td>
                           <td>{obj.name}</td>
-                          <td>
+                          <td className='text-right'>
                             <Link
                               to={`/student/${obj.registrationNumber}`}
-                              className='px-3 font-medium py-1 bg-green-600 rounded-full text-white'
+                              className='lg:px-3 px-2 font-medium py-2 bg-pink-600 rounded-full text-white'
                             >
                               Chat Now
                             </Link>

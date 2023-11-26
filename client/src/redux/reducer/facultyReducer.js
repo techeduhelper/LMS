@@ -53,6 +53,12 @@ const facultyReducer = (state = initialState, action) => {
         fetchedStudentsHelper: action.payload,
       };
     }
+    case "UPDATE_FETCHED_STUDENTS_HELPER": {
+      return {
+        ...state,
+        fetchedStudentsHelper: action.payload,
+      };
+    }
     default:
       return state;
   }

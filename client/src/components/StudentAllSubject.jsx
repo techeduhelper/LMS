@@ -15,13 +15,13 @@ const StudentAllSubject = () => {
     <>
       {store.student.isAuthenticated ? (
         <>
-          <div className='sm:w-full min-h-[80vh]'>
-            <div className='mt-4'>
+          <div className='sm:w-full min-h-screen bg-gray-800 pt-6'>
+            <div>
               <div className='w-full mx-auto px-4'>
-                <div className='bg-white shadow-md rounded-lg lg:overflow-hidden sm:overflow-x-auto'>
+                <div className='text-white shadow-md lg:overflow-hidden sm:overflow-x-auto'>
                   <table className='min-w-full'>
                     <thead>
-                      <tr className='bg-gray-200 border-b'>
+                      <tr className='bg-white text-black border-b'>
                         <th className='py-2 text-left pl-4'>S.No</th>
                         <th className='py-2'>Subject Code</th>
                         <th className='py-2'>Subject Name</th>

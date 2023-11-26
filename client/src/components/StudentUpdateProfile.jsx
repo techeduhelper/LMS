@@ -51,15 +51,12 @@ const StudentUpdateProfile = () => {
 
   return (
     <>
-      <div>
+      <div className='bg-gray-800'>
         {store.student.isAuthenticated ? (
           <>
-            <div className='mt-5 px-3'>
+            <div className='min-h-screen'>
               <div className='flex justify-center'>
-                <div className='w-full max-w-2xl'>
-                  <h1 className='text-center text-xl text-gray-500 font-semibold capitalize'>
-                    Update profile
-                  </h1>
+                <div className='w-full max-w-2xl pt-4 px-2'>
                   <form
                     onSubmit={formHandler}
                     className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'

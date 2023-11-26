@@ -8,20 +8,21 @@ const StudentAttendence = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const studentId = store.student.student.student._id;
   useEffect(() => {
-    dispatch(fetchAttendence());
+    dispatch(fetchAttendence(studentId));
   }, []);
 
   return (
     <>
       {store.student.isAuthenticated ? (
         <>
-          <div className='mt-5 min-h-[80vh]'>
+          <div className='pt-6 min-h-screen bg-gray-800 text-white'>
             <div className=''>
-              <div className='w-full lg:px-10 lg:overflow-hidden sm:overflow-x-auto'>
+              <div className='w-full lg:px-6 lg:overflow-hidden sm:overflow-x-auto'>
                 <table className='table border w-full'>
                   <thead>
-                    <tr className='text-[1rem]'>
+                    <tr className='text-[1rem] text-white'>
                       <th scope='col' className='px-4 py-2'>
                         S.No
                       </th>
@@ -49,7 +50,7 @@ const StudentAttendence = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {store.student?.attendance?.map((res, index) => (
+                    {store.student.attendence.map((res, index) => (
                       <tr key={index}>
                         <td className='px-4 py-2'>{index + 1}</td>
                         <td className='px-4 py-2'>{res.subjectCode}</td>
@@ -60,7 +61,7 @@ const StudentAttendence = () => {
                         <td className='px-4 py-2'>
                           {res.totalLecturesByFaculty}
                         </td>
-                        <td className='px-4 py-2'>{res.attendance}%</td>
+                        <td className='px-4 py-2'>{res.attendence}%</td>
                       </tr>
                     ))}
                   </tbody>

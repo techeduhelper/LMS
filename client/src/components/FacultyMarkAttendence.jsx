@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchStudents, markAttendence } from "../redux/action/facultyAction";
+import {
+  fetchStudents,
+  markAttendence,
+  updateFetchedStudentsHelper,
+} from "../redux/action/facultyAction";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const FacultyMarkAttendence = () => {
@@ -69,6 +73,11 @@ const FacultyMarkAttendence = () => {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = e.target.checked;
     });
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    dispatch(updateFetchedStudentsHelper(false));
   };
 
   return (
@@ -270,6 +279,7 @@ const FacultyMarkAttendence = () => {
                         Submit
                       </button>
                     )}
+                    <button onClick={handleCancel}>Cancel</button>
                   </form>
                 </div>
               </div>

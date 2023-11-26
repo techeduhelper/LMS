@@ -8,6 +8,7 @@ import {
 import io from "socket.io-client";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { FaLocationArrow } from "react-icons/fa6";
 
 function swap(input, value_1, value_2) {
   var temp = input[value_1];
@@ -106,21 +107,21 @@ const StudentChat = () => {
   };
 
   return (
-    <div>
+    <div className='bg-gray-800 min-h-screen'>
       {store.student.isAuthenticated ? (
         <div className='lg:container w-full mx-auto p-4'>
-          <div className='flex flex-col-reverse justify-between min-h-[75vh] bg-slate-200 mb-3'>
+          <div className='flex flex-col-reverse justify-between min-h-[75vh]  mb-3'>
             <div className='w-full'>
               <div className='chat-area'></div>
             </div>
             <div className='w-full lg:px-10 px-4 py-10 overflow-auto'>
               {store.student.privateChat?.map((obj, index) => (
-                <div>
+                <div key={index}>
                   {obj.senderRegistrationNumber ===
                   store.student.student.student.registrationNumber ? (
                     <div className='mb-4 flex gap-2 p-3 rounded-md '>
                       <div className='text-gray-600 flex justify-between flex-col gap-2 bg-white drop-shadow-lg px-4 py-3 rounded-md'>
-                        <div className="flex flex-col">
+                        <div className='flex flex-col'>
                           <span className='font-bold text-yellow-400 text-xl'>
                             {obj.senderName}
                           </span>
@@ -128,7 +129,7 @@ const StudentChat = () => {
                             {formatDate(obj.createdAt)}
                           </span>
                         </div>
-                        <h1 className='text-lg'>{obj.message}</h1>
+                        <h1 className='text-lg text-black'>{obj.message}</h1>
                       </div>
                     </div>
                   ) : (
@@ -164,9 +165,9 @@ const StudentChat = () => {
             />
             <button
               type='submit'
-              className='bg-yellow-400 text-white ml-2 py-5 px-5 rounded'
+              className='bg-pink-600 text-white ml-2 py-5 px-5 rounded'
             >
-              Send
+              <FaLocationArrow size={26} />
             </button>
           </form>
         </div>

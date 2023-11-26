@@ -43,7 +43,7 @@ const FacultyMarksUpload = () => {
     }
   }, [store.errorHelper]);
 
-  const formHandler = (e) => {
+  const formHandlerMarks = (e) => {
     e.preventDefault();
     setIsLoading(true);
     dispatch(fetchStudents(department, year, section));
@@ -61,7 +61,7 @@ const FacultyMarksUpload = () => {
     if (store.faculty.fetchedStudentsHelper.length !== 0) {
       setIsLoading(false);
     }
-  }, [store.faculty.fetchedStudentsHelper.length]);
+  }, [store.faculty.fetchedStudentsHelper]);
 
   return (
     <>
@@ -74,7 +74,7 @@ const FacultyMarksUpload = () => {
                   <h1 className='text-center bg-slate-300 py-2 text-2xl mb-4 font-semibold rounded-md text-gray-500'>
                     Upload Marks
                   </h1>
-                  <form noValidate onSubmit={formHandler}>
+                  <form noValidate onSubmit={formHandlerMarks}>
                     <div className='mb-4'>
                       <label htmlFor='branchId' className='block text-gray-700'>
                         Department
