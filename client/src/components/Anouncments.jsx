@@ -3,6 +3,8 @@ import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import logo from "../assets/seacomlogo.png";
+import { CgBot } from "react-icons/cg";
+import { Link, useNavigate } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 1 },
@@ -42,6 +44,16 @@ const NoticeSection = ({ title, notices }) => {
     const date = new Date(timestamp);
     return date.toLocaleString();
   };
+
+  const navigate = useNavigate();
+
+  const handleCopyPaste = (title, content) => {
+    const copiedText = `${title}\n${content}\n"briefly describe the notice in a few words, and if any date please must be mention in table format like "Commencement of Academic Programs (Odd Semester) >> 15.07.2023 " so that the student can easily understand the notice and can easily access it."`;
+    navigator.clipboard.writeText(copiedText).then(() => {
+      navigate("/life-seacom", { state: { copiedText } });
+    });
+  };
+
   return (
     <div className='w-full flex flex-col justify-center items-center'>
       <div className='flex flex-col space-y-4'>
@@ -68,8 +80,20 @@ const NoticeSection = ({ title, notices }) => {
             {notices.map((notice) => (
               <div
                 key={notice._id}
-                className='px-8 py-8 rounded-md shadow-md min-h-[50vh] border-[30px] bg-yellow-400 border-gray-800'
+                className='overflow-y-hidden px-8 py-8 rounded-md shadow-md h-[70vh] border-[30px] bg-yellow-400 border-gray-800'
               >
+                <div className='flex items-end justify-end w-full'>
+                  <Link>
+                    <CgBot
+                      title='Summarize Notice'
+                      size={50}
+                      className='px-2 drop-shadow-2xl shadow-lg py-2 bg-gray-800 text-white rounded-full active:bg-gray-600 hover:bg-slate-700 m-1 cursor-pointer'
+                      onClick={() =>
+                        handleCopyPaste(notice.title, notice.content)
+                      }
+                    />
+                  </Link>
+                </div>
                 <div className='border-2 border-red-600 px-2 py-2 bg-[#F9F9F9] text-xl text-center rounded-lg'>
                   {formatDate(notice.createdAt)}
                 </div>
@@ -83,7 +107,9 @@ const NoticeSection = ({ title, notices }) => {
                 <h2 className='text-2xl font-bold mb-2 mt-4'>
                   Subject: {notice.title}
                 </h2>
-                <p className='text-gray-700 mt-4'>{notice.content}</p>
+                <p className='text-gray-700 mt-4 hover:text-clip'>
+                  {notice.content}
+                </p>
               </div>
             ))}
           </Carousel>

@@ -5,6 +5,7 @@ import it from "../assets/it.jpg";
 import me from "../assets/me.jpg";
 import civil from "../assets/civil.jpg";
 import ece from "../assets/ece.jpg";
+import { Link } from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -100,12 +101,12 @@ const HomeCourse = () => {
             <div className='w-full h-full flex flex-col justify-between gap-2'>
               <h2 className='text-2xl font-bold'>{course.label}</h2>
               <p className='text-sm'>{course.duration}</p>
-              <a
-                href={course.href}
+              <Link
+                to={course.href}
                 className='btn btn-primary flex justify-center bottom-0'
               >
                 View Course
-              </a>
+              </Link>
             </div>
           </div>
         ))}

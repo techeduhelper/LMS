@@ -33,7 +33,7 @@ const AdminHome = () => {
         <div>
           <div className='adminhome sticky top-0 w-full'>
             <nav className='bg-light w-full'>
-              <div className='p-4 flex justify-between items-center w-full'>
+              <div className='py-2 px-3 flex justify-between items-center w-full'>
                 <div className='flex items-center gap-2'>
                   <button
                     onClick={handleToggle}

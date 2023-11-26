@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import chatbotLogo from "../assets/seacomlogo.png";
 import CodeMessage from "../components/CodeMessage";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FaLocationArrow } from "react-icons/fa6";
 
 const LifeSeacom = () => {
   const [userInput, setUserInput] = useState("");
@@ -9,7 +11,23 @@ const LifeSeacom = () => {
   const msgEnd = useRef();
   const apiKey = import.meta.env.VITE_GPT_API_KEY;
 
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
+
+  // motice copypaste and briefly described
+  useEffect(() => {
+    const copiedText = location.state?.copiedText;
+    if (copiedText) {
+      setUserInput(copiedText);
+    }
+    if (inputRef.current) {
+      inputRef.current.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Enter" })
+      );
+    }
+  }, [location.state]);
 
   useEffect(() => {
     msgEnd.current.scrollIntoView({ behavior: "smooth" });
@@ -65,7 +83,7 @@ const LifeSeacom = () => {
   };
 
   return (
-    <div className='bg-slate-900 min-h-[40vh] lg:min-h-[90vh] w-full px-4'>
+    <div className='bg-slate-900 min-h-[40vh] lg:min-h-[90vh] w-full px-4 scroll-smooth'>
       <div ref={msgEnd} className='mb-4'></div>
       <div className='chat-container lg:w-[60%] w-full mx-auto pt-16 lg:px-0  flex flex-col gap-4 pb-16 lg:pb-0 border-t-4 border-blue-600 h-full'>
         <div className='flex items-center justify-center space-x-2 py-2 rounded-xl bg-white mx-4'>
@@ -129,6 +147,7 @@ const LifeSeacom = () => {
         <div className='chat user '>
           <input
             type='text'
+            ref={inputRef}
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             className='p-2 border w-full py-4 rounded-md'
@@ -139,7 +158,7 @@ const LifeSeacom = () => {
             onClick={sendMessage}
             className='bg-blue-600 text-white py-4 px-6 rounded-lg'
           >
-            Send
+            <FaLocationArrow size={26} />
           </button>
         </div>
       </div>

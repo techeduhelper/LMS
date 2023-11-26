@@ -4,7 +4,7 @@ import { GoUnmute } from "react-icons/go";
 import { IoVolumeMuteOutline } from "react-icons/io5";
 
 const HomeAbout = () => {
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
 
   const toggleMute = () => {
     const video = document.getElementById("backgroundVideo");

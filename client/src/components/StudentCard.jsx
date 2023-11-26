@@ -22,7 +22,7 @@ const StudentCard = () => {
                     <div className='sm:w-full lg:w-2/5'>
                       <div className=''>
                         <img
-                          className='h-96 w-full rounded-tl-md rounded-tr-md'
+                          className='h-[26rem] w-full rounded-tl-md rounded-tr-md'
                           src={store.student.student.student.avatar}
                           alt='Card image cap'
                         />

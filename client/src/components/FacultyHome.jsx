@@ -45,7 +45,7 @@ const FacultyHome = () => {
         <div>
           <div className='adminfaculty sticky top-0'>
             <nav className='bg-light'>
-              <div className='mx-auto p-4 flex justify-between items-center gap-2'>
+              <div className='mx-auto py-2 px-3 flex justify-between items-center gap-2'>
                 <div className='flex items-center gap-3'>
                   <button
                     onClick={handleToggle}

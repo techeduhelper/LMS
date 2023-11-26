@@ -4,7 +4,7 @@ import { BiLogoFacebook } from "react-icons/bi";
 
 const Header2 = () => {
   return (
-    <div className='py-2 px-28 md:flex flex-column items-center justify-center md:justify-between space-y-2 lg:space-y-0 bg-[#7f3a3e] text-white'>
+    <div className='py-2 px-20 md:flex flex-column items-center justify-center md:justify-between space-y-2 lg:space-y-0 bg-[#7f3a3e] text-white'>
       <div className='flex items-center justify-center md:justify-start space-x-6'>
         <BiLogoFacebook
           size={24}

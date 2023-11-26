@@ -22,7 +22,7 @@ const Header = () => {
         <input id='my-drawer-3' type='checkbox' className='drawer-toggle' />
         <div className='drawer-content flex flex-col items-center'>
           {/* Navbar */}
-          <div className='w-full navbar h-[100px] bg-white border-b-2 lg:px-28 flex items-center justify-center'>
+          <div className='w-full navbar h-[100px] bg-white border-b-2 lg:px-20 flex items-center justify-center'>
             <div className='flex-none lg:hidden'>
               <label
                 htmlFor='my-drawer-3'
@@ -63,7 +63,7 @@ const Header = () => {
                 <li>
                   <NavLink to={"/life-seacom"} activeclassname='active'>
                     Ask to AI
-                    <CgBot size={30} className='text-yellow-600' />
+                    <CgBot size={24} className='text-yellow-600' />
                   </NavLink>
                 </li>
                 <li className='dropdown'>
