@@ -48,7 +48,7 @@ const StudentHome = () => {
         <div>
           <div className='student-nav sticky top-0 z-50'>
             <nav className='bg-light'>
-              <div className='mx-auto p-4 flex justify-between w-full items-center gap-2'>
+              <div className='mx-auto p-2 flex justify-between w-full items-center gap-2'>
                 <div className='flex items-center gap-3'>
                   <button
                     onClick={handleToggle}
@@ -85,7 +85,7 @@ const StudentHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                         >
                           <Link to='/student'>{name?.toUpperCase()}</Link>
                         </button>
@@ -96,17 +96,31 @@ const StudentHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           activeClassName='active'
                           to='/student/updateProfile'
                         >
                           <h1>UPDATE PROFILE</h1>
                         </NavLink>
                       </li>
+
+                      <li className='nav-item'>
+                        <NavLink
+                          onClick={
+                            window.innerWidth <= 1024 ? handleToggle : null
+                          }
+                          type='button'
+                          className='btn text-[0.8rem]'
+                          activeClassName='active'
+                          to='/student/studentDetails'
+                        >
+                          <h1>STUDENTS</h1>
+                        </NavLink>
+                      </li>
                       <li className='nav-item dropdown relative group'>
                         <button
                           onClick={handledropd}
-                          className='sm:text-black group-hover:text-blue-300 bg-white text-lg px-3 py-[0.62rem] rounded-md'
+                          className='sm:text-gray-800 text-[0.8rem] font-medium  group-hover:text-blue-300 bg-white px-3 py-[0.9rem] rounded-md'
                         >
                           ACADEMIC
                         </button>
@@ -118,7 +132,7 @@ const StudentHome = () => {
                               to='/student/testPerformance'
                               className='block px-4 py-2 hover:bg-yellow-400'
                             >
-                              Test Performance
+                              Test Results
                             </NavLink>
                             <NavLink
                               activeClassName='active'
@@ -145,20 +159,7 @@ const StudentHome = () => {
                             window.innerWidth <= 1024 ? handleToggle : null
                           }
                           type='button'
-                          className='btn'
-                          activeClassName='active'
-                          to='/student/studentDetails'
-                        >
-                          <h1>STUDENTS</h1>
-                        </NavLink>
-                      </li>
-                      <li className='nav-item'>
-                        <NavLink
-                          onClick={
-                            window.innerWidth <= 1024 ? handleToggle : null
-                          }
-                          type='button'
-                          className='btn'
+                          className='btn text-[0.8rem]'
                           activeClassName='active'
                           to='/student/updatePassword'
                         >
@@ -186,7 +187,7 @@ const StudentHome = () => {
           <div className='h-full'>
             <div className='h-1 bg-yellow-400'></div>
             <Outlet />
-            <div className='h-1 bg-yellow-400 mt-2'></div>
+            <div className='h-1 bg-yellow-400'></div>
             <Footer2 />
           </div>
         </div>

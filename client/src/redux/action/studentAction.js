@@ -303,12 +303,13 @@ export const getAllSubjects = () => {
   };
 };
 
-export const fetchAttendence = () => {
+export const fetchAttendence = (studentId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios({
         method: "Get",
-        url: url + "/api/student/checkAttendence",
+        url: url + "/api/student/checkAttendance",
+        studentId,
       });
       dispatch(fetchAttendenceHelper(data.result));
     } catch (err) {

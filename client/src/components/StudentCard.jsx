@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/seacomlogo.png";
 
 const StudentCard = () => {
   const store = useSelector((store) => store);
@@ -8,17 +9,17 @@ const StudentCard = () => {
 
   return (
     <>
-      <div>
+      <div className='bg-gray-800 min-h-screen'>
         {store.student.isAuthenticated ? (
           <>
-            <div className='sm:w-full'>
-              <div className='w-full flex flex-col justify-center items-center'>
-                <h1 className='text-center py-3 bg-slate-500 rounded-tl-md rounded-tr-md text-3xl font-semibold w-3/4 mt-2 text-white'>
+            <div className='sm:w-full py-2 pb-4'>
+              <div className='print-card w-full lg:px-6 px-4 flex flex-col justify-center items-center'>
+                <h1 className='text-center py-3 bg-slate-500 rounded-tl-md rounded-tr-md text-3xl font-semibold w-full mt-2 text-white'>
                   ID <span className='text-yellow-500'>Card</span>
                 </h1>
-                <div className='mt-2 mx-auto w-full flex items-center justify-center flex-col'>
-                  <div className='flex lg:flex-row sm:flex-col justify-center pt-2 bg-gray-100 lg:w-3/4 sm:w-full px-2 rounded-tr-md rounded-tl-md sm:gap-3'>
-                    <div className='sm:w-full lg:w-1/4'>
+                <div className='mt-2 mx-auto w-full  flex items-center justify-center flex-col'>
+                  <div className='flex lg:flex-row sm:flex-col justify-center pt-2 bg-gray-100 lg:w-full sm:w-full px-2 rounded-tr-md rounded-tl-md sm:gap-3'>
+                    <div className='sm:w-full lg:w-2/5'>
                       <div className=''>
                         <img
                           className='h-96 w-full rounded-tl-md rounded-tr-md'
@@ -27,7 +28,7 @@ const StudentCard = () => {
                         />
                       </div>
                     </div>
-                    <div className='w-3/4 bg-gray-100 text-black px-4 rounded-tr-md'>
+                    <div className='w-full bg-gray-100 text-black px-4 rounded-tr-md'>
                       <table className='table-auto w-full '>
                         <tbody>
                           <tr>
@@ -46,6 +47,34 @@ const StudentCard = () => {
                               {store.student.student.student.registrationNumber}
                             </td>
                           </tr>
+                          <div className='logo absolute right-0 mt-4 lg:mr-16 sm:mr-10 flex justify-center flex-col items-center'>
+                            <div className='relative'>
+                              <img
+                                src={logo}
+                                alt=''
+                                className='h-24 brightness-60'
+                              />
+                            </div>
+                            <div className='absolute -mt-12 ml-3 text-green-700'>
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                strokeWidth={1.5}
+                                stroke='currentColor'
+                                className='w-28 h-28'
+                              >
+                                <path
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
+                                  d='M4.5 12.75l6 6 9-13.5'
+                                />
+                              </svg>
+                            </div>
+                            <h1 className='text-xl font-bold text-gray-600'>
+                              Verified
+                            </h1>
+                          </div>
                           <tr>
                             <td className='font-semibold'>Date Of Birth</td>
                             <td>{store.student.student.student.dob}</td>
@@ -114,7 +143,7 @@ const StudentCard = () => {
                       </table>
                     </div>
                   </div>
-                  <div className='bg-gray-500 dark:bg-gray-800 p-4 lg:w-3/4 sm:w-full flex  flex-col justify-center items-center mt-3 rounded-bl-md rounded-br-md  gap-1'>
+                  <div className='bg-gray-500 dark:bg-gray-800 p-4 lg:w-full sm:w-full flex  flex-col justify-center items-center mt-3 rounded-bl-md rounded-br-md  gap-1'>
                     <h5 className='text-xl font-semibold text-white'>
                       {store.student.student.student.name}
                     </h5>

@@ -33,6 +33,13 @@ const subjectCodeListHelper = (data) => {
   };
 };
 
+export const updateFetchedStudentsHelper = (value) => {
+  return {
+    type: "UPDATE_FETCHED_STUDENTS_HELPER",
+    payload: value,
+  };
+};
+
 export const facultyLogin = (facultyCredential) => {
   return async (dispatch) => {
     try {

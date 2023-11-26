@@ -17,13 +17,13 @@ const RecieverUserDetails = (props) => {
   }, [registrationNumber, dispatch]);
 
   return (
-    <div>
+    <div className='bg-gray-800'>
       {store.student.isAuthenticated ? (
         <>
-          <div className='mx-auto mt-10'>
+          <div className='mx-auto pt-6'>
             <div className='flex'>
               <div className='w-1/12'></div>
-              <div className='lg:w-8/12 w-full px-2 mx-auto'>
+              <div className='lg:w-8/12 w-full px-2 mx-auto text-white'>
                 <div className='flex lg:flex-row flex-col lg:gap-2'>
                   <div className='lg:w-1/2 w-full'>
                     <div className='card lg:max-w-xs mx-auto'>
@@ -45,7 +45,7 @@ const RecieverUserDetails = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div className='w-full'>
+                  <div className='w-full mb-4'>
                     <table className='table border'>
                       <tbody>
                         <tr>
